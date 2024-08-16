@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('数据库集群修改')"/>
+</head>
+<body>
+<form class="layui-form" action=""  th:object="${MonCluster}">
+    <div class="mainBox">
+        <div class="main-container">
+            <div class="main-container">
+
+						<div class="layui-form-item layui-hide">
+		                    <label class="layui-form-label">主键</label>
+		                    <div class="layui-input-block">
+		                        <input type="text" th:value="*{id}" name="id" lay-verify="title"
+		                               autocomplete="off" class="layui-input">
+		                    </div>
+		                </div>
+		
+					
+						<div class="layui-form-item">
+		                    <label class="layui-form-label">集群名称</label>
+		                    <div class="layui-input-block">
+		                        <input th:value="*{name}" type="text" name="name" autocomplete="off" placeholder="集群名称" class="layui-input">
+		                    </div>
+		                </div>
+					                
+		
+					
+<!--						<div class="layui-form-item">-->
+<!--		                    <label class="layui-form-label">创建时间</label>-->
+<!--		                    <div class="layui-input-block">-->
+<!--		                        <input type="text" th:value="${MonCluster.dateToStringConvert(MonCluster.createTime)}" name="createTime" autocomplete="off" placeholder="创建时间" class="layui-input datetime-input">-->
+<!--		                        -->
+<!--		                    </div>-->
+<!--		                </div>-->
+<!--		-->
+<!--					-->
+<!--						<div class="layui-form-item">-->
+<!--		                    <label class="layui-form-label">更新时间</label>-->
+<!--		                    <div class="layui-input-block">-->
+<!--		                        <input type="text" th:value="${MonCluster.dateToStringConvert(MonCluster.updateTime)}" name="updateTime" autocomplete="off" placeholder="更新时间" class="layui-input datetime-input">-->
+<!--		                        -->
+<!--		                    </div>-->
+<!--		                </div>-->
+
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="button-container">
+            <button type="submit" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit=""
+                    lay-filter="monCluster-update">
+                <i class="layui-icon layui-icon-ok"></i>
+				提交
+            </button>
+            <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">
+                <i class="layui-icon layui-icon-refresh"></i>
+				重置
+            </button>
+        </div>
+    </div>
+</form>
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['form','laydate','jquery'], function () {
+        let form = layui.form;
+        let $ = layui.jquery;
+        let MODULE_PATH = rootPath+"/MonClusterController";
+		var laydate = layui.laydate;
+        //同时绑定多个
+        lay('.datetime-input').each(function(){
+          laydate.render({
+            elem: this
+            ,trigger: 'click'
+            ,type: 'datetime'
+          });
+        });
+
+
+        form.on('submit(monCluster-update)', function (data) {
+        	let loader = layer.load();
+            $.ajax({
+                url: MODULE_PATH+'/edit',
+                data: data.field,
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded',
+                type: 'post',
+                success: function (result) {
+                    if (result.code==200) {
+                        layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));//关闭当前页
+                            parent.layui.table.reload("monCluster-table");
+                            layer.close(loader);
+                        });
+                    } else {
+                        layer.msg(result.msg, {icon: 2, time: 1000});
+                        layer.close(loader);
+                    }
+                }
+            })
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

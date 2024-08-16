@@ -22,7 +22,7 @@ import java.util.Date;
 *
  */
 @Controller
-public class BaseController
+public class BaseController extends BusinessBaseController
 {
 	//系统用户
 	@Autowired

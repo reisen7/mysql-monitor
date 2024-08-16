@@ -210,7 +210,7 @@
     #foreach ($column in $beanColumns)
       #if(${column.column_key} != 'PRI')
       
-      <if test="${column.beanName} != null and ${column.beanName} != ''">
+      <if test="${column.beanName} != null ">
         ${column.column_name} = #{${column.beanName},jdbcType=${column.jdbcType}},
       </if>
       #end

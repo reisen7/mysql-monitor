@@ -1,8 +1,8 @@
-${AnsiColor.BRIGHT_BLUE}
+
 Application Version: ${fuce.version}
 Spring Boot Version: ${spring-boot.version}
 ***************************************
-* 码云地址                                                                                    *
+* 码云地址                              *
 * https://gitee.com/bdj/SpringBoot_v2 *
 *                                     *
 ***************************************
