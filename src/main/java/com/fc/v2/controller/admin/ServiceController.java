@@ -7,6 +7,7 @@ import com.fc.v2.model.auto.SysNotice;
 import com.fc.v2.model.auto.TsysOperLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
  * 服务器信息Controller
  *
  * @ClassName: ServiceController
- * @author fuce
+ * @author reisen
  * @date 2019-06-23 00:55
  * @version V1.0
  */
@@ -31,7 +32,7 @@ public class ServiceController extends BaseController {
 	// 跳转页面参数
 	private final String prefix = "admin/service";
 
-	@Resource
+	@Autowired
 	private OshiMonitor oshiMonitor;
 
 	/**
@@ -39,7 +40,7 @@ public class ServiceController extends BaseController {
 	 *
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:04:03
 	 */
 	@ApiOperation(value = "展示页面", notes = "展示页面")

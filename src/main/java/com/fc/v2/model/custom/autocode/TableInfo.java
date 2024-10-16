@@ -83,7 +83,7 @@ public class TableInfo {
      * 首字母小写
      * @param tableName
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2021年1月15日 下午6:22:58
      */
     public String tableToJava_a(String tableName) {

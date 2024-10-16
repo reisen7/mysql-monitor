@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 用户Controller
  * @ClassName: UserController
- * @author fuce
+ * @author reisen
  * @date 2019-11-20 22:35
  */
 @Api(value = "用户数据")
@@ -47,7 +47,7 @@ public class UserController extends BaseController{
 	 * 展示跳转页面
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:14:34
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -64,7 +64,7 @@ public class UserController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:14:40
 	 */
 	//@Log(title = "分页查询", action = "1")
@@ -80,7 +80,7 @@ public class UserController extends BaseController{
 	 * 新增跳转
 	 * @param modelMap
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:14:51
 	 */
 	@ApiOperation(value = "新增跳转", notes = "新增跳转")
@@ -107,7 +107,7 @@ public class UserController extends BaseController{
 	 * @param model
 	 * @param roles
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:14:57
 	 */
     @Log(title = "用户新增", action = "111")

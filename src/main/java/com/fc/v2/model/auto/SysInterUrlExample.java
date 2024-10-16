@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 拦截url表 SysInterUrlExample
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @email 115889198@qq.com
  * @date 2020-01-05 01:48:22
  */

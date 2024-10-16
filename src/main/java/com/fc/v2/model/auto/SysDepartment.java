@@ -9,7 +9,7 @@ import java.lang.Integer;
 /**
  * 部门表 SysDepartment
  * 
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @email 115889198@qq.com
  * @date 2020-04-17 13:12:58
  */

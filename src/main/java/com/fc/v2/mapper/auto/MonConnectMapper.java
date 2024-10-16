@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 数据库连接 MonConnectMapper
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @email ${email}
  * @date 2024-08-16 17:43:36
  */

@@ -3,7 +3,7 @@ package com.fc.v2.model.custom;
 /**
  * 百度编辑器
 * @ClassName: PublicMsg
-* @author fuce
+* @author reisen
 * @date 2019-09-02 01:11
 *
  */

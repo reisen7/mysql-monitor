@@ -22,7 +22,7 @@ import java.util.List;
  * 定时任务调度表 SysQuartzJobService
  * @Title: SysQuartzJobService.java
  * @Package com.fc.v2.service
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @email 115889198@qq.com
  * @date 2019-09-13 00:03:35
  **/

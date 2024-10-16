@@ -27,7 +27,7 @@ import cn.dev33.satoken.exception.SaTokenException;
 
 /**
  * 全局异常处理
- * @author fuce 
+ * @author reisen 
  * @date: 2018年9月9日 下午10:52:55
  */
 @RestControllerAdvice

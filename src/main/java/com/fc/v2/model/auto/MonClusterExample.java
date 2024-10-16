@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 
 /**
  * 数据库集群 MonClusterExample
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @date 2024-08-16 18:20:36
  */
 public class MonClusterExample {

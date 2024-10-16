@@ -31,7 +31,7 @@ public class SysDepartmentController extends BaseController{
 	 * 分页跳转
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:48:55
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -47,7 +47,7 @@ public class SysDepartmentController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:48:34
 	 */
 	//@Log(title = "部门表集合查询", action = "111")
@@ -74,7 +74,7 @@ public class SysDepartmentController extends BaseController{
      * 新增
      * @param sysDepartment
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2020年4月18日 下午11:47:51
      */
 	//@Log(title = "部门表新增", action = "111")

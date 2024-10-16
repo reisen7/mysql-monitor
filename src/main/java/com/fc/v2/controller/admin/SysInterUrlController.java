@@ -28,7 +28,7 @@ public class SysInterUrlController extends BaseController{
 	 * 分页跳转
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:43:33
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -44,7 +44,7 @@ public class SysInterUrlController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:43:42
 	 */
 	//@Log(title = "拦截url表集合查询", action = "111")
@@ -71,7 +71,7 @@ public class SysInterUrlController extends BaseController{
 	 * 新增
 	 * @param sysInterUrl
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:44:30
 	 */
 	//@Log(title = "拦截url表新增", action = "1")
@@ -92,7 +92,7 @@ public class SysInterUrlController extends BaseController{
 	 * 复制
 	 * @param id
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月18日 下午11:44:42
 	 */
 	//@Log(title = "复制", action = "1")

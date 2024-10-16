@@ -38,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
  * 后台方法
  * 
  * @ClassName: HomeController
- * @author fuce
+ * @author reisen
  * @date 2019-10-21 00:10
  *
  */
@@ -172,7 +172,7 @@ public class AdminController extends BaseController {
 	 * @param rememberMe
 	 * @param request
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年12月7日 上午12:54:28
 	 */
 	@ApiOperation(value = "手机登录", notes = "手机登录")

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 配置文件model
  * @ClassName: AutoConfigModel
- * @author fuce
+ * @author reisen
  * @date 2021-01-17 23:29
  */
 public class AutoConfigModel {

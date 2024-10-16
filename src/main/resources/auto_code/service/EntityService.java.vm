@@ -18,11 +18,11 @@ import ${parentPack}.util.StringUtils;
 
 /**
  * ${tableInfo.tableComment} ${tableInfo.javaTableName}Service
- * @Title: ${tableInfo.javaTableName}Service.java 
- * @Package ${parentPack}.service 
+ * @Title: ${tableInfo.javaTableName}Service.java
+ * @Package ${parentPack}.service
  * @author ${author}_自动生成
- * @email ${email}
- * @date ${datetime}  
+ * @Description
+ * @date ${datetime}
  **/
 @Service
 public class ${tableInfo.javaTableName}Service implements BaseService<${tableInfo.javaTableName}, ${tableInfo.javaTableName}Example>{

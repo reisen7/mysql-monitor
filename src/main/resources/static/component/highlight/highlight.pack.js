@@ -43,7 +43,7 @@ illegal:"\\n",contains:[m]},E={
 begin:/\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
 },v=(e,t,n={})=>{const s=a({className:"comment",begin:e,end:t,contains:[]},n)
 ;return s.contains.push(E),s.contains.push({className:"doctag",
-begin:"(?:TODO|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):",relevance:0}),s
+begin:"(?|FIXME|NOTE|BUG|OPTIMIZE|HACK|XXX):",relevance:0}),s
 },N=v("//","$"),w=v("/\\*","\\*/"),R=v("#","$");var y=Object.freeze({
 __proto__:null,IDENT_RE:g,UNDERSCORE_IDENT_RE:d,NUMBER_RE:h,C_NUMBER_RE:f,
 BINARY_NUMBER_RE:p,

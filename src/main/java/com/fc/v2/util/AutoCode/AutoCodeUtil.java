@@ -27,7 +27,7 @@ import cn.hutool.core.date.DateTime;
 /**
  * 自动生成 通用类
 * @ClassName: AutoCodeUtil
-* @author fuce
+* @author reisen
 * @date 2019-11-20 22:05
  */
 public class AutoCodeUtil {
@@ -62,7 +62,7 @@ public class AutoCodeUtil {
 	 * @param vController 生成controller
 	 * @param vservice 生成service
 	 * @param vMapperORdao 生成mapper or dao
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年8月24日 下午11:44:54
 	 */
 	public static void autoCodeOneModel(TableInfo tableInfo,AutoConfigModel autoConfigModel){
@@ -138,7 +138,7 @@ public class AutoCodeUtil {
 	 * 预览方法
 	 * @param tableInfo 数据库表
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2021年1月18日 上午2:10:55
 	 */
 	public static Map<String,String> viewAuto(TableInfo tableInfo,AutoConfigModel autoConfigModel){
@@ -190,7 +190,7 @@ public class AutoCodeUtil {
 	 * 自动生成压缩文件方法
 	 * @param tableInfo
 	 * @param zip
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2021年1月17日 下午7:37:50
 	 */
 	public static void autoCodeOneModel(TableInfo tableInfo,AutoConfigModel autoConfigModel,ZipOutputStream zip){
@@ -248,7 +248,7 @@ public class AutoCodeUtil {
 	 * @param moduleName
 	 * @param controller
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2021年1月17日 下午6:40:57
 	 */
     public static String getCoverFileName(String template,TableInfo tableInfo, String packageName,String targetPath) {

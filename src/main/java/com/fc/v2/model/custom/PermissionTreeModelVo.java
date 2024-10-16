@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 权限树
- * @author fuce 
+ * @author reisen 
  * @date: 2018年9月8日 下午6:40:29
  */
 public class PermissionTreeModelVo {

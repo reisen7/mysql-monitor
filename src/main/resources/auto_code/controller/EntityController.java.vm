@@ -31,7 +31,8 @@ import com.fc.v2.common.conf.oss.OssConfig;
 
 /**
  * ${tableInfo.tableComment}Controller
- * @ClassName: ${tableInfo.javaTableName}Controller
+ * @ClassName ${tableInfo.javaTableName}Controller
+ * @Description
  * @author ${author}
  * @date ${datetime}
  */
@@ -66,7 +67,7 @@ public class ${tableInfo.javaTableName}Controller extends BaseController{
 	/**
 	 * list集合
 	 * @param tablepar
-	 * @param searchText
+	 * @param
 	 * @return
 	 */
 	//@Log(title = "${tableInfo.tableComment}", action = "111")
@@ -134,7 +135,7 @@ public class ${tableInfo.javaTableName}Controller extends BaseController{
 	/**
 	 * 修改跳转
 	 * @param id
-	 * @param mmap
+	 * @param map
 	 * @return
 	 */
 	@ApiOperation(value = "修改跳转", notes = "修改跳转")
@@ -165,7 +166,7 @@ public class ${tableInfo.javaTableName}Controller extends BaseController{
     
     /**
 	 * 修改状态
-	 * @param record
+	 * @param
 	 * @return
 	 */
     @PutMapping("/updateVisible")

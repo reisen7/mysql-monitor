@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 
 /**
  * 数据库连接 MonConnectExample
- * @author fuce_自动生成
+ * @author reisen_自动生成
  * @date 2024-08-16 17:43:36
  */
 public class MonConnectExample {

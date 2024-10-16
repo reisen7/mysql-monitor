@@ -3,7 +3,7 @@ package com.fc.v2.model.custom;
 /**
  * 自动生成前端实体类
 * @ClassName: GenVo
-* @author fuce
+* @author reisen
 * @date 2019-07-11 01:57
 *
  */

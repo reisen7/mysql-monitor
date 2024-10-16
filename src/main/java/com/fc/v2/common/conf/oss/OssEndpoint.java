@@ -30,8 +30,8 @@ import cn.hutool.crypto.digest.MD5;
 /**
  * aws 对外提供服务端点
  * @ClassName: OssEndpoint
- * @author fuce
- * @date 2021-02-28 20:01
+ * @author reisen
+ * @date 2021-02-28
  */
 @RestController
 @RequestMapping("/oss")

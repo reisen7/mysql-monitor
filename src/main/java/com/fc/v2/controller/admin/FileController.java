@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
  * 文件上传controller
- * @author fuce 
+ * @author reisen 
  * @date: 2018年9月16日 下午4:23:50
  */
 @Api(value = "文件上传")
@@ -34,7 +34,7 @@ public class FileController extends BaseController{
 	 * 分页展示页面
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月20日 下午10:18:32
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -64,7 +64,7 @@ public class FileController extends BaseController{
 	/**
 	 * 新增文件跳转页面
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月20日 下午10:19:03
 	 */
 	@ApiOperation(value = "新增跳转", notes = "新增跳转")

@@ -35,7 +35,7 @@ public class QuartzJobController extends BaseController{
 	 * 展示页面
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午3:55:01
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -77,7 +77,7 @@ public class QuartzJobController extends BaseController{
      * 新增保存
      * @param sysQuartzJob
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2019年11月11日 下午4:00:08
      */
 	//@Log(title = "定时任务调度表新增", action = "111")

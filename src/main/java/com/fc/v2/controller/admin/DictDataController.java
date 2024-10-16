@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 字典表Controller
  * @ClassName: DictDataController
- * @author fuce
+ * @author reisen
  * @date 2019-11-20 22:46
  */
 @Api(value = "字典数据表")

@@ -56,7 +56,7 @@ public class SaTokenUtil {
 	 * 获取登录用户ip
 	 * 
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月21日 上午9:58:26
 	 */
 	public static String getIp() {
@@ -67,7 +67,7 @@ public class SaTokenUtil {
 	 * 判断是否登录
 	 * 
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月21日 上午9:58:26
 	 */
 	public static boolean isLogin() {

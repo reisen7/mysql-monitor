@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 省份Controller
  * @ClassName: SysProvinceController
- * @author fuce
+ * @author reisen
  * @date 2019-11-20 22:32
  */
 @Api(value = "省份表")
@@ -32,7 +32,7 @@ public class SysProvinceController extends BaseController{
 	 * 展示页面跳转
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:10:48
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -47,7 +47,7 @@ public class SysProvinceController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:10:39
 	 */
 	//@Log(title = "省份表集合查询", action = "111")
@@ -63,7 +63,7 @@ public class SysProvinceController extends BaseController{
 	 * 新增跳转
 	 * @param modelMap
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:10:20
 	 */
 	@ApiOperation(value = "新增跳转", notes = "新增跳转")
@@ -77,7 +77,7 @@ public class SysProvinceController extends BaseController{
 	 * 新增保存
 	 * @param sysProvince
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:10:26
 	 */
 	//@Log(title = "省份表新增", action = "111")

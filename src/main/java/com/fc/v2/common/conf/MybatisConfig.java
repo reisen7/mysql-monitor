@@ -32,7 +32,7 @@ import javax.sql.DataSource;
  * Mybatis多数据源配置
  * 参考文章：https://www.cnblogs.com/geekdc/p/10963476.html
  * @ClassName: MybatisConfig
- * @author fuce
+ * @author reisen
  * @date 2019-12-06 21:11
  */
 @Configuration
@@ -103,7 +103,7 @@ public class MybatisConfig {
      * 配置@Transactional注解事务
      * @param dynamicDataSource
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2019年12月7日 上午11:31:33
      */
     @Bean

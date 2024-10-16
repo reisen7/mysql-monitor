@@ -13,7 +13,7 @@ import com.sun.mail.util.MailSSLSocketFactory;
 /**
  * 邮件model
  * @ClassName: MailSenderInfo
- * @author fuce
+ * @author reisen
  * @date 2019-06-10 01:06
  * @version V1.0
  */

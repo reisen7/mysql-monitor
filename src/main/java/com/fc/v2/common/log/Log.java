@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义操作日志记录注解
- * @author fuce 
+ * @author reisen 
  * @date: 2018年9月30日 下午3:36:05
  */
 @Target({ ElementType.PARAMETER, ElementType.METHOD })

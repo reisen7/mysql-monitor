@@ -6,7 +6,7 @@ import javax.mail.PasswordAuthentication;
 /**
  * 发送邮件需要使用的基本信息 
  * @ClassName: MyAuthenticator
- * @author fuce
+ * @author reisen
  * @date 2019-06-10 01:06
  * @version V1.0
  */

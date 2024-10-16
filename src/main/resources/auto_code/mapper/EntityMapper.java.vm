@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * ${tableInfo.tableComment} ${tableInfo.javaTableName}Mapper
  * @author ${author}_自动生成
- * @email ${email}
+ * @Description
  * @date ${datetime}
  */
 public interface ${tableInfo.javaTableName}Mapper {

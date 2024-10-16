@@ -1,12 +1,11 @@
-package com.fc.v2.controller.gen;
+package com.fc.v2.controller.monitor;
 
 import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
-import com.fc.v2.model.auto.MonCluster;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.model.auto.MonConnect;
-import com.fc.v2.service.MonConnectService;
+import com.fc.v2.model.auto.MonCluster;
+import com.fc.v2.service.monitor.MonClusterService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,35 +16,34 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
- * 数据库连接Controller
- * @ClassName: MonConnectController
- * @author fuce
- * @date 2024-08-16 17:43:36
+ * 数据库集群Controller
+ * @ClassName MonClusterController
+ * @author reisen
+ * @Description
+ * @date 2024-08-16 18:20:36
  */
-@Api(value = "数据库连接")
+@Api(value = "数据库集群")
 @Controller
-@RequestMapping("/MonConnectController")
-public class MonConnectController extends BaseController {
+@RequestMapping("/MonClusterController")
+public class MonClusterController extends BaseController {
 	
-	private String prefix = "gen/monConnect";
+	private String prefix = "gen/monCluster";
 	
 	@Autowired
-	private MonConnectService monConnectService;
+	private MonClusterService monClusterService;
 	
 	
 	/**
-	 * 数据库连接页面展示
+	 * 数据库集群页面展示
 	 * @param model
 	 * @return String
-	 * @author fuce
+	 * @author reisen
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
 	@GetMapping("/view")
-	@SaCheckPermission("gen:monConnect:view")
+	@SaCheckPermission("gen:monCluster:view")
     public String view(ModelMap model)
     {
         return prefix + "/list";
@@ -57,13 +55,13 @@ public class MonConnectController extends BaseController {
 	 * @param
 	 * @return
 	 */
-	//@Log(title = "数据库连接", action = "111")
+	//@Log(title = "数据库集群", action = "111")
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
 	@GetMapping("/list")
-	@SaCheckPermission("gen:monConnect:list")
+	@SaCheckPermission("gen:monCluster:list")
 	@ResponseBody
-	public ResultTable list(Tablepar tablepar,MonConnect monConnect){
-		PageInfo<MonConnect> page=monConnectService.list(tablepar,monConnect) ; 
+	public ResultTable list(Tablepar tablepar,MonCluster monCluster){
+		PageInfo<MonCluster> page=monClusterService.list(tablepar,monCluster);
 		return pageTable(page.getList(),page.getTotal());
 	}
 	
@@ -72,10 +70,8 @@ public class MonConnectController extends BaseController {
      */
 	@ApiOperation(value = "新增跳转", notes = "新增跳转")
     @GetMapping("/add")
-    public String add(ModelMap modelMap, Map<String,Object> map)
+    public String add(ModelMap modelMap)
     {
-		List<MonCluster> monClusterList = monClusterService.selectByExample(null);
-		map.put("monClusterList",monClusterList);
         return prefix + "/add";
     }
 	
@@ -84,13 +80,13 @@ public class MonConnectController extends BaseController {
      * @param 
      * @return
      */
-	//@Log(title = "数据库连接新增", action = "111")
+	//@Log(title = "数据库集群新增", action = "111")
 	@ApiOperation(value = "新增", notes = "新增")
 	@PostMapping("/add")
-	@SaCheckPermission("gen:monConnect:add")
+	@SaCheckPermission("gen:monCluster:add")
 	@ResponseBody
-	public AjaxResult add(MonConnect monConnect){
-		int b=monConnectService.insertSelective(monConnect);
+	public AjaxResult add(MonCluster monCluster){
+		int b=monClusterService.insertSelective(monCluster);
 		if(b>0){
 			return success();
 		}else{
@@ -99,17 +95,17 @@ public class MonConnectController extends BaseController {
 	}
 	
 	/**
-	 * 数据库连接删除
+	 * 数据库集群删除
 	 * @param ids
 	 * @return
 	 */
-	//@Log(title = "数据库连接删除", action = "111")
+	//@Log(title = "数据库集群删除", action = "111")
 	@ApiOperation(value = "删除", notes = "删除")
 	@DeleteMapping("/remove")
-	@SaCheckPermission("gen:monConnect:remove")
+	@SaCheckPermission("gen:monCluster:remove")
 	@ResponseBody
 	public AjaxResult remove(String ids){
-		int b=monConnectService.deleteByPrimaryKey(ids);
+		int b=monClusterService.deleteByPrimaryKey(ids);
 		if(b>0){
 			return success();
 		}else{
@@ -128,7 +124,7 @@ public class MonConnectController extends BaseController {
 	@GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap map)
     {
-        map.put("MonConnect", monConnectService.selectByPrimaryKey(id));
+        map.put("MonCluster", monClusterService.selectByPrimaryKey(id));
 
         return prefix + "/edit";
     }
@@ -136,15 +132,15 @@ public class MonConnectController extends BaseController {
 	/**
      * 修改保存
      */
-    //@Log(title = "数据库连接修改", action = "111")
+    //@Log(title = "数据库集群修改", action = "111")
 	@ApiOperation(value = "修改保存", notes = "修改保存")
-    @SaCheckPermission("gen:monConnect:edit")
+    @SaCheckPermission("gen:monCluster:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(MonConnect monConnect)
+    public AjaxResult editSave(MonCluster monCluster)
     {
-		monConnect.setUpdateTime(new Date());
-        return toAjax(monConnectService.updateByPrimaryKeySelective(monConnect));
+		monCluster.setUpdateTime(new Date());
+        return toAjax(monClusterService.updateByPrimaryKeySelective(monCluster));
     }
     
     
@@ -155,8 +151,8 @@ public class MonConnectController extends BaseController {
 	 */
     @PutMapping("/updateVisible")
 	@ResponseBody
-    public AjaxResult updateVisible(@RequestBody MonConnect monConnect){
-		int i=monConnectService.updateVisible(monConnect);
+    public AjaxResult updateVisible(@RequestBody MonCluster monCluster){
+		int i=monClusterService.updateVisible(monCluster);
 		return toAjax(i);
 	}
 

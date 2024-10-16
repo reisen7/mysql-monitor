@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 定时任务日志Controller
 * @ClassName: QuartzJobLogController
-* @author fuce
+* @author reisen
 * @date 2019-11-20 22:51
  */
 @Api(value = "定时任务调度日志表")
@@ -34,7 +34,7 @@ public class QuartzJobLogController extends BaseController{
 	 * 展示跳转页面
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:01:13
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -50,7 +50,7 @@ public class QuartzJobLogController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:01:26
 	 */
 	//@Log(title = "定时任务调度日志表集合查询", action = "111")
@@ -67,7 +67,7 @@ public class QuartzJobLogController extends BaseController{
 	 * 查看详情
 	 * @param modelMap
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年9月14日 下午11:50:42
 	 */
 	 @ApiOperation(value = "查看详情", notes = "查看详情")
@@ -85,7 +85,7 @@ public class QuartzJobLogController extends BaseController{
 	 * 定时任务日志删除
 	 * @param ids id集合
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月20日 下午10:51:52
 	 */
 	//@Log(title = "定时任务调度日志表删除", action = "111")

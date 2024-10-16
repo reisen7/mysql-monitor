@@ -1,4 +1,4 @@
-package com.fc.v2.service;
+package com.fc.v2.service.monitor;
 
 import java.util.List;
 import java.util.Arrays;
@@ -18,11 +18,10 @@ import com.fc.v2.util.StringUtils;
 
 /**
  * 数据库连接 MonConnectService
- * @Title: MonConnectService.java 
- * @Package com.fc.v2.service 
- * @author fuce_自动生成
- * @email ${email}
- * @date 2024-08-16 17:43:36  
+ * @Title: MonConnectService.java
+ * @Package com.fc.v2.service
+ * @author reisen_自动生成
+ * @date 2024-08-16 17:43:36
  **/
 @Service
 public class MonConnectService implements BaseService<MonConnect, MonConnectExample>{

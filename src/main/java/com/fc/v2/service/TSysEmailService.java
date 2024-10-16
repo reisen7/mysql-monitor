@@ -21,7 +21,7 @@ import com.github.pagehelper.PageInfo;
  * 电子邮件Service
 * @Title: TSysEmailService.java
 * @Package com.fc.v2.service
-* @author fuce
+* @author reisen
 * @email 87766867@qq.com
 * @date 2019-06-30 00:49:49
  */

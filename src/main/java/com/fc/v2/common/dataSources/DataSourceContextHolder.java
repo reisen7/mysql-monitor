@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 动态数据源上下文管理：设置数据源，获取数据源，清除数据源
  * @ClassName: DataSourceContextHolder
- * @author fuce
+ * @author reisen
  * @date 2019-12-06 21:08
  */
 public class DataSourceContextHolder {
@@ -20,7 +20,7 @@ public class DataSourceContextHolder {
     /**
      * 设置数据源
      * @param type
-     * @author fuce
+     * @author reisen
      * @Date 2019年12月7日 下午6:38:55
      */
     public static void setDataSource(String type){
@@ -32,7 +32,7 @@ public class DataSourceContextHolder {
     /**
      * 获得数据源的变量
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2019年12月7日 下午6:39:00
      */
     public static String getDataSource(){
@@ -41,7 +41,7 @@ public class DataSourceContextHolder {
 
     /**
      * 清除数据源
-     * @author fuce
+     * @author reisen
      * @Date 2019年12月7日 下午6:39:06
      */
     public static void clearDataSource(){

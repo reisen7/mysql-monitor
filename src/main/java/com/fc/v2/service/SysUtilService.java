@@ -17,7 +17,7 @@ public class SysUtilService {
 	 * 执行sql
 	 * @param sql
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年8月31日 下午6:15:08
 	 */
 	public int executeSQL(String sql){
@@ -29,7 +29,7 @@ public class SysUtilService {
 	 * 查询sql
 	 * @param sql
 	 * @return list<map>
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2020年4月10日 下午4:55:49
 	 */
 	public List<Map<Object,Object>> SelectExecuteSQL(String sql){

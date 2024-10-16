@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 拦截器
 * @ClassName: MyWebAppConfigurer
-* @author fuce
-* @date 2018年6月3日
+* @author reisen
+* @date: 2024年10月16日
 *
  */
 @Configuration
@@ -41,7 +41,7 @@ public class MyWebAppConfigurer implements WebMvcConfigurer {
 	
 	/**
 	 * 跨域支持
-	 * @author fuce
+	 * @author reisen
 	 *
 	 */
 	@Configuration(proxyBeanMethods = false)

@@ -26,7 +26,7 @@ public class AutoCodeConfig {
      * 获取配置文件value
      * @param key
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2019年8月17日 上午12:29:40
      */
     public  String getConfigkey(String key) {

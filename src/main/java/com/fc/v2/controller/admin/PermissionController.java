@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 权限Controller
- * @author fuce 
+ * @author reisen 
  * @date: 2018年9月2日 下午8:08:21
  */
 @Api(value = "权限")
@@ -44,7 +44,7 @@ public class PermissionController  extends BaseController{
 	 * 权限列表展示
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午3:43:51
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")

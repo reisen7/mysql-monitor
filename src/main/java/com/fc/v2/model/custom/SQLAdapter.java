@@ -3,7 +3,7 @@ package com.fc.v2.model.custom;
 /**
  * 通用sql
 * @ClassName: SQLAdapter
-* @author fuce
+* @author reisen
 * @date 2019-09-02 01:10
 *
  */
@@ -20,7 +20,7 @@ public class SQLAdapter {
 
 	/**
 	 * @param sql
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年8月31日 下午7:25:22
 	 */
 	public SQLAdapter(String sql) {

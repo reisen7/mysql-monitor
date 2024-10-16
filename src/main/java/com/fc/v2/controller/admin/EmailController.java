@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 邮件发送Controller
  * @ClassName: EmailController
- * @author fuce
+ * @author reisen
  * @date 2019-06-10 00:39
  * @version V1.0
  */
@@ -83,7 +83,7 @@ public class EmailController extends BaseController{
 	 * @param model
 	 * @return
 	 * @throws Exception
-	 * @author fuce
+	 * @author reisen
 	 */
 	//@Log(title = "新增邮件", action = "1")
 	@ApiOperation(value = "新增", notes = "新增")

@@ -320,7 +320,7 @@ public class SysPermissionService implements BaseService<TsysPermission, TsysPer
 	 * 根据权限字段查询是否存在
 	 * @param perms
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年9月1日 上午2:06:31
 	 */
 	public Boolean queryLikePerms(String perms){

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 地区Controller
  * @ClassName: SysAreaController
- * @author fuce
+ * @author reisen
  * @date 2019-11-20 22:34
  */
 @Api(value = "地区设置")
@@ -41,7 +41,7 @@ public class SysAreaController extends BaseController{
 	 * 地区页面展示
 	 * @param model
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:05:04
 	 */
 	@ApiOperation(value = "分页跳转", notes = "分页跳转")
@@ -57,7 +57,7 @@ public class SysAreaController extends BaseController{
 	 * @param tablepar
 	 * @param searchText
 	 * @return
-	 * @author fuce
+	 * @author reisen
 	 * @Date 2019年11月11日 下午4:04:53
 	 */
 	//@Log(title = "地区设置集合查询", action = "111")
@@ -86,7 +86,7 @@ public class SysAreaController extends BaseController{
      * 新增保存
      * @param sysArea
      * @return
-     * @author fuce
+     * @author reisen
      * @Date 2019年11月11日 下午4:04:41
      */
 	//@Log(title = "地区设置新增", action = "111")
