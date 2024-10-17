@@ -156,8 +156,5 @@ public class MonClusterController extends BaseController {
 		return toAjax(i);
 	}
 
-    
-    
 
-	
 }
