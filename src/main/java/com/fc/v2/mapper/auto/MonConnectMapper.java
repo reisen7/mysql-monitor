@@ -1,7 +1,7 @@
 package com.fc.v2.mapper.auto;
 
-import com.fc.v2.model.auto.MonConnect;
-import com.fc.v2.model.auto.MonConnectExample;
+import com.fc.v2.model.monitor.MonConnect;
+import com.fc.v2.model.monitor.MonConnectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -66,8 +66,8 @@
 										<option ></option>
 										<option
 												th:each="item:${monClusterList}"
-												th:value="${monClusterList.id}"
-												th:text="${monClusterList.name}" >
+												th:value="${item.id}"
+												th:text="${item.name}" >
 										</option>
 									</select>
 			                    </div>

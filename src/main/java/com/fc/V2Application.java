@@ -30,7 +30,12 @@ public class V2Application {
 				"　　　　　　 ﾚ'ヽL__|___i,___,ンﾚ|ノ    \n"+
 				"　　　　　 　　　ﾄ-,/　|___./           \n"+
 				"　　　　　 　　　'ｰ'　　!_,.:             \n");
-
+       // 启动打开默认浏览器访问
+//		try {
+//			Runtime.getRuntime().exec("cmd /c start http://localhost:8080/");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 

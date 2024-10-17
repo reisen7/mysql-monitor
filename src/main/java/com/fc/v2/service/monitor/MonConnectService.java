@@ -10,11 +10,9 @@ import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
 import com.fc.v2.mapper.auto.MonConnectMapper;
-import com.fc.v2.model.auto.MonConnect;
-import com.fc.v2.model.auto.MonConnectExample;
+import com.fc.v2.model.monitor.MonConnect;
+import com.fc.v2.model.monitor.MonConnectExample;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
 
 /**
  * 数据库连接 MonConnectService

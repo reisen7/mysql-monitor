@@ -10,11 +10,9 @@ import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
 import com.fc.v2.mapper.auto.MonClusterMapper;
-import com.fc.v2.model.auto.MonCluster;
-import com.fc.v2.model.auto.MonClusterExample;
+import com.fc.v2.model.monitor.MonCluster;
+import com.fc.v2.model.monitor.MonClusterExample;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
 
 /**
  * 数据库集群 MonClusterService

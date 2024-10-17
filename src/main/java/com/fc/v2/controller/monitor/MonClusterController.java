@@ -4,7 +4,7 @@ import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.model.auto.MonCluster;
+import com.fc.v2.model.monitor.MonCluster;
 import com.fc.v2.service.monitor.MonClusterService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;

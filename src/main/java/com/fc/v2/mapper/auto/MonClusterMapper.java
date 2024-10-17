@@ -1,7 +1,7 @@
 package com.fc.v2.mapper.auto;
 
-import com.fc.v2.model.auto.MonCluster;
-import com.fc.v2.model.auto.MonClusterExample;
+import com.fc.v2.model.monitor.MonCluster;
+import com.fc.v2.model.monitor.MonClusterExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

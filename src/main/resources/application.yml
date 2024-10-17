@@ -27,8 +27,8 @@ reisen:
 server :
   port : 8080
   ##项目名字配置
-  #servlet :
-  #  context-path : /demo
+  servlet :
+    context-path : /
   tomcat :
     uri-encoding : UTF-8
     #xx 报错修改的地方
@@ -56,7 +56,7 @@ spring :
   devtools:
     restart:
       #热部署开关
-      enabled: true
+      enabled: false
       #指定热部署的目录
       additional-paths: src/main/java
       #指定目录不更新

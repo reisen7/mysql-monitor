@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fc.v2.mapper.auto.MonClusterMapper">
-  <resultMap id="BaseResultMap" type="com.fc.v2.model.auto.MonCluster">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.monitor.MonCluster">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -74,7 +74,7 @@
   	
   </sql>
   
-  <select id="selectByExample" parameterType="com.fc.v2.model.auto.MonClusterExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -99,14 +99,14 @@
     delete from mon_cluster
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fc.v2.model.auto.MonClusterExample">
+  <delete id="deleteByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample">
     delete from mon_cluster
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   
-  <insert id="insert" parameterType="com.fc.v2.model.auto.MonCluster">
+  <insert id="insert" parameterType="com.fc.v2.model.monitor.MonCluster">
     insert into mon_cluster (
       id,
       name,
@@ -121,7 +121,7 @@
     )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.fc.v2.model.auto.MonCluster">
+  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.MonCluster">
     insert into mon_cluster
     <trim prefix="(" suffix=")" suffixOverrides=",">
     
@@ -157,7 +157,7 @@
     </trim>
   </insert>
   
-  <select id="countByExample" parameterType="com.fc.v2.model.auto.MonClusterExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample" resultType="java.lang.Long">
     select count(*) from mon_cluster
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -205,7 +205,7 @@
   </update>
   
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.auto.MonCluster">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.monitor.MonCluster">
     update mon_cluster
     <set>
       
@@ -230,7 +230,7 @@
 
 	
 
-  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.auto.MonCluster">
+  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.monitor.MonCluster">
     update mon_cluster
     set 
 	  

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fc.v2.mapper.auto.MonConnectMapper">
-  <resultMap id="BaseResultMap" type="com.fc.v2.model.auto.MonConnect">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.monitor.MonConnect">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="host" jdbcType="VARCHAR" property="host" />
     <result column="port" jdbcType="INTEGER" property="port" />
@@ -86,7 +86,7 @@
   	
   </sql>
   
-  <select id="selectByExample" parameterType="com.fc.v2.model.auto.MonConnectExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fc.v2.model.monitor.MonConnectExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -111,14 +111,14 @@
     delete from mon_connect
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fc.v2.model.auto.MonConnectExample">
+  <delete id="deleteByExample" parameterType="com.fc.v2.model.monitor.MonConnectExample">
     delete from mon_connect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   
-  <insert id="insert" parameterType="com.fc.v2.model.auto.MonConnect">
+  <insert id="insert" parameterType="com.fc.v2.model.monitor.MonConnect">
     insert into mon_connect (
       id,
       host,
@@ -145,7 +145,7 @@
     )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.fc.v2.model.auto.MonConnect">
+  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.MonConnect">
     insert into mon_connect
     <trim prefix="(" suffix=")" suffixOverrides=",">
     
@@ -223,7 +223,7 @@
     </trim>
   </insert>
   
-  <select id="countByExample" parameterType="com.fc.v2.model.auto.MonConnectExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fc.v2.model.monitor.MonConnectExample" resultType="java.lang.Long">
     select count(*) from mon_connect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -301,7 +301,7 @@
   </update>
   
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.auto.MonConnect">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.monitor.MonConnect">
     update mon_connect
     <set>
       
@@ -350,7 +350,7 @@
 
 	
 
-  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.auto.MonConnect">
+  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.monitor.MonConnect">
     update mon_connect
     set 
 	  
