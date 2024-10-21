@@ -1,10 +1,10 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.model.mysql.InnodbLockWaits;
 import com.fc.v2.model.mysql.InnodbTrx;
-import com.fc.v2.service.mysql.InnodbService;
+import com.fc.v2.service.monitor.InnodbService;
 import com.fc.v2.model.mysql.MysqlServer;
 import org.springframework.stereotype.Service;
 

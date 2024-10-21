@@ -1,4 +1,4 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.alibaba.druid.DbType;
 import com.alibaba.druid.sql.SQLUtils;
@@ -11,12 +11,11 @@ import com.alibaba.druid.stat.TableStat.Condition;
 import com.alibaba.druid.util.JdbcConstants;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.mapper.mysql.MysqlServerMapper;
-import com.fc.v2.service.mysql.JdbcService;
-import com.fc.v2.service.mysql.SqlAdviserService;
+import com.fc.v2.service.monitor.JdbcService;
+import com.fc.v2.service.monitor.SqlAdviserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;

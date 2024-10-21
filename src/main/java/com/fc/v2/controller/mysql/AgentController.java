@@ -1,7 +1,7 @@
 package com.fc.v2.controller.mysql;
 
-import com.fc.v2.service.mysql.StatementService;
-import com.fc.v2.service.mysql.SuggestionService;
+import com.fc.v2.service.monitor.StatementService;
+import com.fc.v2.service.monitor.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

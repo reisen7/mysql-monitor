@@ -1,19 +1,18 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.*;
 import com.fc.v2.mapper.mysql.MysqlClusterMapper;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.model.mysql.MysqlCluster;
 import com.fc.v2.model.mysql.MysqlServerExample;
-import com.fc.v2.service.mysql.JdbcService;
-import com.fc.v2.service.mysql.MysqlService;
+import com.fc.v2.service.monitor.JdbcService;
+import com.fc.v2.service.monitor.MysqlService;
 import com.fc.v2.util.MiscUtil;
 import com.fc.v2.model.mysql.MysqlServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

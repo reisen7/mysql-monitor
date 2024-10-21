@@ -1,12 +1,12 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.dto.Suggestion;
 import com.fc.v2.mapper.mysql.MysqlServerMapper;
 import com.fc.v2.model.mysql.MysqlServer;
-import com.fc.v2.service.mysql.JdbcService;
-import com.fc.v2.service.mysql.SuggestionService;
+import com.fc.v2.service.monitor.JdbcService;
+import com.fc.v2.service.monitor.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

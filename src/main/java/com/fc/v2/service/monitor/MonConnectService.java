@@ -29,8 +29,8 @@ public class MonConnectService implements BaseService<MonConnect, MonConnectExam
 	
 	/**
 	 * 分页查询
-	 * @param pageNum
-	 * @param pageSize
+	 * @param
+	 * @param
 	 * @return
 	 */
 	 public PageInfo<MonConnect> list(Tablepar tablepar,MonConnect monConnect){

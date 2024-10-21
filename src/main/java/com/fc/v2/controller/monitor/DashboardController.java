@@ -1,8 +1,10 @@
 package com.fc.v2.controller.monitor;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import com.fc.v2.service.monitor.DashboardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DashboardController {
 
     private String prefix = "mysql/";
+
+    @Autowired
+    private DashboardService dashboardService;
 
     /**
      * 页面展示

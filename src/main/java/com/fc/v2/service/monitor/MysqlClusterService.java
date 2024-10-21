@@ -1,4 +1,4 @@
-package com.fc.v2.service.mysql;
+package com.fc.v2.service.monitor;
 
 import com.fc.v2.dto.ClusterNetworkDto;
 import com.fc.v2.dto.RestResponse;

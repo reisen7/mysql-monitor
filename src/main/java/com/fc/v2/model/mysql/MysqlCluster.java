@@ -1,52 +1,83 @@
 package com.fc.v2.model.mysql;
 
+import cn.hutool.core.date.DateUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class MysqlCluster implements Serializable {
-    private Long id;
-
-    private String name;
-
-    private Date createTime;
-
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+
+    @ApiModelProperty(value = "主键")
+    private Integer id;
+
+    @ApiModelProperty(value = "集群名称")
+    private String name;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
+    @JsonProperty("id")
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id =  id;
     }
-
+    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name =  name;
     }
-
+    @JsonProperty("createTime")
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        this.createTime =  createTime;
+    }
+    @JsonProperty("updateTime")
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime =  updateTime;
+    }
+
+
+    public MysqlCluster(Integer id,String name,Date createTime,Date updateTime) {
+
+        this.id = id;
+
+        this.name = name;
+
+        this.createTime = createTime;
+
+        this.updateTime = updateTime;
+
+    }
+
+    public MysqlCluster() {
+        super();
+    }
+
+    public String dateToStringConvert(Date date) {
+        if(date!=null) {
+            return DateUtil.format(date, "yyyy-MM-dd HH:mm:ss");
+        }
+        return "";
     }
 }

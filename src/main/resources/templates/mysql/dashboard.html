@@ -3,8 +3,35 @@
 <head>
 	<th:block th:include="include :: header('首页')"/>
 	<link rel="stylesheet" th:href="@{/static/admin/css/other/console1.css}"/>
+	<style>
+		.cluster-select {
+			position: relative;
+			padding-bottom: 50px;
+		}
+		.cluster-form {
+			position: absolute;
+			right: 30px;
+		}
+	</style>
 </head>
 <body class="pear-container">
+<div class="cluster-select">
+	<form class="layui-form cluster-form" action="" onsubmit="return false">
+		<div class="layui-form-item">
+			<label class="layui-form-label">数据库连接</label>
+			<div class="layui-input-inline">
+				<select name="a2zkp" lay-verify="required" lay-search>
+					<option value=""></option>
+					<option value="0">北京</option>
+					<option value="1">上海</option>
+					<option value="2">广州</option>
+					<option value="3">深圳</option>
+					<option value="4">杭州</option>
+				</select>
+			</div>
+		</div>
+	</form>
+</div>
 <div>
 	<div class="layui-row layui-col-space10">
 		<div class="layui-col-xs6 layui-col-md3">
@@ -152,11 +179,15 @@
 		</div>
 	</div>
 	<div class="layui-row layui-col-space10">
-		<div class="layui-col-md9">
+		<div class="layui-col-md12">
 			<div class="layui-card">
 				<div class="layui-card-body">
 					<div class="layui-tab custom-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-						<div id="echarts-records" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+						<div id="echarts-records" style="
+						background-color:#ffffff;
+						min-height:400px;
+						padding: 10px;
+						width: 100%"></div>
 					</div>
 				</div>
 			</div>
@@ -166,7 +197,7 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script>
-	layui.use(['layer', 'echarts', 'element', 'count', 'topBar','code'], function () {
+	layui.use(['layer', 'echarts', 'element', 'count', 'topBar','code', 'form'], function () {
 		layui.code();
 		let count = layui.count,
 				echarts = layui.echarts;
@@ -178,6 +209,13 @@
 		})
 
 		var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+
+		var form = layui.form;
+		form.on('submit(formDemo)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			return false;
+		});
+
 
 		var option = {
 			tooltip: {

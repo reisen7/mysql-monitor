@@ -1,7 +1,7 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.QueryResult;
-import com.fc.v2.service.mysql.JdbcService;
+import com.fc.v2.service.monitor.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,13 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.*;
-import com.fc.v2.mapper.mysql.MysqlServerMapper;
+import com.fc.v2.mapper.auto.MonClusterMapper;
+import com.fc.v2.mapper.auto.MonConnectMapper;
 import com.fc.v2.mapper.mysql.MysqlStatusHistoryMapper;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.model.mysql.MysqlStatusHistory;
 import com.fc.v2.model.mysql.MysqlStatusHistoryExample;
-import com.fc.v2.service.mysql.DashboardService;
+import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.util.MiscUtil;
 import com.fc.v2.util.SysSampleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ import java.util.Map;
 public class DashboardServiceImpl extends AbstractService implements DashboardService
 {
     @Autowired
-    private MysqlServerMapper mysqlServerMapper;
+    private MonConnectMapper monConnectMapper;
+
+    @Autowired
+    private MonClusterMapper monClusterMapper;
     
     @Autowired
     private MysqlStatusHistoryMapper mysqlStatusHistoryMapper;
@@ -36,7 +40,7 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardOverview(java.lang.Long)
      */
     @Override
-    public Object getDashboardOverview(Long serverId)
+    public DashboardOverview getDashboardOverview(Long serverId)
     {
         DashboardOverview dashboardOverview = getUptimeThreadsInnodbBytes(serverId);
         dashboardOverview = getSchemaTotalDataTotal(dashboardOverview, serverId);

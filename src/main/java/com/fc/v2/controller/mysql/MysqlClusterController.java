@@ -3,7 +3,7 @@ package com.fc.v2.controller.mysql;
 import com.fc.v2.dto.ClusterNetworkDto;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.model.mysql.MysqlCluster;
-import com.fc.v2.service.mysql.MysqlClusterService;
+import com.fc.v2.service.monitor.MysqlClusterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

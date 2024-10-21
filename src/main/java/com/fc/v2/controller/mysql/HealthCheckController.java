@@ -1,7 +1,7 @@
 package com.fc.v2.controller.mysql;
 
 import com.fc.v2.dto.RestResponse;
-import com.fc.v2.service.mysql.HealthCheckService;
+import com.fc.v2.service.monitor.HealthCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

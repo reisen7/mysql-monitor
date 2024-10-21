@@ -1,18 +1,17 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.Pager;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.dto.Statement;
 import com.fc.v2.mapper.mysql.MysqlServerMapper;
-import com.fc.v2.service.mysql.JdbcService;
-import com.fc.v2.service.mysql.StatementService;
+import com.fc.v2.service.monitor.JdbcService;
+import com.fc.v2.service.monitor.StatementService;
 import com.fc.v2.model.mysql.MysqlServer;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;

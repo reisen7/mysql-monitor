@@ -1,4 +1,4 @@
-package com.fc.v2.service.mysql;
+package com.fc.v2.service.monitor;
 
 /**
  * @ClassName: SuggestionService

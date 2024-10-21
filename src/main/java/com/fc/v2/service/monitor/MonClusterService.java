@@ -16,10 +16,10 @@ import com.fc.v2.model.custom.Tablepar;
 
 /**
  * 数据库集群 MonClusterService
- * @Title: MonClusterService.java 
- * @Package com.fc.v2.service 
+ * @Title: MonClusterService.java
+ * @Package com.fc.v2.service
  * @author reisen_自动生成
- * @date 2024-08-16 18:20:36  
+ * @date 2024-08-16 18:20:36
  **/
 @Service
 public class MonClusterService implements BaseService<MonCluster, MonClusterExample>{
@@ -29,8 +29,8 @@ public class MonClusterService implements BaseService<MonCluster, MonClusterExam
 	
 	/**
 	 * 分页查询
-	 * @param pageNum
-	 * @param pageSize
+	 * @param
+	 * @param
 	 * @return
 	 */
 	 public PageInfo<MonCluster> list(Tablepar tablepar,MonCluster monCluster){

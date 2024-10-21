@@ -44,8 +44,8 @@ public class ${tableInfo.javaTableName}Service implements BaseService<${tableInf
 	
 	/**
 	 * 分页查询
-	 * @param pageNum
-	 * @param pageSize
+	 * @param tablepar
+	 * @param
 	 * @return
 	 */
 	 public PageInfo<${tableInfo.javaTableName}> list(Tablepar tablepar,${tableInfo.javaTableName} ${tableInfo.javaTableName_a}){

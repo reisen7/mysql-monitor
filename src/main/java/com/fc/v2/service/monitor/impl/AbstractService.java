@@ -1,17 +1,16 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.mapper.mysql.MysqlServerMapper;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.model.mysql.MysqlServerExample;
-import com.fc.v2.service.mysql.JdbcService;
+import com.fc.v2.service.monitor.JdbcService;
 import com.fc.v2.model.mysql.MysqlServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

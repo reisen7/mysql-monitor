@@ -1,4 +1,4 @@
-package com.fc.v2.service.mysql.impl;
+package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
@@ -6,11 +6,10 @@ import com.fc.v2.mapper.mysql.MysqlWeakPasswordMapper;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.model.mysql.MysqlWeakPassword;
 import com.fc.v2.model.mysql.MysqlWeakPasswordExample;
-import com.fc.v2.service.mysql.HealthCheckService;
+import com.fc.v2.service.monitor.HealthCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
