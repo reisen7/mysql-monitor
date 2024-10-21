@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fc.v2.mapper.auto.MonClusterMapper">
-  <resultMap id="BaseResultMap" type="com.fc.v2.model.monitor.MonCluster">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.fc.v2.mapper.mysql.MonitorClusterMapper">
+  <resultMap id="BaseResultMap" type="com.fc.v2.model.monitor.MonitorCluster">
+    <result column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -74,13 +74,13 @@
   	
   </sql>
   
-  <select id="selectByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fc.v2.model.monitor.MonitorClusterExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from mon_cluster
+    from monitor_cluster
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,41 +88,41 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from mon_cluster
-    where id = #{id,jdbcType=INTEGER}
+    from monitor_cluster
+    where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from mon_cluster
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from monitor_cluster
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample">
-    delete from mon_cluster
+  <delete id="deleteByExample" parameterType="com.fc.v2.model.monitor.MonitorClusterExample">
+    delete from monitor_cluster
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   
-  <insert id="insert" parameterType="com.fc.v2.model.monitor.MonCluster">
-    insert into mon_cluster (
+  <insert id="insert" parameterType="com.fc.v2.model.monitor.MonitorCluster">
+    insert into monitor_cluster (
       id,
       name,
       create_time,
    	  update_time
     )
     values (
-     	#{id,jdbcType=INTEGER},
+     	#{id,jdbcType=BIGINT},
      	#{name,jdbcType=VARCHAR},
      	#{createTime,jdbcType=TIMESTAMP},
    	  #{updateTime,jdbcType=TIMESTAMP}
     )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.MonCluster">
-    insert into mon_cluster
+  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.MonitorCluster">
+    insert into monitor_cluster
     <trim prefix="(" suffix=")" suffixOverrides=",">
     
       <if test="id != null">
@@ -143,7 +143,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -157,18 +157,18 @@
     </trim>
   </insert>
   
-  <select id="countByExample" parameterType="com.fc.v2.model.monitor.MonClusterExample" resultType="java.lang.Long">
-    select count(*) from mon_cluster
+  <select id="countByExample" parameterType="com.fc.v2.model.monitor.MonitorClusterExample" resultType="java.lang.Long">
+    select count(*) from monitor_cluster
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   
   <update id="updateByExampleSelective" parameterType="map">
-    update mon_cluster
+    update monitor_cluster
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
@@ -188,10 +188,10 @@
   
   
   <update id="updateByExample" parameterType="map">
-    update mon_cluster
+    update monitor_cluster
     set
     	 
-    	 id = #{record.id,jdbcType=INTEGER},
+    	 id = #{record.id,jdbcType=BIGINT},
     	 
     	 name = #{record.name,jdbcType=VARCHAR},
     	 
@@ -205,8 +205,8 @@
   </update>
   
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.monitor.MonCluster">
-    update mon_cluster
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.v2.model.monitor.MonitorCluster">
+    update monitor_cluster
     <set>
       
       <if test="name != null ">
@@ -224,14 +224,14 @@
     
     where 
     
-    id = #{id,jdbcType=INTEGER}
+    id = #{id,jdbcType=BIGINT}
   
   </update>
 
 	
 
-  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.monitor.MonCluster">
-    update mon_cluster
+  <update id="updateByPrimaryKey" parameterType="com.fc.v2.model.monitor.MonitorCluster">
+    update monitor_cluster
     set 
 	  
 		name = #{name,jdbcType=VARCHAR},
@@ -242,7 +242,7 @@
 	
     where 
     
-    id = #{id,jdbcType=INTEGER}
+    id = #{id,jdbcType=BIGINT}
     
   </update>
   

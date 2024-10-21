@@ -2,8 +2,8 @@ package com.fc.v2.controller.mysql;
 
 import com.fc.v2.dto.ClusterNetworkDto;
 import com.fc.v2.dto.RestResponse;
-import com.fc.v2.model.mysql.MysqlCluster;
-import com.fc.v2.service.monitor.MysqlClusterService;
+import com.fc.v2.model.monitor.MonitorCluster;
+import com.fc.v2.service.monitor.MonitorClusterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**   
- * @ClassName:  MysqlClusterController   
+ * @ClassName:  MonitorClusterController   
  * @Description:MySQL集群Controller
  * @author: reisen
  * @date:   2024-10-16 18:20:36
@@ -23,7 +23,7 @@ import java.util.List;
 public class MysqlClusterController
 {
     @Autowired
-    private MysqlClusterService mysqlClusterService;
+    private MonitorClusterService monitorClusterService;
 
     /**
      * 获取所有集群信息
@@ -33,8 +33,9 @@ public class MysqlClusterController
      */
     @RequestMapping("/mysql/cluster/all")
     @CrossOrigin(origins = "*")
-    public List<MysqlCluster> getAllClusters() {
-        return mysqlClusterService.getAllClusters();
+    public List<MonitorCluster> getAllClusters() {
+//        return monitorClusterService.getAllClusters();
+        return null;
     }
     /**
      * 获取指定集群的拓扑节点信息
@@ -47,7 +48,7 @@ public class MysqlClusterController
     public ClusterNetworkDto getClusterNetworkById(HttpServletRequest request) {
         //请求数据
         Long clusterId = Long.valueOf(request.getParameter("clusterId"));
-        return mysqlClusterService.getClusterNetworkById(clusterId);
+        return monitorClusterService.getClusterNetworkById(clusterId);
     }
     /**
      * 新增集群
@@ -61,7 +62,7 @@ public class MysqlClusterController
     public RestResponse<String> saveCluster(HttpServletRequest request) {
         Long id = Long.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
-        return mysqlClusterService.saveCluster(id,name);
+        return monitorClusterService.saveCluster(id,name);
     }
     /**
      * 删除集群
@@ -74,6 +75,6 @@ public class MysqlClusterController
     @CrossOrigin(origins = "*")
     public RestResponse<String> deleteCluster(HttpServletRequest request) {
         Long id = Long.valueOf(request.getParameter("id"));
-        return mysqlClusterService.deleteCluster(id);
+        return monitorClusterService.deleteCluster(id);
     }
 }

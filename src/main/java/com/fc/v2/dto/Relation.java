@@ -1,8 +1,9 @@
 package com.fc.v2.dto;
 
-import com.fc.v2.model.mysql.MysqlServer;
 
-/**   
+import com.fc.v2.model.monitor.MonitorServer;
+
+/**
  * @ClassName:  Relation   
  * @Description:MySQL节点的复制关系
  * @author: reisen
@@ -10,11 +11,11 @@ import com.fc.v2.model.mysql.MysqlServer;
  */
 public class Relation
 {
-    private MysqlServer from;
-    private MysqlServer to;
+    private MonitorServer from;
+    private MonitorServer to;
     private SlaveStatus slaveStatus;
     
-    public Relation(MysqlServer from, MysqlServer to, SlaveStatus slaveStatus){
+    public Relation(MonitorServer from, MonitorServer to, SlaveStatus slaveStatus){
         this.from=from;
         this.to=to;
         this.slaveStatus=slaveStatus;
@@ -22,28 +23,28 @@ public class Relation
     /**
      * @return the from
      */
-    public MysqlServer getFrom()
+    public MonitorServer getFrom()
     {
         return from;
     }
     /**
      * @param from the from to set
      */
-    public void setFrom(MysqlServer from)
+    public void setFrom(MonitorServer from)
     {
         this.from = from;
     }
     /**
      * @return the to
      */
-    public MysqlServer getTo()
+    public MonitorServer getTo()
     {
         return to;
     }
     /**
      * @param to the to to set
      */
-    public void setTo(MysqlServer to)
+    public void setTo(MonitorServer to)
     {
         this.to = to;
     }

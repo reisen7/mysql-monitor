@@ -1,6 +1,6 @@
 package com.fc.v2.controller.mysql;
 
-import com.fc.v2.service.monitor.MysqlService;
+import com.fc.v2.service.monitor.MonitorServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ public class MysqlController
 {
     
     @Autowired
-    private MysqlService mysqlService;
+    private MonitorServerService monitorServerService;
     
     /**
      * 获取二进制文件列表
@@ -25,7 +25,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object getBinaryLogs(@PathVariable Long serverId)
     {
-        return mysqlService.getBinaryLogs(serverId);
+        return monitorServerService.getBinaryLogs(serverId);
     }
     
     /**
@@ -43,7 +43,7 @@ public class MysqlController
     public Object getBinaryLogData(@PathVariable Long serverId, @PathVariable String logName, @PathVariable Long begin,
         @PathVariable Long end)
     {
-        return mysqlService.getBinaryLogData(serverId, logName, begin, end);
+        return monitorServerService.getBinaryLogData(serverId, logName, begin, end);
     }
     
     /**
@@ -59,7 +59,7 @@ public class MysqlController
     public Object getShowBinlogEvents(@PathVariable Long serverId, HttpServletRequest request)
     {
         String showBinlogEvents = request.getParameter("showBinlogEvents");
-        return mysqlService.getShowBinlogEvents(serverId, showBinlogEvents);
+        return monitorServerService.getShowBinlogEvents(serverId, showBinlogEvents);
     }
     
     /**
@@ -75,7 +75,7 @@ public class MysqlController
     public Object getGlobalVariables(@PathVariable Long serverId, HttpServletRequest request)
     {
         String filter = request.getParameter("filter");
-        return mysqlService.getGlobalVariables(serverId, filter);
+        return monitorServerService.getGlobalVariables(serverId, filter);
     }
     
     /**
@@ -88,7 +88,7 @@ public class MysqlController
     @RequestMapping(value = "/{serverId}/sessionVariables", method = {RequestMethod.GET})
     public Object getSessionVariables(@PathVariable Long serverId)
     {
-        return mysqlService.getSessionVariables(serverId);
+        return monitorServerService.getSessionVariables(serverId);
     }
     
     /**
@@ -104,7 +104,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object setGlobalVariables(@PathVariable Long serverId, @PathVariable String name, @PathVariable String value)
     {
-        return mysqlService.setGlobalVariables(serverId, name, value);
+        return monitorServerService.setGlobalVariables(serverId, name, value);
     }
     
     /**
@@ -120,7 +120,7 @@ public class MysqlController
     public Object setSessionVariables(@PathVariable Long serverId, @PathVariable String name,
         @PathVariable String value)
     {
-        return mysqlService.setSessionVariables(serverId, name, value);
+        return monitorServerService.setSessionVariables(serverId, name, value);
     }
     
     /**
@@ -141,7 +141,7 @@ public class MysqlController
         // 需要提供数据的版本
         String version = "";
 
-        return mysqlService.mysqlVerify(host, port, username, password, version);
+        return monitorServerService.mysqlVerify(host, port, username, password, version);
     }
     
     /**
@@ -155,7 +155,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object getDatabases(@PathVariable Long serverId)
     {
-        return mysqlService.getDatabases(serverId);
+        return monitorServerService.getDatabases(serverId);
     }
     
     /**
@@ -169,7 +169,7 @@ public class MysqlController
     @RequestMapping(value = "/{serverId}/{schema}/tables", method = {RequestMethod.GET})
     public Object getDatabases(@PathVariable Long serverId, @PathVariable String schema)
     {
-        return mysqlService.getTables(serverId, schema);
+        return monitorServerService.getTables(serverId, schema);
     }
     
     /**
@@ -183,7 +183,7 @@ public class MysqlController
     @RequestMapping(value = "/{serverId}/{schema}/priv", method = {RequestMethod.GET})
     public Object getUserPriv(@PathVariable Long serverId, @PathVariable String schema)
     {
-        return mysqlService.getUserPriv(serverId, schema);
+        return monitorServerService.getUserPriv(serverId, schema);
     }
     
     /**
@@ -199,7 +199,7 @@ public class MysqlController
     public Object getStatus(@PathVariable Long serverId, HttpServletRequest request)
     {
         String filter = request.getParameter("filter");
-        return mysqlService.getStatus(serverId, filter);
+        return monitorServerService.getStatus(serverId, filter);
     }
     
     /**
@@ -213,7 +213,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object getOverview(@PathVariable Long serverId)
     {
-        return mysqlService.getOverview(serverId);
+        return monitorServerService.getOverview(serverId);
     }
     
     /**
@@ -227,7 +227,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object getMasterInfo(@PathVariable Long serverId)
     {
-        return mysqlService.getMasterInfo(serverId);
+        return monitorServerService.getMasterInfo(serverId);
     }
     
     /**
@@ -241,7 +241,7 @@ public class MysqlController
     @CrossOrigin(origins = "*")
     public Object getSlaveInfo(@PathVariable Long serverId)
     {
-        return mysqlService.getSlaveInfo(serverId);
+        return monitorServerService.getSlaveInfo(serverId);
     }
     
     /**
@@ -258,7 +258,7 @@ public class MysqlController
         int draw = Integer.parseInt(request.getParameter("draw"));
         int startIndex = Integer.parseInt(request.getParameter("start"));
         int pageSize = Integer.parseInt(request.getParameter("length"));
-        return mysqlService.getNodeList(draw, startIndex, pageSize);
+        return monitorServerService.getNodeList(draw, startIndex, pageSize);
     }
     
     /**
@@ -280,7 +280,7 @@ public class MysqlController
         String tags = request.getParameter("tags");
         Long clusterId = Long.parseLong(request.getParameter("clusterId"));
         String version = request.getParameter("version");
-        return mysqlService.saveNode(username, id, host, port, password, tags, clusterId, version);
+        return monitorServerService.saveNode(username, id, host, port, password, tags, clusterId, version);
     }
     
     /**
@@ -295,7 +295,7 @@ public class MysqlController
     public Object deleteNode(HttpServletRequest request)
     {
         Long id = Long.parseLong(request.getParameter("id"));
-        return mysqlService.deleteNode(id);
+        return monitorServerService.deleteNode(id);
     }
     
     /**
@@ -310,6 +310,6 @@ public class MysqlController
     public Object getNodeInfo(HttpServletRequest request)
     {
         Long id = Long.parseLong(request.getParameter("id"));
-        return mysqlService.getNodeInfo(id);
+        return monitorServerService.getNodeInfo(id);
     }
 }

@@ -6,11 +6,11 @@ import java.util.List;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * 数据库集群 MonClusterExample
+ * 数据库集群 MonitorClusterExample
  * @author reisen_自动生成
- * @date 2024-08-16 18:20:36
+ * @date 2024-10-21 10:58:36
  */
-public class MonClusterExample {
+public class MonitorClusterExample {
 
     protected String orderByClause;
 
@@ -18,7 +18,7 @@ public class MonClusterExample {
 
     protected List<Criteria> oredCriteria;
 
-    public MonClusterExample() {
+    public MonitorClusterExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -123,62 +123,62 @@ public class MonClusterExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLike(Integer value) {
+        public Criteria andIdLike(Long value) {
             addCriterion("id like", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotLike(Integer value) {
+        public Criteria andIdNotLike(Long value) {
             addCriterion("id not like", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Integer value1, Integer value2) {
+        public Criteria andIdBetween(Long value1, Long value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
@@ -397,7 +397,7 @@ public class MonClusterExample {
         }
         
 	
-		 public Criteria andLikeQuery(MonCluster record) {
+		 public Criteria andLikeQuery(MonitorCluster record) {
 		 	List<String> list= new ArrayList<String>();
 		 	List<String> list2= new ArrayList<String>();
         	StringBuffer buffer=new StringBuffer();

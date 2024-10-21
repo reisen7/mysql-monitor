@@ -2,11 +2,11 @@ package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
-import com.fc.v2.mapper.mysql.MysqlServerMapper;
+import com.fc.v2.mapper.mysql.MonitorServerMapper;
+import com.fc.v2.model.monitor.MonitorServer;
+import com.fc.v2.model.monitor.MonitorServerExample;
 import com.fc.v2.model.mysql.Constant;
-import com.fc.v2.model.mysql.MysqlServerExample;
 import com.fc.v2.service.monitor.JdbcService;
-import com.fc.v2.model.mysql.MysqlServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class AbstractService
 
     // MySQL服务器Mapper
     @Autowired
-    protected MysqlServerMapper mysqlServerMapper;
+    protected MonitorServerMapper monitorServerMapper;
     
     public AbstractService()
     {
@@ -57,14 +57,14 @@ public class AbstractService
     }
     
     /**
-     * 获取MySQL Server列表 @Title: getMysqlServerList @return @throws
+     * 获取MySQL Server列表 @Title: getMonitorServerList @return @throws
      */
-    protected List<MysqlServer> getMysqlServers()
+    protected List<MonitorServer> getMonitorServers()
     {
-        MysqlServerExample example = new MysqlServerExample();
-        List<MysqlServer> mysqlServers = mysqlServerMapper.selectByExample(example);
+        MonitorServerExample example = new MonitorServerExample();
+        List<MonitorServer> monitorServers = monitorServerMapper.selectByExample(example);
         
-        return mysqlServers;
+        return monitorServers;
     }
     
     /**
@@ -128,12 +128,12 @@ public class AbstractService
     
     protected QueryResult<List<Map<Object, Object>>> getQueryResult(Long serverId, String sql)
     {
-        MysqlServer mysqlServer = getMysqlServerById(serverId);
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        MonitorServer monitorServer = getMonitorServerById(serverId);
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         String url = getDataSourceUrl(host, port, "", username, password, version);
 
 
@@ -143,12 +143,12 @@ public class AbstractService
     
     protected QueryResult<List<Map<Object, Object>>> getQueryResult(Long serverId, String schema, String sql)
     {
-        MysqlServer mysqlServer = getMysqlServerById(serverId);
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        MonitorServer monitorServer = getMonitorServerById(serverId);
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         String url = getDataSourceUrl(host, port, schema, username, password, version);
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password, version);
         return queryResult;
@@ -195,21 +195,21 @@ public class AbstractService
         return queryResult;
     }
     
-    private MysqlServer getMysqlServerById(Long id)
+    private MonitorServer getMonitorServerById(Long id)
     {
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(id);
-        return mysqlServer;
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(id);
+        return monitorServer;
     }
     
     protected  RestResponse<Object> executeSqlForList(Long serverId, String sql) {
         RestResponse<Object> restResponse = new RestResponse<Object>();
         // 获取MySQL服务器信息
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         String url = "jdbc:mysql://" + host + ":" + port + "/" + "?useSSL=false";
         url = getDataSourceUrl(host, port,"", username, password, version);
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password, version);
@@ -227,12 +227,12 @@ public class AbstractService
     public  RestResponse<Object> executeSqlForBoolean(Long serverId, String sql) {
         RestResponse<Object> restResponse = new RestResponse<Object>();
         // 获取MySQL服务器信息
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         //String url = "jdbc:mysql://" + host + ":" + port + "/" + "?user=" + username + "&password=" + password
         //        + "&useSSL=false";
         String url = "jdbc:mysql://" + host + ":" + port + "/?useSSL=false";

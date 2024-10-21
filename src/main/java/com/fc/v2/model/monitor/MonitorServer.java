@@ -7,12 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 import cn.hutool.core.date.DateUtil;
 import java.util.Date;
 
-public class MonConnect implements Serializable {
+public class MonitorServer implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	
 	@ApiModelProperty(value = "主键")
-	private Integer id;
+	private Long id;
 	
 	@ApiModelProperty(value = "主机")
 	private String host;
@@ -30,10 +30,10 @@ public class MonConnect implements Serializable {
 	private String version;
 	
 	@ApiModelProperty(value = "标签")
-	private String tag;
+	private String tags;
 	
 	@ApiModelProperty(value = "集群")
-	private Integer clusterId;
+	private Long clusterId;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
@@ -42,11 +42,11 @@ public class MonConnect implements Serializable {
 	private Date updateTime;
 	
 	@JsonProperty("id")
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id =  id;
 	}
 	@JsonProperty("host")
@@ -89,20 +89,20 @@ public class MonConnect implements Serializable {
 	public void setVersion(String version) {
 		this.version =  version;
 	}
-	@JsonProperty("tag")
-	public String getTag() {
-		return tag;
+	@JsonProperty("tags")
+	public String getTags() {
+		return tags;
 	}
 
-	public void setTag(String tag) {
-		this.tag =  tag;
+	public void setTags(String tags) {
+		this.tags =  tags;
 	}
 	@JsonProperty("clusterId")
-	public Integer getClusterId() {
+	public Long getClusterId() {
 		return clusterId;
 	}
 
-	public void setClusterId(Integer clusterId) {
+	public void setClusterId(Long clusterId) {
 		this.clusterId =  clusterId;
 	}
 	@JsonProperty("createTime")
@@ -123,7 +123,7 @@ public class MonConnect implements Serializable {
 	}
 
 
-	public MonConnect(Integer id,String host,Integer port,String username,String password,String version,String tag,Integer clusterId,Date createTime,Date updateTime) {
+	public MonitorServer(Long id,String host,Integer port,String username,String password,String version,String tags,Long clusterId,Date createTime,Date updateTime) {
 		
 		this.id = id;
 		
@@ -137,7 +137,7 @@ public class MonConnect implements Serializable {
 		
 		this.version = version;
 		
-		this.tag = tag;
+		this.tags = tags;
 		
 		this.clusterId = clusterId;
 		
@@ -147,7 +147,7 @@ public class MonConnect implements Serializable {
 		
 	}
 
-	public MonConnect() {
+	public MonitorServer() {
 	    super();
 	}
 

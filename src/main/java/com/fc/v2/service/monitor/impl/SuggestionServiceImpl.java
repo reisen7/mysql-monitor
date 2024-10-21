@@ -3,8 +3,8 @@ package com.fc.v2.service.monitor.impl;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.dto.Suggestion;
-import com.fc.v2.mapper.mysql.MysqlServerMapper;
-import com.fc.v2.model.mysql.MysqlServer;
+import com.fc.v2.mapper.mysql.MonitorServerMapper;
+import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.service.monitor.JdbcService;
 import com.fc.v2.service.monitor.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class SuggestionServiceImpl implements SuggestionService
 {
     @Autowired
-    private MysqlServerMapper mysqlServerMapper;
+    private MonitorServerMapper monitorServerMapper;
     
     @Autowired
     protected JdbcService jdbcService;
@@ -44,15 +44,15 @@ public class SuggestionServiceImpl implements SuggestionService
         RestResponse<List<Suggestion>> restResponse = new RestResponse<List<Suggestion>>();
         List<Suggestion> suggestions = new ArrayList<Suggestion>();
         // 获取目标MySQL节点信息
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
         // 获取慢查询数量占比建议
-        Suggestion suggestionSlowQueries = getSuggestionBySlowQueries(mysqlServer);
+        Suggestion suggestionSlowQueries = getSuggestionBySlowQueries(monitorServer);
         suggestions.add(suggestionSlowQueries);
         restResponse.setCode(0);
         restResponse.setMessage("success");
@@ -62,11 +62,11 @@ public class SuggestionServiceImpl implements SuggestionService
     
     /**
      * 获取慢查询数量占比建议 @Title: getSuggestionBySlowQueries @param
-     * mysqlServer @return @throws
+     * monitorServer @return @throws
      */
-    private Suggestion getSuggestionBySlowQueries(MysqlServer mysqlServer)
+    private Suggestion getSuggestionBySlowQueries(MonitorServer monitorServer)
     {
-        QueryResult<List<Map<Object, Object>>> queryResult = getAllStatus(mysqlServer);
+        QueryResult<List<Map<Object, Object>>> queryResult = getAllStatus(monitorServer);
         List<Map<Object, Object>> statusList = queryResult.getData();
         String slowQueries = getStatusValueByVariableName(statusList, "Slow_queries");
         String questions = getStatusValueByVariableName(statusList, "Questions");
@@ -79,15 +79,15 @@ public class SuggestionServiceImpl implements SuggestionService
     }
     
     /**
-     * 获取当前状态的所有指标 @Title: getAllStatus @param mysqlServer @return @throws
+     * 获取当前状态的所有指标 @Title: getAllStatus @param monitorServer @return @throws
      */
-    private QueryResult<List<Map<Object, Object>>> getAllStatus(MysqlServer mysqlServer)
+    private QueryResult<List<Map<Object, Object>>> getAllStatus(MonitorServer monitorServer)
     {
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         String sql = "show status";
         return getQueryResult(host, port, sql, username, password, version);
     }

@@ -1,7 +1,7 @@
 package com.fc.v2.common.base;
 
-import com.fc.v2.service.monitor.MonClusterService;
-import com.fc.v2.service.monitor.MonConnectService;
+import com.fc.v2.service.monitor.MonitorClusterService;
+import com.fc.v2.service.monitor.MonitorServerService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class BusinessBaseController {
 
-    @Autowired
-    protected MonClusterService monClusterService;
 
     @Autowired
-    protected MonConnectService monConnectService;
+    protected MonitorClusterService monitorClusterService;
+
+    @Autowired
+    protected MonitorServerService monitorServerService;
 }

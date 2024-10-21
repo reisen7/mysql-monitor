@@ -10,7 +10,7 @@ import com.alibaba.druid.stat.TableStat.Column;
 import com.alibaba.druid.stat.TableStat.Condition;
 import com.alibaba.druid.util.JdbcConstants;
 import com.fc.v2.dto.QueryResult;
-import com.fc.v2.mapper.mysql.MysqlServerMapper;
+import com.fc.v2.mapper.mysql.MonitorServerMapper;
 import com.fc.v2.service.monitor.JdbcService;
 import com.fc.v2.service.monitor.SqlAdviserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class SqlAdviserServiceImpl extends AbstractService implements SqlAdviser
     private final static Long MAX_EXPLAIN_ROWS = 100000L;
     
     @Autowired
-    private MysqlServerMapper mysqlServerMapper;
+    private MonitorServerMapper monitorServerMapper;
     
     @Autowired
     protected JdbcService jdbcService;

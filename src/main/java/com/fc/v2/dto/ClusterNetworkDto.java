@@ -1,6 +1,6 @@
 package com.fc.v2.dto;
 
-import com.fc.v2.model.mysql.MysqlServer;
+import com.fc.v2.model.monitor.MonitorServer;
 
 import java.util.List;
 
@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class ClusterNetworkDto
 {
-    private List<MysqlServer> mysqlServers;
+    private List<MonitorServer> mysqlServers;
     private List<Relation> relations;
     
     /**
      * @return the mysqlServers
      */
-    public List<MysqlServer> getMysqlServers()
+    public List<MonitorServer> getMonitorServers()
     {
         return mysqlServers;
     }
@@ -27,7 +27,7 @@ public class ClusterNetworkDto
     /**
      * @param mysqlServers the mysqlServers to set
      */
-    public void setMysqlServers(List<MysqlServer> mysqlServers)
+    public void setMonitorServers(List<MonitorServer> mysqlServers)
     {
         this.mysqlServers = mysqlServers;
     }

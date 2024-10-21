@@ -2,10 +2,10 @@ package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.dto.QueryResult;
+import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.mysql.InnodbLockWaits;
 import com.fc.v2.model.mysql.InnodbTrx;
 import com.fc.v2.service.monitor.InnodbService;
-import com.fc.v2.model.mysql.MysqlServer;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -76,8 +76,8 @@ public class InnodbServiceImpl extends AbstractService implements InnodbService 
 
 	@Override
 	public PagedDto<InnodbLockWaits> getInnodbLockWaits(Long serverId) {
-		MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-		String sql = mysqlServer.getVer().equals("8")?"select * from performance_schema.DATA_LOCKS":"select * from information_schema.INNODB_LOCK_WAITS";
+		MonitorServer monitorServe = monitorServerMapper.selectByPrimaryKey(serverId);
+		String sql = monitorServe.getVersion().equals("8")?"select * from performance_schema.DATA_LOCKS":"select * from information_schema.INNODB_LOCK_WAITS";
 		QueryResult<List<Map<Object,Object>>> queryResult = getQueryResult(serverId, sql);
 		if (queryResult.isSuccess()) {
 			List<InnodbLockWaits> innodbLockWaits=new ArrayList<>();

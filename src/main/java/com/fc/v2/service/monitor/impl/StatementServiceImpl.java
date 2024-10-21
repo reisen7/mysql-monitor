@@ -4,10 +4,10 @@ import com.fc.v2.dto.Pager;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.dto.Statement;
-import com.fc.v2.mapper.mysql.MysqlServerMapper;
+import com.fc.v2.mapper.mysql.MonitorServerMapper;
+import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.service.monitor.JdbcService;
 import com.fc.v2.service.monitor.StatementService;
-import com.fc.v2.model.mysql.MysqlServer;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     protected static final String BUILT_IN_SCHEMA = "'information_schema','mysql','performance_schema','sys','test',''";
     
     @Autowired
-    private MysqlServerMapper mysqlServerMapper;
+    private MonitorServerMapper monitorServerMapper;
     
     @Autowired
     protected JdbcService jdbcService;
@@ -50,17 +50,17 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
         RestResponse<List<Map<Object, Object>>> restResponse = new RestResponse<List<Map<Object, Object>>>();
         
         // 获取MySQL服务器信息
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
         String explainSql = "explain " + sql;
         QueryResult<List<Map<Object, Object>>> explainQueryResult =
             getQueryResult(host, port, schema, explainSql, username, password);
@@ -95,18 +95,18 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     {
         RestResponse<String> restResponse = new RestResponse<String>();
         // 获取该语句相关的MySQL服务器信息，主机、端口、用户名、密码
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         // 连接到目标MySQL服务器，查询show create table语句
         String url = getDataSourceUrl(host, port, schema, username, password, version);
         String sql = "show create table " + tableName;
@@ -127,18 +127,18 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     {
         RestResponse<List<Map<Object, Object>>> restResponse = new RestResponse<List<Map<Object, Object>>>();
         // 获取该语句相关的MySQL服务器信息，主机、端口、用户名、密码
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         // 连接到目标MySQL服务器，查询show create table语句
         String url = getDataSourceUrl(host, port, schema, username, password, version);
         String sql = "show index from " + tableName;
@@ -158,18 +158,18 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     {
         RestResponse<List<Statement>> restResponse = new RestResponse<List<Statement>>();
         // 获取该语句相关的MySQL服务器信息，主机、端口、用户名、密码
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         // 连接到目标MySQL服务器，查询events_statements_history表中的近期SQL语句
         String url = getDataSourceUrl(host, port, "performance_schema", username, password, version);
         String sql =
@@ -226,19 +226,19 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     {
         RestResponse<List<Map<Object, Object>>> restResponse = new RestResponse<List<Map<Object, Object>>>();
         // 获取该语句相关的MySQL服务器信息，主机、端口、用户名、密码
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
         // 连接到目标MySQL服务器，查询show create table语句
-        String version = mysqlServer.getVer();
+        String version = monitorServer.getVersion();
         String url = getDataSourceUrl(host, port, schema, username, password, version);
         String sql = "show table status like '" + table + "'";
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password, version);
@@ -256,18 +256,18 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     public Object executeSql(Long serverId, String schema, String sql)
     {
         RestResponse<List<Map<Object, Object>>> restResponse = new RestResponse<List<Map<Object, Object>>>();
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         // 连接到目标MySQL服务器，查询show create table语句
         String url = getDataSourceUrl(host, port, schema, username, password, version);
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password, version);
@@ -289,18 +289,18 @@ public class StatementServiceImpl extends AbstractService implements StatementSe
     public Object getStatementSlow(Long serverId, String orderBy, Integer pageIndex, Integer pageSize)
     {
         RestResponse<Pager<List<Map<Object, Object>>>> restResponse = new RestResponse<>();
-        MysqlServer mysqlServer = mysqlServerMapper.selectByPrimaryKey(serverId);
-        if (mysqlServer == null)
+        MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
+        if (monitorServer == null)
         {
-            restResponse.setMessage("mysqlServer is null");
+            restResponse.setMessage("monitorServer is null");
             restResponse.setCode(1);
             return restResponse;
         }
-        String host = mysqlServer.getHost();
-        String port = String.valueOf(mysqlServer.getPort());
-        String username = mysqlServer.getUsername();
-        String password = mysqlServer.getPassword();
-        String version = mysqlServer.getVer();
+        String host = monitorServer.getHost();
+        String port = String.valueOf(monitorServer.getPort());
+        String username = monitorServer.getUsername();
+        String password = monitorServer.getPassword();
+        String version = monitorServer.getVersion();
         Integer start = pageIndex * pageSize;
         Integer offset = pageSize;
         String sqlTotal = "select count(1) from mysql.slow_log where db NOT IN (" + BUILT_IN_SCHEMA + ")";

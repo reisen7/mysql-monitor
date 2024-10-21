@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('数据库连接列表')"/>
+    <th:block th:include="include :: header('数据库集群列表')"/>
 </head>
 <body class="pear-container">
 <div class="layui-card">
@@ -12,7 +12,7 @@
                 <div class="layui-input-inline">
                     <input type="text" name="searchText" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="monConnect-query">
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="monitorCluster-query">
                     <i class="layui-icon layui-icon-search"></i>
                    	 查询
                 </button>
@@ -26,27 +26,27 @@
 </div>
 <div class="layui-card">
     <div class="layui-card-body">
-        <table id="monConnect-table" lay-filter="monConnect-table"></table>
+        <table id="monitorCluster-table" lay-filter="monitorCluster-table"></table>
     </div>
 </div>
 </body>
 
-<script type="text/html" id="monConnect-toolbar">
-    <button sa:hasPermission="gen:monConnect:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+<script type="text/html" id="monitorCluster-toolbar">
+    <button sa:hasPermission="gen:monitorCluster:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
 		 新增
     </button>
-    <button sa:hasPermission="gen:monConnect:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+    <button sa:hasPermission="gen:monitorCluster:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
 		删除
     </button>
 </script>
 
-<script type="text/html" id="monConnect-bar">
-    <button sa:hasPermission="gen:monConnect:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="修改"><i class="layui-icon layui-icon-edit"></i>
+<script type="text/html" id="monitorCluster-bar">
+    <button sa:hasPermission="gen:monitorCluster:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="修改"><i class="layui-icon layui-icon-edit"></i>
     </button>
 
-    <button sa:hasPermission="gen:monConnect:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="删除"><i class="layui-icon layui-icon-delete"></i>
+    <button sa:hasPermission="gen:monitorCluster:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="删除"><i class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
@@ -89,44 +89,32 @@
         let form = layui.form;
         let $ = layui.jquery;
 		
-        let MODULE_PATH = rootPath+"/MonConnectController/";
+        let MODULE_PATH = rootPath+"/MonitorClusterController/";
         let cols = [
             [
                {type: 'checkbox'},
                 	
                {title: '主键', field: 'id', align: 'center'},
                 	
-               {title: '主机', field: 'host', align: 'center'},
-                	
-               {title: '端口', field: 'port', align: 'center'},
-                	
-               {title: '用户名', field: 'username', align: 'center'},
-                	
-               {title: '密码', field: 'password', align: 'center'},
-                	
-               {title: '版本', field: 'version', align: 'center'},
-                	
-               {title: '标签', field: 'tag', align: 'center'},
-                	
-               {title: '集群', field: 'clusterId', align: 'center'},
+               {title: '集群名称', field: 'name', align: 'center'},
                 	
                {title: '创建时间', field: 'createTime', align: 'center'},
                 	
                {title: '更新时间', field: 'updateTime', align: 'center'},
                 
-               {title: '操作', toolbar: '#monConnect-bar', align: 'center'}
+               {title: '操作', toolbar: '#monitorCluster-bar', align: 'center'}
             ]
         ]
 
         //table表单列表
         table.render({
-            elem: '#monConnect-table',
+            elem: '#monitorCluster-table',
             url: MODULE_PATH + 'list',
             page: true,
             method: 'get',
             cols: cols,
             skin: 'line',
-            toolbar: '#monConnect-toolbar',
+            toolbar: '#monitorCluster-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
@@ -134,7 +122,7 @@
         });
 
         //table图标事件绑定
-        table.on('tool(monConnect-table)', function (obj) {
+        table.on('tool(monitorCluster-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
             } else if (obj.event === 'edit') {
@@ -143,7 +131,7 @@
         });
 
         //table工具栏绑定
-        table.on('toolbar(monConnect-table)', function (obj) {
+        table.on('toolbar(monitorCluster-table)', function (obj) {
             if (obj.event === 'add') {
                 window.add();
             } else if (obj.event === 'refresh') {
@@ -154,8 +142,8 @@
         });
 
         //查询按钮绑定
-        form.on('submit(monConnect-query)', function (data) {
-            table.reload('monConnect-table', {page: {curr: 1}, where: data.field})
+        form.on('submit(monitorCluster-query)', function (data) {
+            table.reload('monitorCluster-table', {page: {curr: 1}, where: data.field})
             return false;
         });
 
@@ -226,7 +214,7 @@
                         layer.close(loading);
                         if (result.code==200) {
                             layer.msg(result.msg, {icon: 1, time: 1000}, function () {
-                                table.reload('monConnect-table');
+                                table.reload('monitorCluster-table');
                             });
                         } else {
                             layer.msg(result.msg, {icon: 2, time: 1000});
@@ -239,7 +227,7 @@
         
         //刷新按钮
         window.refresh = function () {
-            table.reload('monConnect-table');
+            table.reload('monitorCluster-table');
         }
     })
 </script>

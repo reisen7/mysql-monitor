@@ -1,21 +1,29 @@
-package com.fc.v2.model.mysql;
+package com.fc.v2.model.monitor;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import cn.hutool.core.util.StrUtil;
 
-public class MysqlServerExample {
+/**
+ * 数据库连接 MonitorServerExample
+ * @author reisen_自动生成
+ * @date 2024-10-21 10:57:44
+ */
+public class MonitorServerExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
-
-    protected List<Criteria> oredCriteria;
 
     protected int limitStart = -1;
 
     protected int pageSize = -1;
 
-    public MysqlServerExample() {
+
+    protected List<Criteria> oredCriteria;
+
+    public MonitorServerExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -124,7 +132,8 @@ public class MysqlServerExample {
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
-
+        
+		
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -165,6 +174,16 @@ public class MysqlServerExample {
             return (Criteria) this;
         }
 
+        public Criteria andIdLike(Long value) {
+            addCriterion("id like", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotLike(Long value) {
+            addCriterion("id not like", value, "id");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
@@ -184,7 +203,8 @@ public class MysqlServerExample {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andHostIsNull() {
             addCriterion("host is null");
             return (Criteria) this;
@@ -254,7 +274,8 @@ public class MysqlServerExample {
             addCriterion("host not between", value1, value2, "host");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andPortIsNull() {
             addCriterion("port is null");
             return (Criteria) this;
@@ -295,6 +316,16 @@ public class MysqlServerExample {
             return (Criteria) this;
         }
 
+        public Criteria andPortLike(Integer value) {
+            addCriterion("port like", value, "port");
+            return (Criteria) this;
+        }
+
+        public Criteria andPortNotLike(Integer value) {
+            addCriterion("port not like", value, "port");
+            return (Criteria) this;
+        }
+
         public Criteria andPortIn(List<Integer> values) {
             addCriterion("port in", values, "port");
             return (Criteria) this;
@@ -314,7 +345,8 @@ public class MysqlServerExample {
             addCriterion("port not between", value1, value2, "port");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andUsernameIsNull() {
             addCriterion("username is null");
             return (Criteria) this;
@@ -384,7 +416,8 @@ public class MysqlServerExample {
             addCriterion("username not between", value1, value2, "username");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andPasswordIsNull() {
             addCriterion("password is null");
             return (Criteria) this;
@@ -454,7 +487,79 @@ public class MysqlServerExample {
             addCriterion("password not between", value1, value2, "password");
             return (Criteria) this;
         }
+        
+		
+        public Criteria andVersionIsNull() {
+            addCriterion("version is null");
+            return (Criteria) this;
+        }
 
+        public Criteria andVersionIsNotNull() {
+            addCriterion("version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionEqualTo(String value) {
+            addCriterion("version =", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotEqualTo(String value) {
+            addCriterion("version <>", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThan(String value) {
+            addCriterion("version >", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("version >=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThan(String value) {
+            addCriterion("version <", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThanOrEqualTo(String value) {
+            addCriterion("version <=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLike(String value) {
+            addCriterion("version like", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotLike(String value) {
+            addCriterion("version not like", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIn(List<String> values) {
+            addCriterion("version in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotIn(List<String> values) {
+            addCriterion("version not in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionBetween(String value1, String value2) {
+            addCriterion("version between", value1, value2, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotBetween(String value1, String value2) {
+            addCriterion("version not between", value1, value2, "version");
+            return (Criteria) this;
+        }
+        
+		
         public Criteria andTagsIsNull() {
             addCriterion("tags is null");
             return (Criteria) this;
@@ -524,7 +629,8 @@ public class MysqlServerExample {
             addCriterion("tags not between", value1, value2, "tags");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andClusterIdIsNull() {
             addCriterion("cluster_id is null");
             return (Criteria) this;
@@ -565,6 +671,16 @@ public class MysqlServerExample {
             return (Criteria) this;
         }
 
+        public Criteria andClusterIdLike(Long value) {
+            addCriterion("cluster_id like", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdNotLike(Long value) {
+            addCriterion("cluster_id not like", value, "clusterId");
+            return (Criteria) this;
+        }
+
         public Criteria andClusterIdIn(List<Long> values) {
             addCriterion("cluster_id in", values, "clusterId");
             return (Criteria) this;
@@ -584,7 +700,8 @@ public class MysqlServerExample {
             addCriterion("cluster_id not between", value1, value2, "clusterId");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -625,6 +742,16 @@ public class MysqlServerExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreateTimeLike(Date value) {
+            addCriterion("create_time like", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotLike(Date value) {
+            addCriterion("create_time not like", value, "createTime");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
@@ -644,10 +771,181 @@ public class MysqlServerExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
-    }
+        
+		
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
 
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLike(Date value) {
+            addCriterion("update_time like", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotLike(Date value) {
+            addCriterion("update_time not like", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+        
+	
+		 public Criteria andLikeQuery(MonitorServer record) {
+		 	List<String> list= new ArrayList<String>();
+		 	List<String> list2= new ArrayList<String>();
+        	StringBuffer buffer=new StringBuffer();
+			if(record.getId()!=null&&StrUtil.isNotEmpty(record.getId().toString())) {
+    			 list.add("ifnull(id,'')");
+    		}
+			if(record.getHost()!=null&&StrUtil.isNotEmpty(record.getHost().toString())) {
+    			 list.add("ifnull(host,'')");
+    		}
+			if(record.getPort()!=null&&StrUtil.isNotEmpty(record.getPort().toString())) {
+    			 list.add("ifnull(port,'')");
+    		}
+			if(record.getUsername()!=null&&StrUtil.isNotEmpty(record.getUsername().toString())) {
+    			 list.add("ifnull(username,'')");
+    		}
+			if(record.getPassword()!=null&&StrUtil.isNotEmpty(record.getPassword().toString())) {
+    			 list.add("ifnull(password,'')");
+    		}
+			if(record.getVersion()!=null&&StrUtil.isNotEmpty(record.getVersion().toString())) {
+    			 list.add("ifnull(version,'')");
+    		}
+			if(record.getTags()!=null&&StrUtil.isNotEmpty(record.getTags().toString())) {
+    			 list.add("ifnull(tags,'')");
+    		}
+			if(record.getClusterId()!=null&&StrUtil.isNotEmpty(record.getClusterId().toString())) {
+    			 list.add("ifnull(cluster_id,'')");
+    		}
+			if(record.getCreateTime()!=null&&StrUtil.isNotEmpty(record.getCreateTime().toString())) {
+    			 list.add("ifnull(create_time,'')");
+    		}
+			if(record.getUpdateTime()!=null&&StrUtil.isNotEmpty(record.getUpdateTime().toString())) {
+    			 list.add("ifnull(update_time,'')");
+    		}
+			if(record.getId()!=null&&StrUtil.isNotEmpty(record.getId().toString())) {
+    			list2.add("'%"+record.getId()+"%'");
+    		}
+			if(record.getHost()!=null&&StrUtil.isNotEmpty(record.getHost().toString())) {
+    			list2.add("'%"+record.getHost()+"%'");
+    		}
+			if(record.getPort()!=null&&StrUtil.isNotEmpty(record.getPort().toString())) {
+    			list2.add("'%"+record.getPort()+"%'");
+    		}
+			if(record.getUsername()!=null&&StrUtil.isNotEmpty(record.getUsername().toString())) {
+    			list2.add("'%"+record.getUsername()+"%'");
+    		}
+			if(record.getPassword()!=null&&StrUtil.isNotEmpty(record.getPassword().toString())) {
+    			list2.add("'%"+record.getPassword()+"%'");
+    		}
+			if(record.getVersion()!=null&&StrUtil.isNotEmpty(record.getVersion().toString())) {
+    			list2.add("'%"+record.getVersion()+"%'");
+    		}
+			if(record.getTags()!=null&&StrUtil.isNotEmpty(record.getTags().toString())) {
+    			list2.add("'%"+record.getTags()+"%'");
+    		}
+			if(record.getClusterId()!=null&&StrUtil.isNotEmpty(record.getClusterId().toString())) {
+    			list2.add("'%"+record.getClusterId()+"%'");
+    		}
+			if(record.getCreateTime()!=null&&StrUtil.isNotEmpty(record.getCreateTime().toString())) {
+    			list2.add("'%"+record.getCreateTime()+"%'");
+    		}
+			if(record.getUpdateTime()!=null&&StrUtil.isNotEmpty(record.getUpdateTime().toString())) {
+    			list2.add("'%"+record.getUpdateTime()+"%'");
+    		}
+        	buffer.append(" CONCAT(");
+	        buffer.append(StrUtil.join(",",list));
+        	buffer.append(")");
+        	buffer.append(" like CONCAT(");
+        	buffer.append(StrUtil.join(",",list2));
+        	buffer.append(")");
+        	if(!" CONCAT() like CONCAT()".equals(buffer.toString())) {
+        		addCriterion(buffer.toString());
+        	}
+        	return (Criteria) this;
+        }
+        
+        public Criteria andLikeQuery2(String searchText) {
+		 	List<String> list= new ArrayList<String>();
+        	StringBuffer buffer=new StringBuffer();
+    		list.add("ifnull(id,'')");
+    		list.add("ifnull(host,'')");
+    		list.add("ifnull(port,'')");
+    		list.add("ifnull(username,'')");
+    		list.add("ifnull(password,'')");
+    		list.add("ifnull(version,'')");
+    		list.add("ifnull(tags,'')");
+    		list.add("ifnull(cluster_id,'')");
+    		list.add("ifnull(create_time,'')");
+    		list.add("ifnull(update_time,'')");
+        	buffer.append(" CONCAT(");
+	        buffer.append(StrUtil.join(",",list));
+        	buffer.append(")");
+        	buffer.append("like '%");
+        	buffer.append(searchText);
+        	buffer.append("%'");
+        	addCriterion(buffer.toString());
+        	return (Criteria) this;
+        }
+        
+}
+	
     public static class Criteria extends GeneratedCriteria {
-
         protected Criteria() {
             super();
         }

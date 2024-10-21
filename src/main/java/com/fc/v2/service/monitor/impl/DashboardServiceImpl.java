@@ -1,8 +1,6 @@
 package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.dto.*;
-import com.fc.v2.mapper.auto.MonClusterMapper;
-import com.fc.v2.mapper.auto.MonConnectMapper;
 import com.fc.v2.mapper.mysql.MysqlStatusHistoryMapper;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.model.mysql.MysqlStatusHistory;
@@ -27,11 +25,6 @@ import java.util.Map;
 @Service
 public class DashboardServiceImpl extends AbstractService implements DashboardService
 {
-    @Autowired
-    private MonConnectMapper monConnectMapper;
-
-    @Autowired
-    private MonClusterMapper monClusterMapper;
     
     @Autowired
     private MysqlStatusHistoryMapper mysqlStatusHistoryMapper;

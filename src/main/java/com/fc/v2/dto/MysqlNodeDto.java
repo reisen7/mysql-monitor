@@ -1,7 +1,7 @@
 package com.fc.v2.dto;
 
 
-import com.fc.v2.model.mysql.MysqlServer;
+import com.fc.v2.model.monitor.MonitorServer;
 
 /**
  * @ClassName:  MysqlNodeDto   
@@ -12,24 +12,24 @@ import com.fc.v2.model.mysql.MysqlServer;
  */
 public class MysqlNodeDto
 {
-    private MysqlServer mysqlServer;
+    private MonitorServer monitorServer;
     
     private String clusterName = "";
     
     /**
-     * @return the mysqlServer
+     * @return the monitorServer
      */
-    public MysqlServer getMysqlServer()
+    public MonitorServer getMonitorServer()
     {
-        return mysqlServer;
+        return monitorServer;
     }
     
     /**
-     * @param mysqlServer the mysqlServer to set
+     * @param monitorServer the monitorServer to set
      */
-    public void setMysqlServer(MysqlServer mysqlServer)
+    public void setMonitorServer(MonitorServer monitorServer)
     {
-        this.mysqlServer = mysqlServer;
+        this.monitorServer = monitorServer;
     }
     
     /**

@@ -7,12 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 import cn.hutool.core.date.DateUtil;
 import java.util.Date;
 
-public class MonCluster implements Serializable {
+public class MonitorCluster implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	
 	@ApiModelProperty(value = "主键")
-	private Integer id;
+	private Long id;
 	
 	@ApiModelProperty(value = "集群名称")
 	private String name;
@@ -24,11 +24,11 @@ public class MonCluster implements Serializable {
 	private Date updateTime;
 	
 	@JsonProperty("id")
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id =  id;
 	}
 	@JsonProperty("name")
@@ -57,7 +57,7 @@ public class MonCluster implements Serializable {
 	}
 
 
-	public MonCluster(Integer id,String name,Date createTime,Date updateTime) {
+	public MonitorCluster(Long id,String name,Date createTime,Date updateTime) {
 		
 		this.id = id;
 		
@@ -69,7 +69,7 @@ public class MonCluster implements Serializable {
 		
 	}
 
-	public MonCluster() {
+	public MonitorCluster() {
 	    super();
 	}
 
