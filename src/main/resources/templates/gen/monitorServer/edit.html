@@ -48,7 +48,7 @@
 						<div class="layui-form-item">
 		                    <label class="layui-form-label">密码</label>
 		                    <div class="layui-input-block">
-		                        <input th:value="*{password}" type="text" name="password" autocomplete="off" placeholder="密码" class="layui-input">
+		                        <input th:value="*{password}" type="password" name="password" autocomplete="off" placeholder="密码" class="layui-input">
 		                    </div>
 		                </div>
 					                
@@ -57,8 +57,14 @@
 						<div class="layui-form-item">
 		                    <label class="layui-form-label">版本</label>
 		                    <div class="layui-input-block">
-		                        <input th:value="*{version}" type="text" name="version" autocomplete="off" placeholder="版本" class="layui-input">
-		                    </div>
+<!--		                        <input th:value="*{version}" type="text" name="version" autocomplete="off" placeholder="版本" class="layui-input">-->
+
+								<select lay-verify="required" name="version" lay-filter="selectOnchange">
+									<option th:selected="${version} eq 8" value="8">8</option>
+									<option th:selected="${version} eq 5.7" value="5.7">5.7</option>
+
+								</select>
+							</div>
 		                </div>
 					                
 		
@@ -75,7 +81,16 @@
 						<div class="layui-form-item">
 		                    <label class="layui-form-label">集群</label>
 		                    <div class="layui-input-block">
-		                        <input th:value="*{clusterId}" type="text" name="clusterId" autocomplete="off" placeholder="集群" class="layui-input">
+<!--		                        <input th:value="*{clusterId}" type="text" name="clusterId" autocomplete="off" placeholder="集群" class="layui-input">-->
+
+								<select lay-verify="required" name="clusterId" lay-filter="selectOnchange">
+									<option
+											th:each="item:${monitorClusterList}"
+											th:value="${item.id}"
+											th:text="${item.name}" th:selected="${item.id} eq ${clusterId}">
+									</option>
+								</select>
+
 		                    </div>
 		                </div>
 					                

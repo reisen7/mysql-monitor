@@ -34,6 +34,13 @@ public class MonitorServer implements Serializable {
 	
 	@ApiModelProperty(value = "集群")
 	private Long clusterId;
+
+
+	/**
+	 * 非数据库字段
+	 */
+	private MonitorCluster monitorCluster;
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
@@ -122,8 +129,15 @@ public class MonitorServer implements Serializable {
 		this.updateTime =  updateTime;
 	}
 
+	public MonitorCluster getMonitorCluster() {
+		return monitorCluster;
+	}
 
-	public MonitorServer(Long id,String host,Integer port,String username,String password,String version,String tags,Long clusterId,Date createTime,Date updateTime) {
+	public void setMonitorCluster(MonitorCluster monitorCluster) {
+		this.monitorCluster = monitorCluster;
+	}
+
+	public MonitorServer(Long id, String host, Integer port, String username, String password, String version, String tags, Long clusterId, Date createTime, Date updateTime) {
 		
 		this.id = id;
 		

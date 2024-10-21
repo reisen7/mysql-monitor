@@ -12,7 +12,15 @@
     <result column="cluster_id" jdbcType="BIGINT" property="clusterId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <association property="monitorCluster" javaType="com.fc.v2.model.monitor.MonitorCluster" column="cluster_id" select="getClusterById"/>
   </resultMap>
+
+  <select id="getClusterById" resultType="com.fc.v2.model.monitor.MonitorCluster">
+    SELECT *
+    FROM monitor_cluster
+    WHERE id = #{cluster_id}
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

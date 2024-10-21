@@ -102,7 +102,11 @@
                 	
                {title: '用户名', field: 'username', align: 'center'},
                 	
-               {title: '密码', field: 'password', align: 'center'},
+               {title: '密码', field: 'password', align: 'center',
+                   templet: function(d){
+                       // 调用脱敏函数处理身份证号
+                       return "*****";
+                   }},
                 	
                {title: '版本', field: 'version', align: 'center'},
                 	

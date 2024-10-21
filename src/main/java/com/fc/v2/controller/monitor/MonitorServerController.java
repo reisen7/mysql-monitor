@@ -129,7 +129,8 @@ public class MonitorServerController extends BaseController{
     public String edit(@PathVariable("id") String id, ModelMap map)
     {
         map.put("MonitorServer", monitorServerService.selectByPrimaryKey(id));
-
+		List<MonitorCluster> monitorClusterList = monitorClusterService.selectByExample(null);
+		map.put("monitorClusterList",monitorClusterList);
         return prefix + "/edit";
     }
 	
