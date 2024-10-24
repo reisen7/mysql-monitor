@@ -1,10 +1,17 @@
-package com.fc.v2.model.mysql;
+package com.fc.v2.model.monitor;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import cn.hutool.core.util.StrUtil;
 
-public class MysqlStatusHistoryExample {
+/**
+ * 数据库状态历史表 ServerStatusHistoryExample
+ * @author reisen_自动生成
+ * @date 2024-10-24 11:19:41
+ */
+public class ServerStatusHistoryExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +22,23 @@ public class MysqlStatusHistoryExample {
 
     protected int pageSize = -1;
 
-    public MysqlStatusHistoryExample() {
+    public int getLimitStart() {
+        return limitStart;
+    }
+
+    public void setLimitStart(int limitStart) {
+        this.limitStart = limitStart;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public ServerStatusHistoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -68,22 +91,6 @@ public class MysqlStatusHistoryExample {
         distinct = false;
     }
 
-    public void setLimitStart(int limitStart) {
-        this.limitStart=limitStart;
-    }
-
-    public int getLimitStart() {
-        return limitStart;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize=pageSize;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -124,7 +131,8 @@ public class MysqlStatusHistoryExample {
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
-
+        
+		
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -165,6 +173,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andIdLike(Long value) {
+            addCriterion("id like", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotLike(Long value) {
+            addCriterion("id not like", value, "id");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
@@ -184,7 +202,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andServerIdIsNull() {
             addCriterion("server_id is null");
             return (Criteria) this;
@@ -225,6 +244,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andServerIdLike(Long value) {
+            addCriterion("server_id like", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotLike(Long value) {
+            addCriterion("server_id not like", value, "serverId");
+            return (Criteria) this;
+        }
+
         public Criteria andServerIdIn(List<Long> values) {
             addCriterion("server_id in", values, "serverId");
             return (Criteria) this;
@@ -244,7 +273,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("server_id not between", value1, value2, "serverId");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andUptimeIsNull() {
             addCriterion("uptime is null");
             return (Criteria) this;
@@ -314,7 +344,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("uptime not between", value1, value2, "uptime");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andOpenTablesIsNull() {
             addCriterion("open_tables is null");
             return (Criteria) this;
@@ -355,6 +386,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andOpenTablesLike(Integer value) {
+            addCriterion("open_tables like", value, "openTables");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenTablesNotLike(Integer value) {
+            addCriterion("open_tables not like", value, "openTables");
+            return (Criteria) this;
+        }
+
         public Criteria andOpenTablesIn(List<Integer> values) {
             addCriterion("open_tables in", values, "openTables");
             return (Criteria) this;
@@ -374,7 +415,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("open_tables not between", value1, value2, "openTables");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andThreadsConnectedIsNull() {
             addCriterion("threads_connected is null");
             return (Criteria) this;
@@ -415,6 +457,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andThreadsConnectedLike(Integer value) {
+            addCriterion("threads_connected like", value, "threadsConnected");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadsConnectedNotLike(Integer value) {
+            addCriterion("threads_connected not like", value, "threadsConnected");
+            return (Criteria) this;
+        }
+
         public Criteria andThreadsConnectedIn(List<Integer> values) {
             addCriterion("threads_connected in", values, "threadsConnected");
             return (Criteria) this;
@@ -434,7 +486,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("threads_connected not between", value1, value2, "threadsConnected");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andThreadsRunningIsNull() {
             addCriterion("threads_running is null");
             return (Criteria) this;
@@ -475,6 +528,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andThreadsRunningLike(Integer value) {
+            addCriterion("threads_running like", value, "threadsRunning");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadsRunningNotLike(Integer value) {
+            addCriterion("threads_running not like", value, "threadsRunning");
+            return (Criteria) this;
+        }
+
         public Criteria andThreadsRunningIn(List<Integer> values) {
             addCriterion("threads_running in", values, "threadsRunning");
             return (Criteria) this;
@@ -494,7 +557,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("threads_running not between", value1, value2, "threadsRunning");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andThreadsCreatedIsNull() {
             addCriterion("threads_created is null");
             return (Criteria) this;
@@ -535,6 +599,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andThreadsCreatedLike(Integer value) {
+            addCriterion("threads_created like", value, "threadsCreated");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadsCreatedNotLike(Integer value) {
+            addCriterion("threads_created not like", value, "threadsCreated");
+            return (Criteria) this;
+        }
+
         public Criteria andThreadsCreatedIn(List<Integer> values) {
             addCriterion("threads_created in", values, "threadsCreated");
             return (Criteria) this;
@@ -554,7 +628,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("threads_created not between", value1, value2, "threadsCreated");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andThreadsCachedIsNull() {
             addCriterion("threads_cached is null");
             return (Criteria) this;
@@ -595,6 +670,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andThreadsCachedLike(Integer value) {
+            addCriterion("threads_cached like", value, "threadsCached");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadsCachedNotLike(Integer value) {
+            addCriterion("threads_cached not like", value, "threadsCached");
+            return (Criteria) this;
+        }
+
         public Criteria andThreadsCachedIn(List<Integer> values) {
             addCriterion("threads_cached in", values, "threadsCached");
             return (Criteria) this;
@@ -614,7 +699,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("threads_cached not between", value1, value2, "threadsCached");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andConnectionsIsNull() {
             addCriterion("connections is null");
             return (Criteria) this;
@@ -655,6 +741,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andConnectionsLike(Integer value) {
+            addCriterion("connections like", value, "connections");
+            return (Criteria) this;
+        }
+
+        public Criteria andConnectionsNotLike(Integer value) {
+            addCriterion("connections not like", value, "connections");
+            return (Criteria) this;
+        }
+
         public Criteria andConnectionsIn(List<Integer> values) {
             addCriterion("connections in", values, "connections");
             return (Criteria) this;
@@ -674,7 +770,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("connections not between", value1, value2, "connections");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andAbortedClientsIsNull() {
             addCriterion("aborted_clients is null");
             return (Criteria) this;
@@ -715,6 +812,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andAbortedClientsLike(Integer value) {
+            addCriterion("aborted_clients like", value, "abortedClients");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbortedClientsNotLike(Integer value) {
+            addCriterion("aborted_clients not like", value, "abortedClients");
+            return (Criteria) this;
+        }
+
         public Criteria andAbortedClientsIn(List<Integer> values) {
             addCriterion("aborted_clients in", values, "abortedClients");
             return (Criteria) this;
@@ -734,7 +841,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("aborted_clients not between", value1, value2, "abortedClients");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andAbortedConnectsIsNull() {
             addCriterion("aborted_connects is null");
             return (Criteria) this;
@@ -775,6 +883,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andAbortedConnectsLike(Integer value) {
+            addCriterion("aborted_connects like", value, "abortedConnects");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbortedConnectsNotLike(Integer value) {
+            addCriterion("aborted_connects not like", value, "abortedConnects");
+            return (Criteria) this;
+        }
+
         public Criteria andAbortedConnectsIn(List<Integer> values) {
             addCriterion("aborted_connects in", values, "abortedConnects");
             return (Criteria) this;
@@ -794,7 +912,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("aborted_connects not between", value1, value2, "abortedConnects");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andBytesReceivedIsNull() {
             addCriterion("bytes_received is null");
             return (Criteria) this;
@@ -835,6 +954,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andBytesReceivedLike(Long value) {
+            addCriterion("bytes_received like", value, "bytesReceived");
+            return (Criteria) this;
+        }
+
+        public Criteria andBytesReceivedNotLike(Long value) {
+            addCriterion("bytes_received not like", value, "bytesReceived");
+            return (Criteria) this;
+        }
+
         public Criteria andBytesReceivedIn(List<Long> values) {
             addCriterion("bytes_received in", values, "bytesReceived");
             return (Criteria) this;
@@ -854,7 +983,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("bytes_received not between", value1, value2, "bytesReceived");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andBytesReceivedPersecondIsNull() {
             addCriterion("bytes_received_persecond is null");
             return (Criteria) this;
@@ -924,7 +1054,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("bytes_received_persecond not between", value1, value2, "bytesReceivedPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andBytesSentIsNull() {
             addCriterion("bytes_sent is null");
             return (Criteria) this;
@@ -965,6 +1096,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andBytesSentLike(Long value) {
+            addCriterion("bytes_sent like", value, "bytesSent");
+            return (Criteria) this;
+        }
+
+        public Criteria andBytesSentNotLike(Long value) {
+            addCriterion("bytes_sent not like", value, "bytesSent");
+            return (Criteria) this;
+        }
+
         public Criteria andBytesSentIn(List<Long> values) {
             addCriterion("bytes_sent in", values, "bytesSent");
             return (Criteria) this;
@@ -984,7 +1125,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("bytes_sent not between", value1, value2, "bytesSent");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andBytesSentPersecondIsNull() {
             addCriterion("bytes_sent_persecond is null");
             return (Criteria) this;
@@ -1054,7 +1196,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("bytes_sent_persecond not between", value1, value2, "bytesSentPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComSelectIsNull() {
             addCriterion("com_select is null");
             return (Criteria) this;
@@ -1095,6 +1238,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComSelectLike(Long value) {
+            addCriterion("com_select like", value, "comSelect");
+            return (Criteria) this;
+        }
+
+        public Criteria andComSelectNotLike(Long value) {
+            addCriterion("com_select not like", value, "comSelect");
+            return (Criteria) this;
+        }
+
         public Criteria andComSelectIn(List<Long> values) {
             addCriterion("com_select in", values, "comSelect");
             return (Criteria) this;
@@ -1114,7 +1267,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_select not between", value1, value2, "comSelect");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComSelectPersecondIsNull() {
             addCriterion("com_select_persecond is null");
             return (Criteria) this;
@@ -1184,7 +1338,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_select_persecond not between", value1, value2, "comSelectPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComInsertIsNull() {
             addCriterion("com_insert is null");
             return (Criteria) this;
@@ -1225,6 +1380,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComInsertLike(Long value) {
+            addCriterion("com_insert like", value, "comInsert");
+            return (Criteria) this;
+        }
+
+        public Criteria andComInsertNotLike(Long value) {
+            addCriterion("com_insert not like", value, "comInsert");
+            return (Criteria) this;
+        }
+
         public Criteria andComInsertIn(List<Long> values) {
             addCriterion("com_insert in", values, "comInsert");
             return (Criteria) this;
@@ -1244,7 +1409,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_insert not between", value1, value2, "comInsert");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComInsertPersecondIsNull() {
             addCriterion("com_insert_persecond is null");
             return (Criteria) this;
@@ -1314,7 +1480,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_insert_persecond not between", value1, value2, "comInsertPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComUpdateIsNull() {
             addCriterion("com_update is null");
             return (Criteria) this;
@@ -1355,6 +1522,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComUpdateLike(Long value) {
+            addCriterion("com_update like", value, "comUpdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andComUpdateNotLike(Long value) {
+            addCriterion("com_update not like", value, "comUpdate");
+            return (Criteria) this;
+        }
+
         public Criteria andComUpdateIn(List<Long> values) {
             addCriterion("com_update in", values, "comUpdate");
             return (Criteria) this;
@@ -1374,7 +1551,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_update not between", value1, value2, "comUpdate");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComUpdatePersecondIsNull() {
             addCriterion("com_update_persecond is null");
             return (Criteria) this;
@@ -1444,7 +1622,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_update_persecond not between", value1, value2, "comUpdatePersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComDeleteIsNull() {
             addCriterion("com_delete is null");
             return (Criteria) this;
@@ -1485,6 +1664,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComDeleteLike(Long value) {
+            addCriterion("com_delete like", value, "comDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andComDeleteNotLike(Long value) {
+            addCriterion("com_delete not like", value, "comDelete");
+            return (Criteria) this;
+        }
+
         public Criteria andComDeleteIn(List<Long> values) {
             addCriterion("com_delete in", values, "comDelete");
             return (Criteria) this;
@@ -1504,7 +1693,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_delete not between", value1, value2, "comDelete");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComDeletePersecondIsNull() {
             addCriterion("com_delete_persecond is null");
             return (Criteria) this;
@@ -1574,7 +1764,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_delete_persecond not between", value1, value2, "comDeletePersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComCommitIsNull() {
             addCriterion("com_commit is null");
             return (Criteria) this;
@@ -1615,6 +1806,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComCommitLike(Long value) {
+            addCriterion("com_commit like", value, "comCommit");
+            return (Criteria) this;
+        }
+
+        public Criteria andComCommitNotLike(Long value) {
+            addCriterion("com_commit not like", value, "comCommit");
+            return (Criteria) this;
+        }
+
         public Criteria andComCommitIn(List<Long> values) {
             addCriterion("com_commit in", values, "comCommit");
             return (Criteria) this;
@@ -1634,7 +1835,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_commit not between", value1, value2, "comCommit");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComCommitPersecondIsNull() {
             addCriterion("com_commit_persecond is null");
             return (Criteria) this;
@@ -1704,7 +1906,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_commit_persecond not between", value1, value2, "comCommitPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComRollbackIsNull() {
             addCriterion("com_rollback is null");
             return (Criteria) this;
@@ -1745,6 +1948,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andComRollbackLike(Long value) {
+            addCriterion("com_rollback like", value, "comRollback");
+            return (Criteria) this;
+        }
+
+        public Criteria andComRollbackNotLike(Long value) {
+            addCriterion("com_rollback not like", value, "comRollback");
+            return (Criteria) this;
+        }
+
         public Criteria andComRollbackIn(List<Long> values) {
             addCriterion("com_rollback in", values, "comRollback");
             return (Criteria) this;
@@ -1764,7 +1977,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_rollback not between", value1, value2, "comRollback");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andComRollbackPersecondIsNull() {
             addCriterion("com_rollback_persecond is null");
             return (Criteria) this;
@@ -1834,7 +2048,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("com_rollback_persecond not between", value1, value2, "comRollbackPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andQuestionsIsNull() {
             addCriterion("questions is null");
             return (Criteria) this;
@@ -1875,6 +2090,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andQuestionsLike(Long value) {
+            addCriterion("questions like", value, "questions");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestionsNotLike(Long value) {
+            addCriterion("questions not like", value, "questions");
+            return (Criteria) this;
+        }
+
         public Criteria andQuestionsIn(List<Long> values) {
             addCriterion("questions in", values, "questions");
             return (Criteria) this;
@@ -1894,7 +2119,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("questions not between", value1, value2, "questions");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andQuestionsPersecondIsNull() {
             addCriterion("questions_persecond is null");
             return (Criteria) this;
@@ -1964,7 +2190,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("questions_persecond not between", value1, value2, "questionsPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andTransactionsIsNull() {
             addCriterion("transactions is null");
             return (Criteria) this;
@@ -2005,6 +2232,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andTransactionsLike(Long value) {
+            addCriterion("transactions like", value, "transactions");
+            return (Criteria) this;
+        }
+
+        public Criteria andTransactionsNotLike(Long value) {
+            addCriterion("transactions not like", value, "transactions");
+            return (Criteria) this;
+        }
+
         public Criteria andTransactionsIn(List<Long> values) {
             addCriterion("transactions in", values, "transactions");
             return (Criteria) this;
@@ -2024,7 +2261,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("transactions not between", value1, value2, "transactions");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andTransactionsPersecondIsNull() {
             addCriterion("transactions_persecond is null");
             return (Criteria) this;
@@ -2094,7 +2332,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("transactions_persecond not between", value1, value2, "transactionsPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpTablesIsNull() {
             addCriterion("created_tmp_tables is null");
             return (Criteria) this;
@@ -2135,6 +2374,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreatedTmpTablesLike(Long value) {
+            addCriterion("created_tmp_tables like", value, "createdTmpTables");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTmpTablesNotLike(Long value) {
+            addCriterion("created_tmp_tables not like", value, "createdTmpTables");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedTmpTablesIn(List<Long> values) {
             addCriterion("created_tmp_tables in", values, "createdTmpTables");
             return (Criteria) this;
@@ -2154,7 +2403,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_tables not between", value1, value2, "createdTmpTables");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpTablesPersecondIsNull() {
             addCriterion("created_tmp_tables_persecond is null");
             return (Criteria) this;
@@ -2224,7 +2474,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_tables_persecond not between", value1, value2, "createdTmpTablesPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpDiskTablesIsNull() {
             addCriterion("created_tmp_disk_tables is null");
             return (Criteria) this;
@@ -2265,6 +2516,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreatedTmpDiskTablesLike(Long value) {
+            addCriterion("created_tmp_disk_tables like", value, "createdTmpDiskTables");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTmpDiskTablesNotLike(Long value) {
+            addCriterion("created_tmp_disk_tables not like", value, "createdTmpDiskTables");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedTmpDiskTablesIn(List<Long> values) {
             addCriterion("created_tmp_disk_tables in", values, "createdTmpDiskTables");
             return (Criteria) this;
@@ -2284,7 +2545,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_disk_tables not between", value1, value2, "createdTmpDiskTables");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpDiskTablesPersecondIsNull() {
             addCriterion("created_tmp_disk_tables_persecond is null");
             return (Criteria) this;
@@ -2354,7 +2616,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_disk_tables_persecond not between", value1, value2, "createdTmpDiskTablesPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpFilesIsNull() {
             addCriterion("created_tmp_files is null");
             return (Criteria) this;
@@ -2395,6 +2658,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreatedTmpFilesLike(Long value) {
+            addCriterion("created_tmp_files like", value, "createdTmpFiles");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTmpFilesNotLike(Long value) {
+            addCriterion("created_tmp_files not like", value, "createdTmpFiles");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedTmpFilesIn(List<Long> values) {
             addCriterion("created_tmp_files in", values, "createdTmpFiles");
             return (Criteria) this;
@@ -2414,7 +2687,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_files not between", value1, value2, "createdTmpFiles");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreatedTmpFilesPersecondIsNull() {
             addCriterion("created_tmp_files_persecond is null");
             return (Criteria) this;
@@ -2484,7 +2758,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("created_tmp_files_persecond not between", value1, value2, "createdTmpFilesPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataReadsIsNull() {
             addCriterion("innodb_data_reads is null");
             return (Criteria) this;
@@ -2525,6 +2800,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbDataReadsLike(Long value) {
+            addCriterion("innodb_data_reads like", value, "innodbDataReads");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbDataReadsNotLike(Long value) {
+            addCriterion("innodb_data_reads not like", value, "innodbDataReads");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbDataReadsIn(List<Long> values) {
             addCriterion("innodb_data_reads in", values, "innodbDataReads");
             return (Criteria) this;
@@ -2544,7 +2829,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_reads not between", value1, value2, "innodbDataReads");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataReadsPersecondIsNull() {
             addCriterion("innodb_data_reads_persecond is null");
             return (Criteria) this;
@@ -2614,7 +2900,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_reads_persecond not between", value1, value2, "innodbDataReadsPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataWritesIsNull() {
             addCriterion("innodb_data_writes is null");
             return (Criteria) this;
@@ -2655,6 +2942,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbDataWritesLike(Long value) {
+            addCriterion("innodb_data_writes like", value, "innodbDataWrites");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbDataWritesNotLike(Long value) {
+            addCriterion("innodb_data_writes not like", value, "innodbDataWrites");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbDataWritesIn(List<Long> values) {
             addCriterion("innodb_data_writes in", values, "innodbDataWrites");
             return (Criteria) this;
@@ -2674,7 +2971,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_writes not between", value1, value2, "innodbDataWrites");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataWritesPersecondIsNull() {
             addCriterion("innodb_data_writes_persecond is null");
             return (Criteria) this;
@@ -2744,7 +3042,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_writes_persecond not between", value1, value2, "innodbDataWritesPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataFsyncsIsNull() {
             addCriterion("innodb_data_fsyncs is null");
             return (Criteria) this;
@@ -2785,6 +3084,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbDataFsyncsLike(Long value) {
+            addCriterion("innodb_data_fsyncs like", value, "innodbDataFsyncs");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbDataFsyncsNotLike(Long value) {
+            addCriterion("innodb_data_fsyncs not like", value, "innodbDataFsyncs");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbDataFsyncsIn(List<Long> values) {
             addCriterion("innodb_data_fsyncs in", values, "innodbDataFsyncs");
             return (Criteria) this;
@@ -2804,7 +3113,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_fsyncs not between", value1, value2, "innodbDataFsyncs");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataFsyncsPersecondIsNull() {
             addCriterion("innodb_data_fsyncs_persecond is null");
             return (Criteria) this;
@@ -2874,7 +3184,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_fsyncs_persecond not between", value1, value2, "innodbDataFsyncsPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataReadIsNull() {
             addCriterion("innodb_data_read is null");
             return (Criteria) this;
@@ -2915,6 +3226,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbDataReadLike(Long value) {
+            addCriterion("innodb_data_read like", value, "innodbDataRead");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbDataReadNotLike(Long value) {
+            addCriterion("innodb_data_read not like", value, "innodbDataRead");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbDataReadIn(List<Long> values) {
             addCriterion("innodb_data_read in", values, "innodbDataRead");
             return (Criteria) this;
@@ -2934,7 +3255,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_read not between", value1, value2, "innodbDataRead");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataReadPersecondIsNull() {
             addCriterion("innodb_data_read_persecond is null");
             return (Criteria) this;
@@ -3004,7 +3326,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_read_persecond not between", value1, value2, "innodbDataReadPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataWrittenIsNull() {
             addCriterion("innodb_data_written is null");
             return (Criteria) this;
@@ -3045,6 +3368,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbDataWrittenLike(Long value) {
+            addCriterion("innodb_data_written like", value, "innodbDataWritten");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbDataWrittenNotLike(Long value) {
+            addCriterion("innodb_data_written not like", value, "innodbDataWritten");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbDataWrittenIn(List<Long> values) {
             addCriterion("innodb_data_written in", values, "innodbDataWritten");
             return (Criteria) this;
@@ -3064,7 +3397,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_written not between", value1, value2, "innodbDataWritten");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbDataWrittenPersecondIsNull() {
             addCriterion("innodb_data_written_persecond is null");
             return (Criteria) this;
@@ -3134,7 +3468,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_data_written_persecond not between", value1, value2, "innodbDataWrittenPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesDirtyIsNull() {
             addCriterion("innodb_buffer_pool_pages_dirty is null");
             return (Criteria) this;
@@ -3175,6 +3510,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbBufferPoolPagesDirtyLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_dirty like", value, "innodbBufferPoolPagesDirty");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbBufferPoolPagesDirtyNotLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_dirty not like", value, "innodbBufferPoolPagesDirty");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbBufferPoolPagesDirtyIn(List<Long> values) {
             addCriterion("innodb_buffer_pool_pages_dirty in", values, "innodbBufferPoolPagesDirty");
             return (Criteria) this;
@@ -3194,7 +3539,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_dirty not between", value1, value2, "innodbBufferPoolPagesDirty");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesDirtyPersecondIsNull() {
             addCriterion("innodb_buffer_pool_pages_dirty_persecond is null");
             return (Criteria) this;
@@ -3264,7 +3610,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_dirty_persecond not between", value1, value2, "innodbBufferPoolPagesDirtyPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesFlushedIsNull() {
             addCriterion("innodb_buffer_pool_pages_flushed is null");
             return (Criteria) this;
@@ -3305,6 +3652,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbBufferPoolPagesFlushedLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_flushed like", value, "innodbBufferPoolPagesFlushed");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbBufferPoolPagesFlushedNotLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_flushed not like", value, "innodbBufferPoolPagesFlushed");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbBufferPoolPagesFlushedIn(List<Long> values) {
             addCriterion("innodb_buffer_pool_pages_flushed in", values, "innodbBufferPoolPagesFlushed");
             return (Criteria) this;
@@ -3324,7 +3681,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_flushed not between", value1, value2, "innodbBufferPoolPagesFlushed");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesFlushedPersecondIsNull() {
             addCriterion("innodb_buffer_pool_pages_flushed_persecond is null");
             return (Criteria) this;
@@ -3394,7 +3752,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_flushed_persecond not between", value1, value2, "innodbBufferPoolPagesFlushedPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferReadHitRatioIsNull() {
             addCriterion("innodb_buffer_read_hit_ratio is null");
             return (Criteria) this;
@@ -3464,7 +3823,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_read_hit_ratio not between", value1, value2, "innodbBufferReadHitRatio");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferUsageIsNull() {
             addCriterion("innodb_buffer_usage is null");
             return (Criteria) this;
@@ -3534,7 +3894,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_usage not between", value1, value2, "innodbBufferUsage");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsInsertedIsNull() {
             addCriterion("innodb_rows_inserted is null");
             return (Criteria) this;
@@ -3575,6 +3936,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbRowsInsertedLike(Long value) {
+            addCriterion("innodb_rows_inserted like", value, "innodbRowsInserted");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbRowsInsertedNotLike(Long value) {
+            addCriterion("innodb_rows_inserted not like", value, "innodbRowsInserted");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbRowsInsertedIn(List<Long> values) {
             addCriterion("innodb_rows_inserted in", values, "innodbRowsInserted");
             return (Criteria) this;
@@ -3594,7 +3965,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_inserted not between", value1, value2, "innodbRowsInserted");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsInsertedPersecondIsNull() {
             addCriterion("innodb_rows_inserted_persecond is null");
             return (Criteria) this;
@@ -3664,7 +4036,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_inserted_persecond not between", value1, value2, "innodbRowsInsertedPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsUpdatedIsNull() {
             addCriterion("innodb_rows_updated is null");
             return (Criteria) this;
@@ -3705,6 +4078,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbRowsUpdatedLike(Long value) {
+            addCriterion("innodb_rows_updated like", value, "innodbRowsUpdated");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbRowsUpdatedNotLike(Long value) {
+            addCriterion("innodb_rows_updated not like", value, "innodbRowsUpdated");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbRowsUpdatedIn(List<Long> values) {
             addCriterion("innodb_rows_updated in", values, "innodbRowsUpdated");
             return (Criteria) this;
@@ -3724,7 +4107,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_updated not between", value1, value2, "innodbRowsUpdated");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsUpdatedPersecondIsNull() {
             addCriterion("innodb_rows_updated_persecond is null");
             return (Criteria) this;
@@ -3794,7 +4178,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_updated_persecond not between", value1, value2, "innodbRowsUpdatedPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsDeletedIsNull() {
             addCriterion("innodb_rows_deleted is null");
             return (Criteria) this;
@@ -3835,6 +4220,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbRowsDeletedLike(Long value) {
+            addCriterion("innodb_rows_deleted like", value, "innodbRowsDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbRowsDeletedNotLike(Long value) {
+            addCriterion("innodb_rows_deleted not like", value, "innodbRowsDeleted");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbRowsDeletedIn(List<Long> values) {
             addCriterion("innodb_rows_deleted in", values, "innodbRowsDeleted");
             return (Criteria) this;
@@ -3854,7 +4249,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_deleted not between", value1, value2, "innodbRowsDeleted");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbRowsDeletedPersecondIsNull() {
             addCriterion("innodb_rows_deleted_persecond is null");
             return (Criteria) this;
@@ -3924,7 +4320,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_rows_deleted_persecond not between", value1, value2, "innodbRowsDeletedPersecond");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesTotalIsNull() {
             addCriterion("innodb_buffer_pool_pages_total is null");
             return (Criteria) this;
@@ -3965,6 +4362,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbBufferPoolPagesTotalLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_total like", value, "innodbBufferPoolPagesTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbBufferPoolPagesTotalNotLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_total not like", value, "innodbBufferPoolPagesTotal");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbBufferPoolPagesTotalIn(List<Long> values) {
             addCriterion("innodb_buffer_pool_pages_total in", values, "innodbBufferPoolPagesTotal");
             return (Criteria) this;
@@ -3984,7 +4391,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_total not between", value1, value2, "innodbBufferPoolPagesTotal");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbBufferPoolPagesFreeIsNull() {
             addCriterion("innodb_buffer_pool_pages_free is null");
             return (Criteria) this;
@@ -4025,6 +4433,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbBufferPoolPagesFreeLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_free like", value, "innodbBufferPoolPagesFree");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbBufferPoolPagesFreeNotLike(Long value) {
+            addCriterion("innodb_buffer_pool_pages_free not like", value, "innodbBufferPoolPagesFree");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbBufferPoolPagesFreeIn(List<Long> values) {
             addCriterion("innodb_buffer_pool_pages_free in", values, "innodbBufferPoolPagesFree");
             return (Criteria) this;
@@ -4044,7 +4462,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_buffer_pool_pages_free not between", value1, value2, "innodbBufferPoolPagesFree");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andInnodbPageSizeIsNull() {
             addCriterion("innodb_page_size is null");
             return (Criteria) this;
@@ -4085,6 +4504,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andInnodbPageSizeLike(Integer value) {
+            addCriterion("innodb_page_size like", value, "innodbPageSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andInnodbPageSizeNotLike(Integer value) {
+            addCriterion("innodb_page_size not like", value, "innodbPageSize");
+            return (Criteria) this;
+        }
+
         public Criteria andInnodbPageSizeIn(List<Integer> values) {
             addCriterion("innodb_page_size in", values, "innodbPageSize");
             return (Criteria) this;
@@ -4104,7 +4533,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("innodb_page_size not between", value1, value2, "innodbPageSize");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andSlowQueriesIsNull() {
             addCriterion("slow_queries is null");
             return (Criteria) this;
@@ -4145,6 +4575,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andSlowQueriesLike(Integer value) {
+            addCriterion("slow_queries like", value, "slowQueries");
+            return (Criteria) this;
+        }
+
+        public Criteria andSlowQueriesNotLike(Integer value) {
+            addCriterion("slow_queries not like", value, "slowQueries");
+            return (Criteria) this;
+        }
+
         public Criteria andSlowQueriesIn(List<Integer> values) {
             addCriterion("slow_queries in", values, "slowQueries");
             return (Criteria) this;
@@ -4164,7 +4604,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("slow_queries not between", value1, value2, "slowQueries");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andSlaveDelayIsNull() {
             addCriterion("slave_delay is null");
             return (Criteria) this;
@@ -4205,6 +4646,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andSlaveDelayLike(Long value) {
+            addCriterion("slave_delay like", value, "slaveDelay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSlaveDelayNotLike(Long value) {
+            addCriterion("slave_delay not like", value, "slaveDelay");
+            return (Criteria) this;
+        }
+
         public Criteria andSlaveDelayIn(List<Long> values) {
             addCriterion("slave_delay in", values, "slaveDelay");
             return (Criteria) this;
@@ -4224,7 +4675,8 @@ public class MysqlStatusHistoryExample {
             addCriterion("slave_delay not between", value1, value2, "slaveDelay");
             return (Criteria) this;
         }
-
+        
+		
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -4265,6 +4717,16 @@ public class MysqlStatusHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreateTimeLike(Date value) {
+            addCriterion("create_time like", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotLike(Date value) {
+            addCriterion("create_time not like", value, "createTime");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
@@ -4284,10 +4746,573 @@ public class MysqlStatusHistoryExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
-    }
+        
+		
+        public Criteria andUpdateDateIsNull() {
+            addCriterion("update_date is null");
+            return (Criteria) this;
+        }
 
+        public Criteria andUpdateDateIsNotNull() {
+            addCriterion("update_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateEqualTo(Date value) {
+            addCriterion("update_date =", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotEqualTo(Date value) {
+            addCriterion("update_date <>", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThan(Date value) {
+            addCriterion("update_date >", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_date >=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThan(Date value) {
+            addCriterion("update_date <", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThanOrEqualTo(Date value) {
+            addCriterion("update_date <=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLike(Date value) {
+            addCriterion("update_date like", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotLike(Date value) {
+            addCriterion("update_date not like", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIn(List<Date> values) {
+            addCriterion("update_date in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotIn(List<Date> values) {
+            addCriterion("update_date not in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateBetween(Date value1, Date value2) {
+            addCriterion("update_date between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotBetween(Date value1, Date value2) {
+            addCriterion("update_date not between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+        
+	
+		 public Criteria andLikeQuery(ServerStatusHistory record) {
+		 	List<String> list= new ArrayList<String>();
+		 	List<String> list2= new ArrayList<String>();
+        	StringBuffer buffer=new StringBuffer();
+			if(record.getId()!=null&&StrUtil.isNotEmpty(record.getId().toString())) {
+    			 list.add("ifnull(id,'')");
+    		}
+			if(record.getServerId()!=null&&StrUtil.isNotEmpty(record.getServerId().toString())) {
+    			 list.add("ifnull(server_id,'')");
+    		}
+			if(record.getUptime()!=null&&StrUtil.isNotEmpty(record.getUptime().toString())) {
+    			 list.add("ifnull(uptime,'')");
+    		}
+			if(record.getOpenTables()!=null&&StrUtil.isNotEmpty(record.getOpenTables().toString())) {
+    			 list.add("ifnull(open_tables,'')");
+    		}
+			if(record.getThreadsConnected()!=null&&StrUtil.isNotEmpty(record.getThreadsConnected().toString())) {
+    			 list.add("ifnull(threads_connected,'')");
+    		}
+			if(record.getThreadsRunning()!=null&&StrUtil.isNotEmpty(record.getThreadsRunning().toString())) {
+    			 list.add("ifnull(threads_running,'')");
+    		}
+			if(record.getThreadsCreated()!=null&&StrUtil.isNotEmpty(record.getThreadsCreated().toString())) {
+    			 list.add("ifnull(threads_created,'')");
+    		}
+			if(record.getThreadsCached()!=null&&StrUtil.isNotEmpty(record.getThreadsCached().toString())) {
+    			 list.add("ifnull(threads_cached,'')");
+    		}
+			if(record.getConnections()!=null&&StrUtil.isNotEmpty(record.getConnections().toString())) {
+    			 list.add("ifnull(connections,'')");
+    		}
+			if(record.getAbortedClients()!=null&&StrUtil.isNotEmpty(record.getAbortedClients().toString())) {
+    			 list.add("ifnull(aborted_clients,'')");
+    		}
+			if(record.getAbortedConnects()!=null&&StrUtil.isNotEmpty(record.getAbortedConnects().toString())) {
+    			 list.add("ifnull(aborted_connects,'')");
+    		}
+			if(record.getBytesReceived()!=null&&StrUtil.isNotEmpty(record.getBytesReceived().toString())) {
+    			 list.add("ifnull(bytes_received,'')");
+    		}
+			if(record.getBytesReceivedPersecond()!=null&&StrUtil.isNotEmpty(record.getBytesReceivedPersecond().toString())) {
+    			 list.add("ifnull(bytes_received_persecond,'')");
+    		}
+			if(record.getBytesSent()!=null&&StrUtil.isNotEmpty(record.getBytesSent().toString())) {
+    			 list.add("ifnull(bytes_sent,'')");
+    		}
+			if(record.getBytesSentPersecond()!=null&&StrUtil.isNotEmpty(record.getBytesSentPersecond().toString())) {
+    			 list.add("ifnull(bytes_sent_persecond,'')");
+    		}
+			if(record.getComSelect()!=null&&StrUtil.isNotEmpty(record.getComSelect().toString())) {
+    			 list.add("ifnull(com_select,'')");
+    		}
+			if(record.getComSelectPersecond()!=null&&StrUtil.isNotEmpty(record.getComSelectPersecond().toString())) {
+    			 list.add("ifnull(com_select_persecond,'')");
+    		}
+			if(record.getComInsert()!=null&&StrUtil.isNotEmpty(record.getComInsert().toString())) {
+    			 list.add("ifnull(com_insert,'')");
+    		}
+			if(record.getComInsertPersecond()!=null&&StrUtil.isNotEmpty(record.getComInsertPersecond().toString())) {
+    			 list.add("ifnull(com_insert_persecond,'')");
+    		}
+			if(record.getComUpdate()!=null&&StrUtil.isNotEmpty(record.getComUpdate().toString())) {
+    			 list.add("ifnull(com_update,'')");
+    		}
+			if(record.getComUpdatePersecond()!=null&&StrUtil.isNotEmpty(record.getComUpdatePersecond().toString())) {
+    			 list.add("ifnull(com_update_persecond,'')");
+    		}
+			if(record.getComDelete()!=null&&StrUtil.isNotEmpty(record.getComDelete().toString())) {
+    			 list.add("ifnull(com_delete,'')");
+    		}
+			if(record.getComDeletePersecond()!=null&&StrUtil.isNotEmpty(record.getComDeletePersecond().toString())) {
+    			 list.add("ifnull(com_delete_persecond,'')");
+    		}
+			if(record.getComCommit()!=null&&StrUtil.isNotEmpty(record.getComCommit().toString())) {
+    			 list.add("ifnull(com_commit,'')");
+    		}
+			if(record.getComCommitPersecond()!=null&&StrUtil.isNotEmpty(record.getComCommitPersecond().toString())) {
+    			 list.add("ifnull(com_commit_persecond,'')");
+    		}
+			if(record.getComRollback()!=null&&StrUtil.isNotEmpty(record.getComRollback().toString())) {
+    			 list.add("ifnull(com_rollback,'')");
+    		}
+			if(record.getComRollbackPersecond()!=null&&StrUtil.isNotEmpty(record.getComRollbackPersecond().toString())) {
+    			 list.add("ifnull(com_rollback_persecond,'')");
+    		}
+			if(record.getQuestions()!=null&&StrUtil.isNotEmpty(record.getQuestions().toString())) {
+    			 list.add("ifnull(questions,'')");
+    		}
+			if(record.getQuestionsPersecond()!=null&&StrUtil.isNotEmpty(record.getQuestionsPersecond().toString())) {
+    			 list.add("ifnull(questions_persecond,'')");
+    		}
+			if(record.getTransactions()!=null&&StrUtil.isNotEmpty(record.getTransactions().toString())) {
+    			 list.add("ifnull(transactions,'')");
+    		}
+			if(record.getTransactionsPersecond()!=null&&StrUtil.isNotEmpty(record.getTransactionsPersecond().toString())) {
+    			 list.add("ifnull(transactions_persecond,'')");
+    		}
+			if(record.getCreatedTmpTables()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpTables().toString())) {
+    			 list.add("ifnull(created_tmp_tables,'')");
+    		}
+			if(record.getCreatedTmpTablesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpTablesPersecond().toString())) {
+    			 list.add("ifnull(created_tmp_tables_persecond,'')");
+    		}
+			if(record.getCreatedTmpDiskTables()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpDiskTables().toString())) {
+    			 list.add("ifnull(created_tmp_disk_tables,'')");
+    		}
+			if(record.getCreatedTmpDiskTablesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpDiskTablesPersecond().toString())) {
+    			 list.add("ifnull(created_tmp_disk_tables_persecond,'')");
+    		}
+			if(record.getCreatedTmpFiles()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpFiles().toString())) {
+    			 list.add("ifnull(created_tmp_files,'')");
+    		}
+			if(record.getCreatedTmpFilesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpFilesPersecond().toString())) {
+    			 list.add("ifnull(created_tmp_files_persecond,'')");
+    		}
+			if(record.getInnodbDataReads()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReads().toString())) {
+    			 list.add("ifnull(innodb_data_reads,'')");
+    		}
+			if(record.getInnodbDataReadsPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReadsPersecond().toString())) {
+    			 list.add("ifnull(innodb_data_reads_persecond,'')");
+    		}
+			if(record.getInnodbDataWrites()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWrites().toString())) {
+    			 list.add("ifnull(innodb_data_writes,'')");
+    		}
+			if(record.getInnodbDataWritesPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWritesPersecond().toString())) {
+    			 list.add("ifnull(innodb_data_writes_persecond,'')");
+    		}
+			if(record.getInnodbDataFsyncs()!=null&&StrUtil.isNotEmpty(record.getInnodbDataFsyncs().toString())) {
+    			 list.add("ifnull(innodb_data_fsyncs,'')");
+    		}
+			if(record.getInnodbDataFsyncsPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataFsyncsPersecond().toString())) {
+    			 list.add("ifnull(innodb_data_fsyncs_persecond,'')");
+    		}
+			if(record.getInnodbDataRead()!=null&&StrUtil.isNotEmpty(record.getInnodbDataRead().toString())) {
+    			 list.add("ifnull(innodb_data_read,'')");
+    		}
+			if(record.getInnodbDataReadPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReadPersecond().toString())) {
+    			 list.add("ifnull(innodb_data_read_persecond,'')");
+    		}
+			if(record.getInnodbDataWritten()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWritten().toString())) {
+    			 list.add("ifnull(innodb_data_written,'')");
+    		}
+			if(record.getInnodbDataWrittenPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWrittenPersecond().toString())) {
+    			 list.add("ifnull(innodb_data_written_persecond,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesDirty()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesDirty().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_dirty,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesDirtyPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesDirtyPersecond().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_dirty_persecond,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesFlushed()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFlushed().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_flushed,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesFlushedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFlushedPersecond().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_flushed_persecond,'')");
+    		}
+			if(record.getInnodbBufferReadHitRatio()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferReadHitRatio().toString())) {
+    			 list.add("ifnull(innodb_buffer_read_hit_ratio,'')");
+    		}
+			if(record.getInnodbBufferUsage()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferUsage().toString())) {
+    			 list.add("ifnull(innodb_buffer_usage,'')");
+    		}
+			if(record.getInnodbRowsInserted()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsInserted().toString())) {
+    			 list.add("ifnull(innodb_rows_inserted,'')");
+    		}
+			if(record.getInnodbRowsInsertedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsInsertedPersecond().toString())) {
+    			 list.add("ifnull(innodb_rows_inserted_persecond,'')");
+    		}
+			if(record.getInnodbRowsUpdated()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsUpdated().toString())) {
+    			 list.add("ifnull(innodb_rows_updated,'')");
+    		}
+			if(record.getInnodbRowsUpdatedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsUpdatedPersecond().toString())) {
+    			 list.add("ifnull(innodb_rows_updated_persecond,'')");
+    		}
+			if(record.getInnodbRowsDeleted()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsDeleted().toString())) {
+    			 list.add("ifnull(innodb_rows_deleted,'')");
+    		}
+			if(record.getInnodbRowsDeletedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsDeletedPersecond().toString())) {
+    			 list.add("ifnull(innodb_rows_deleted_persecond,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesTotal()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesTotal().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_total,'')");
+    		}
+			if(record.getInnodbBufferPoolPagesFree()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFree().toString())) {
+    			 list.add("ifnull(innodb_buffer_pool_pages_free,'')");
+    		}
+			if(record.getInnodbPageSize()!=null&&StrUtil.isNotEmpty(record.getInnodbPageSize().toString())) {
+    			 list.add("ifnull(innodb_page_size,'')");
+    		}
+			if(record.getSlowQueries()!=null&&StrUtil.isNotEmpty(record.getSlowQueries().toString())) {
+    			 list.add("ifnull(slow_queries,'')");
+    		}
+			if(record.getSlaveDelay()!=null&&StrUtil.isNotEmpty(record.getSlaveDelay().toString())) {
+    			 list.add("ifnull(slave_delay,'')");
+    		}
+			if(record.getCreateTime()!=null&&StrUtil.isNotEmpty(record.getCreateTime().toString())) {
+    			 list.add("ifnull(create_time,'')");
+    		}
+			if(record.getUpdateDate()!=null&&StrUtil.isNotEmpty(record.getUpdateDate().toString())) {
+    			 list.add("ifnull(update_date,'')");
+    		}
+			if(record.getId()!=null&&StrUtil.isNotEmpty(record.getId().toString())) {
+    			list2.add("'%"+record.getId()+"%'");
+    		}
+			if(record.getServerId()!=null&&StrUtil.isNotEmpty(record.getServerId().toString())) {
+    			list2.add("'%"+record.getServerId()+"%'");
+    		}
+			if(record.getUptime()!=null&&StrUtil.isNotEmpty(record.getUptime().toString())) {
+    			list2.add("'%"+record.getUptime()+"%'");
+    		}
+			if(record.getOpenTables()!=null&&StrUtil.isNotEmpty(record.getOpenTables().toString())) {
+    			list2.add("'%"+record.getOpenTables()+"%'");
+    		}
+			if(record.getThreadsConnected()!=null&&StrUtil.isNotEmpty(record.getThreadsConnected().toString())) {
+    			list2.add("'%"+record.getThreadsConnected()+"%'");
+    		}
+			if(record.getThreadsRunning()!=null&&StrUtil.isNotEmpty(record.getThreadsRunning().toString())) {
+    			list2.add("'%"+record.getThreadsRunning()+"%'");
+    		}
+			if(record.getThreadsCreated()!=null&&StrUtil.isNotEmpty(record.getThreadsCreated().toString())) {
+    			list2.add("'%"+record.getThreadsCreated()+"%'");
+    		}
+			if(record.getThreadsCached()!=null&&StrUtil.isNotEmpty(record.getThreadsCached().toString())) {
+    			list2.add("'%"+record.getThreadsCached()+"%'");
+    		}
+			if(record.getConnections()!=null&&StrUtil.isNotEmpty(record.getConnections().toString())) {
+    			list2.add("'%"+record.getConnections()+"%'");
+    		}
+			if(record.getAbortedClients()!=null&&StrUtil.isNotEmpty(record.getAbortedClients().toString())) {
+    			list2.add("'%"+record.getAbortedClients()+"%'");
+    		}
+			if(record.getAbortedConnects()!=null&&StrUtil.isNotEmpty(record.getAbortedConnects().toString())) {
+    			list2.add("'%"+record.getAbortedConnects()+"%'");
+    		}
+			if(record.getBytesReceived()!=null&&StrUtil.isNotEmpty(record.getBytesReceived().toString())) {
+    			list2.add("'%"+record.getBytesReceived()+"%'");
+    		}
+			if(record.getBytesReceivedPersecond()!=null&&StrUtil.isNotEmpty(record.getBytesReceivedPersecond().toString())) {
+    			list2.add("'%"+record.getBytesReceivedPersecond()+"%'");
+    		}
+			if(record.getBytesSent()!=null&&StrUtil.isNotEmpty(record.getBytesSent().toString())) {
+    			list2.add("'%"+record.getBytesSent()+"%'");
+    		}
+			if(record.getBytesSentPersecond()!=null&&StrUtil.isNotEmpty(record.getBytesSentPersecond().toString())) {
+    			list2.add("'%"+record.getBytesSentPersecond()+"%'");
+    		}
+			if(record.getComSelect()!=null&&StrUtil.isNotEmpty(record.getComSelect().toString())) {
+    			list2.add("'%"+record.getComSelect()+"%'");
+    		}
+			if(record.getComSelectPersecond()!=null&&StrUtil.isNotEmpty(record.getComSelectPersecond().toString())) {
+    			list2.add("'%"+record.getComSelectPersecond()+"%'");
+    		}
+			if(record.getComInsert()!=null&&StrUtil.isNotEmpty(record.getComInsert().toString())) {
+    			list2.add("'%"+record.getComInsert()+"%'");
+    		}
+			if(record.getComInsertPersecond()!=null&&StrUtil.isNotEmpty(record.getComInsertPersecond().toString())) {
+    			list2.add("'%"+record.getComInsertPersecond()+"%'");
+    		}
+			if(record.getComUpdate()!=null&&StrUtil.isNotEmpty(record.getComUpdate().toString())) {
+    			list2.add("'%"+record.getComUpdate()+"%'");
+    		}
+			if(record.getComUpdatePersecond()!=null&&StrUtil.isNotEmpty(record.getComUpdatePersecond().toString())) {
+    			list2.add("'%"+record.getComUpdatePersecond()+"%'");
+    		}
+			if(record.getComDelete()!=null&&StrUtil.isNotEmpty(record.getComDelete().toString())) {
+    			list2.add("'%"+record.getComDelete()+"%'");
+    		}
+			if(record.getComDeletePersecond()!=null&&StrUtil.isNotEmpty(record.getComDeletePersecond().toString())) {
+    			list2.add("'%"+record.getComDeletePersecond()+"%'");
+    		}
+			if(record.getComCommit()!=null&&StrUtil.isNotEmpty(record.getComCommit().toString())) {
+    			list2.add("'%"+record.getComCommit()+"%'");
+    		}
+			if(record.getComCommitPersecond()!=null&&StrUtil.isNotEmpty(record.getComCommitPersecond().toString())) {
+    			list2.add("'%"+record.getComCommitPersecond()+"%'");
+    		}
+			if(record.getComRollback()!=null&&StrUtil.isNotEmpty(record.getComRollback().toString())) {
+    			list2.add("'%"+record.getComRollback()+"%'");
+    		}
+			if(record.getComRollbackPersecond()!=null&&StrUtil.isNotEmpty(record.getComRollbackPersecond().toString())) {
+    			list2.add("'%"+record.getComRollbackPersecond()+"%'");
+    		}
+			if(record.getQuestions()!=null&&StrUtil.isNotEmpty(record.getQuestions().toString())) {
+    			list2.add("'%"+record.getQuestions()+"%'");
+    		}
+			if(record.getQuestionsPersecond()!=null&&StrUtil.isNotEmpty(record.getQuestionsPersecond().toString())) {
+    			list2.add("'%"+record.getQuestionsPersecond()+"%'");
+    		}
+			if(record.getTransactions()!=null&&StrUtil.isNotEmpty(record.getTransactions().toString())) {
+    			list2.add("'%"+record.getTransactions()+"%'");
+    		}
+			if(record.getTransactionsPersecond()!=null&&StrUtil.isNotEmpty(record.getTransactionsPersecond().toString())) {
+    			list2.add("'%"+record.getTransactionsPersecond()+"%'");
+    		}
+			if(record.getCreatedTmpTables()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpTables().toString())) {
+    			list2.add("'%"+record.getCreatedTmpTables()+"%'");
+    		}
+			if(record.getCreatedTmpTablesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpTablesPersecond().toString())) {
+    			list2.add("'%"+record.getCreatedTmpTablesPersecond()+"%'");
+    		}
+			if(record.getCreatedTmpDiskTables()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpDiskTables().toString())) {
+    			list2.add("'%"+record.getCreatedTmpDiskTables()+"%'");
+    		}
+			if(record.getCreatedTmpDiskTablesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpDiskTablesPersecond().toString())) {
+    			list2.add("'%"+record.getCreatedTmpDiskTablesPersecond()+"%'");
+    		}
+			if(record.getCreatedTmpFiles()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpFiles().toString())) {
+    			list2.add("'%"+record.getCreatedTmpFiles()+"%'");
+    		}
+			if(record.getCreatedTmpFilesPersecond()!=null&&StrUtil.isNotEmpty(record.getCreatedTmpFilesPersecond().toString())) {
+    			list2.add("'%"+record.getCreatedTmpFilesPersecond()+"%'");
+    		}
+			if(record.getInnodbDataReads()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReads().toString())) {
+    			list2.add("'%"+record.getInnodbDataReads()+"%'");
+    		}
+			if(record.getInnodbDataReadsPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReadsPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbDataReadsPersecond()+"%'");
+    		}
+			if(record.getInnodbDataWrites()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWrites().toString())) {
+    			list2.add("'%"+record.getInnodbDataWrites()+"%'");
+    		}
+			if(record.getInnodbDataWritesPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWritesPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbDataWritesPersecond()+"%'");
+    		}
+			if(record.getInnodbDataFsyncs()!=null&&StrUtil.isNotEmpty(record.getInnodbDataFsyncs().toString())) {
+    			list2.add("'%"+record.getInnodbDataFsyncs()+"%'");
+    		}
+			if(record.getInnodbDataFsyncsPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataFsyncsPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbDataFsyncsPersecond()+"%'");
+    		}
+			if(record.getInnodbDataRead()!=null&&StrUtil.isNotEmpty(record.getInnodbDataRead().toString())) {
+    			list2.add("'%"+record.getInnodbDataRead()+"%'");
+    		}
+			if(record.getInnodbDataReadPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataReadPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbDataReadPersecond()+"%'");
+    		}
+			if(record.getInnodbDataWritten()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWritten().toString())) {
+    			list2.add("'%"+record.getInnodbDataWritten()+"%'");
+    		}
+			if(record.getInnodbDataWrittenPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbDataWrittenPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbDataWrittenPersecond()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesDirty()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesDirty().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesDirty()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesDirtyPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesDirtyPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesDirtyPersecond()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesFlushed()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFlushed().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesFlushed()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesFlushedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFlushedPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesFlushedPersecond()+"%'");
+    		}
+			if(record.getInnodbBufferReadHitRatio()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferReadHitRatio().toString())) {
+    			list2.add("'%"+record.getInnodbBufferReadHitRatio()+"%'");
+    		}
+			if(record.getInnodbBufferUsage()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferUsage().toString())) {
+    			list2.add("'%"+record.getInnodbBufferUsage()+"%'");
+    		}
+			if(record.getInnodbRowsInserted()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsInserted().toString())) {
+    			list2.add("'%"+record.getInnodbRowsInserted()+"%'");
+    		}
+			if(record.getInnodbRowsInsertedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsInsertedPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbRowsInsertedPersecond()+"%'");
+    		}
+			if(record.getInnodbRowsUpdated()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsUpdated().toString())) {
+    			list2.add("'%"+record.getInnodbRowsUpdated()+"%'");
+    		}
+			if(record.getInnodbRowsUpdatedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsUpdatedPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbRowsUpdatedPersecond()+"%'");
+    		}
+			if(record.getInnodbRowsDeleted()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsDeleted().toString())) {
+    			list2.add("'%"+record.getInnodbRowsDeleted()+"%'");
+    		}
+			if(record.getInnodbRowsDeletedPersecond()!=null&&StrUtil.isNotEmpty(record.getInnodbRowsDeletedPersecond().toString())) {
+    			list2.add("'%"+record.getInnodbRowsDeletedPersecond()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesTotal()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesTotal().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesTotal()+"%'");
+    		}
+			if(record.getInnodbBufferPoolPagesFree()!=null&&StrUtil.isNotEmpty(record.getInnodbBufferPoolPagesFree().toString())) {
+    			list2.add("'%"+record.getInnodbBufferPoolPagesFree()+"%'");
+    		}
+			if(record.getInnodbPageSize()!=null&&StrUtil.isNotEmpty(record.getInnodbPageSize().toString())) {
+    			list2.add("'%"+record.getInnodbPageSize()+"%'");
+    		}
+			if(record.getSlowQueries()!=null&&StrUtil.isNotEmpty(record.getSlowQueries().toString())) {
+    			list2.add("'%"+record.getSlowQueries()+"%'");
+    		}
+			if(record.getSlaveDelay()!=null&&StrUtil.isNotEmpty(record.getSlaveDelay().toString())) {
+    			list2.add("'%"+record.getSlaveDelay()+"%'");
+    		}
+			if(record.getCreateTime()!=null&&StrUtil.isNotEmpty(record.getCreateTime().toString())) {
+    			list2.add("'%"+record.getCreateTime()+"%'");
+    		}
+			if(record.getUpdateDate()!=null&&StrUtil.isNotEmpty(record.getUpdateDate().toString())) {
+    			list2.add("'%"+record.getUpdateDate()+"%'");
+    		}
+        	buffer.append(" CONCAT(");
+	        buffer.append(StrUtil.join(",",list));
+        	buffer.append(")");
+        	buffer.append(" like CONCAT(");
+        	buffer.append(StrUtil.join(",",list2));
+        	buffer.append(")");
+        	if(!" CONCAT() like CONCAT()".equals(buffer.toString())) {
+        		addCriterion(buffer.toString());
+        	}
+        	return (Criteria) this;
+        }
+        
+        public Criteria andLikeQuery2(String searchText) {
+		 	List<String> list= new ArrayList<String>();
+        	StringBuffer buffer=new StringBuffer();
+    		list.add("ifnull(id,'')");
+    		list.add("ifnull(server_id,'')");
+    		list.add("ifnull(uptime,'')");
+    		list.add("ifnull(open_tables,'')");
+    		list.add("ifnull(threads_connected,'')");
+    		list.add("ifnull(threads_running,'')");
+    		list.add("ifnull(threads_created,'')");
+    		list.add("ifnull(threads_cached,'')");
+    		list.add("ifnull(connections,'')");
+    		list.add("ifnull(aborted_clients,'')");
+    		list.add("ifnull(aborted_connects,'')");
+    		list.add("ifnull(bytes_received,'')");
+    		list.add("ifnull(bytes_received_persecond,'')");
+    		list.add("ifnull(bytes_sent,'')");
+    		list.add("ifnull(bytes_sent_persecond,'')");
+    		list.add("ifnull(com_select,'')");
+    		list.add("ifnull(com_select_persecond,'')");
+    		list.add("ifnull(com_insert,'')");
+    		list.add("ifnull(com_insert_persecond,'')");
+    		list.add("ifnull(com_update,'')");
+    		list.add("ifnull(com_update_persecond,'')");
+    		list.add("ifnull(com_delete,'')");
+    		list.add("ifnull(com_delete_persecond,'')");
+    		list.add("ifnull(com_commit,'')");
+    		list.add("ifnull(com_commit_persecond,'')");
+    		list.add("ifnull(com_rollback,'')");
+    		list.add("ifnull(com_rollback_persecond,'')");
+    		list.add("ifnull(questions,'')");
+    		list.add("ifnull(questions_persecond,'')");
+    		list.add("ifnull(transactions,'')");
+    		list.add("ifnull(transactions_persecond,'')");
+    		list.add("ifnull(created_tmp_tables,'')");
+    		list.add("ifnull(created_tmp_tables_persecond,'')");
+    		list.add("ifnull(created_tmp_disk_tables,'')");
+    		list.add("ifnull(created_tmp_disk_tables_persecond,'')");
+    		list.add("ifnull(created_tmp_files,'')");
+    		list.add("ifnull(created_tmp_files_persecond,'')");
+    		list.add("ifnull(innodb_data_reads,'')");
+    		list.add("ifnull(innodb_data_reads_persecond,'')");
+    		list.add("ifnull(innodb_data_writes,'')");
+    		list.add("ifnull(innodb_data_writes_persecond,'')");
+    		list.add("ifnull(innodb_data_fsyncs,'')");
+    		list.add("ifnull(innodb_data_fsyncs_persecond,'')");
+    		list.add("ifnull(innodb_data_read,'')");
+    		list.add("ifnull(innodb_data_read_persecond,'')");
+    		list.add("ifnull(innodb_data_written,'')");
+    		list.add("ifnull(innodb_data_written_persecond,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_dirty,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_dirty_persecond,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_flushed,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_flushed_persecond,'')");
+    		list.add("ifnull(innodb_buffer_read_hit_ratio,'')");
+    		list.add("ifnull(innodb_buffer_usage,'')");
+    		list.add("ifnull(innodb_rows_inserted,'')");
+    		list.add("ifnull(innodb_rows_inserted_persecond,'')");
+    		list.add("ifnull(innodb_rows_updated,'')");
+    		list.add("ifnull(innodb_rows_updated_persecond,'')");
+    		list.add("ifnull(innodb_rows_deleted,'')");
+    		list.add("ifnull(innodb_rows_deleted_persecond,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_total,'')");
+    		list.add("ifnull(innodb_buffer_pool_pages_free,'')");
+    		list.add("ifnull(innodb_page_size,'')");
+    		list.add("ifnull(slow_queries,'')");
+    		list.add("ifnull(slave_delay,'')");
+    		list.add("ifnull(create_time,'')");
+    		list.add("ifnull(update_date,'')");
+        	buffer.append(" CONCAT(");
+	        buffer.append(StrUtil.join(",",list));
+        	buffer.append(")");
+        	buffer.append("like '%");
+        	buffer.append(searchText);
+        	buffer.append("%'");
+        	addCriterion(buffer.toString());
+        	return (Criteria) this;
+        }
+        
+}
+	
     public static class Criteria extends GeneratedCriteria {
-
         protected Criteria() {
             super();
         }

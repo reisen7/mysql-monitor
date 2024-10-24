@@ -10,7 +10,8 @@
  */
 package com.fc.v2.util;
 
-import com.fc.v2.model.mysql.MysqlStatusHistory;
+
+import com.fc.v2.model.monitor.ServerStatusHistory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public class SysSampleUtil<T>
      * @return        
      * @throws
      */
-    public static List<MysqlStatusHistory> getSysSample(List<MysqlStatusHistory> list, int count){
-        List<MysqlStatusHistory> sampleList=null;
+    public static List<ServerStatusHistory> getSysSample(List<ServerStatusHistory> list, int count){
+        List<ServerStatusHistory> sampleList=null;
         int size = list.size();
         if (size<=count)
         {

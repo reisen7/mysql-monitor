@@ -34,6 +34,7 @@ public class DashboardController extends BaseController {
      * @param model
      * @return String
      * @author reisen
+     * @date 2024年10月24日
      */
     @ApiOperation(value = "页面跳转", notes = "面板查看")
     @GetMapping("/view")
@@ -49,8 +50,7 @@ public class DashboardController extends BaseController {
      * 获取控制台概要信息
      * @Title: getDashboardOverview
      * @param serverId
-     * @return
-     * @throws
+     * @date 2024年10月24日
      */
     @ApiOperation(value = "控制台概要信息", notes = "面板查看")
     @GetMapping("/dashboard-overview/{serverId}")

@@ -2,10 +2,10 @@ package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.*;
-import com.fc.v2.mapper.mysql.MysqlStatusHistoryMapper;
+import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
+import com.fc.v2.model.monitor.ServerStatusHistory;
+import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.model.mysql.Constant;
-import com.fc.v2.model.mysql.MysqlStatusHistory;
-import com.fc.v2.model.mysql.MysqlStatusHistoryExample;
 import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.util.MiscUtil;
 import com.fc.v2.util.SysSampleUtil;
@@ -26,9 +26,9 @@ import java.util.Map;
 @Service
 public class DashboardServiceImpl extends AbstractService implements DashboardService
 {
-    
+
     @Autowired
-    private MysqlStatusHistoryMapper mysqlStatusHistoryMapper;
+    private ServerStatusHistoryMapper serverStatusHistoryMapper;
     
     /* (non-Javadoc)
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardOverview(java.lang.Long)
@@ -94,19 +94,19 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
      */
     private DashboardOverview getQpsChatData(DashboardOverview dashboardOverview, Long serverId)
     {
-        MysqlStatusHistoryExample example = new MysqlStatusHistoryExample();
+        ServerStatusHistoryExample example = new ServerStatusHistoryExample();
         example.setOrderByClause("create_time");
-        MysqlStatusHistoryExample.Criteria criteria = example.createCriteria();
+        ServerStatusHistoryExample.Criteria criteria = example.createCriteria();
         criteria.andServerIdEqualTo(serverId);
         //获取30分钟的数据
         criteria.andCreateTimeBetween(org.apache.commons.lang3.time.DateUtils.addMinutes(new Date(), -180), new Date());
-        List<MysqlStatusHistory> selectByExample = mysqlStatusHistoryMapper.selectByExample(example);
+        List<ServerStatusHistory> selectByExample = serverStatusHistoryMapper.selectByExample(example);
         //获取系统采样样本
-        List<MysqlStatusHistory> sampleList = SysSampleUtil.getSysSample(selectByExample, Constant.SAMPLE_COUNT);
+        List<ServerStatusHistory> sampleList = SysSampleUtil.getSysSample(selectByExample, Constant.SAMPLE_COUNT);
         List<String> xDataList = new ArrayList<String>();
         //qps
         List<String> qpsDataList = new ArrayList<String>();
-        for (MysqlStatusHistory mysqlStatusHistory : sampleList)
+        for (ServerStatusHistory mysqlStatusHistory : sampleList)
         {
             xDataList.add(MiscUtil.getFormatDateTime(mysqlStatusHistory.getCreateTime()));
             qpsDataList.add(mysqlStatusHistory.getQuestionsPersecond());
