@@ -112,7 +112,11 @@
                 	
                {title: '标签', field: 'tags', align: 'center'},
                 	
-               {title: '集群', field: 'clusterId', align: 'center'},
+               {title: '集群', field: 'monitorCluster', align: 'center',templet: function(d){
+                       // d 是当前行的数据对象
+                       return d.monitorCluster ? d.monitorCluster.name : '';
+                   }
+               },
                 	
                {title: '创建时间', field: 'createTime', align: 'center'},
                 	
