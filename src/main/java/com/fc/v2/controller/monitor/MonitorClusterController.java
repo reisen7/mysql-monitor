@@ -59,7 +59,7 @@ public class MonitorClusterController extends BaseController{
 	@SaCheckPermission("gen:monitorCluster:list")
 	@ResponseBody
 	public ResultTable list(Tablepar tablepar,MonitorCluster monitorCluster){
-		PageInfo<MonitorCluster> page=monitorClusterService.list(tablepar,monitorCluster) ; 
+		PageInfo<MonitorCluster> page=monitorClusterService.list(tablepar,monitorCluster);
 		return pageTable(page.getList(),page.getTotal());
 	}
 	

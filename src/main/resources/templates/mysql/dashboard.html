@@ -20,14 +20,16 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">数据库连接</label>
 			<div class="layui-input-inline">
-				<select name="a2zkp" lay-verify="required" lay-search>
-					<option value=""></option>
-					<option value="0">北京</option>
-					<option value="1">上海</option>
-					<option value="2">广州</option>
-					<option value="3">深圳</option>
-					<option value="4">杭州</option>
+
+				<select lay-verify="required" id="serverId" lay-filter="selectOnchange">
+					<option ></option>
+					<option
+							th:each="item:${monitorServerList}"
+							th:value="${item.id}"
+							th:text="${item.tags}" >
+					</option>
 				</select>
+
 			</div>
 		</div>
 	</form>
@@ -52,7 +54,7 @@
 		</div>
 		<div class="layui-col-xs6 layui-col-md3">
 			<div class="layui-card top-panel">
-				<div class="layui-card-header">JAVA版本</div>
+				<div class="layui-card-header">当前连接数</div>
 				<div class="layui-card-body">
 					<div class="layui-row layui-col-space5">
 						<div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="1">
@@ -88,7 +90,7 @@
 		</div>
 		<div class="layui-col-xs6 layui-col-md3">
 			<div class="layui-card top-panel">
-				<div class="layui-card-header">服务器信息</div>
+				<div class="layui-card-header">数据量</div>
 				<div class="layui-card-body">
 					<div class="layui-row layui-col-space5">
 						<div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="3">
@@ -144,7 +146,7 @@
 		</div>
 		<div class="layui-col-xs6 layui-col-md3">
 			<div class="layui-card top-panel">
-				<div class="layui-card-header">流量统计</div>
+				<div class="layui-card-header">InnoDB缓存使用率</div>
 				<div class="layui-card-body">
 					<div class="layui-row layui-col-space5">
 						<div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value4">
@@ -178,6 +180,9 @@
 			</div>
 		</div>
 	</div>
+
+<!--	//加载QPS数据图表-->
+
 	<div class="layui-row layui-col-space10">
 		<div class="layui-col-md12">
 			<div class="layui-card">
@@ -199,6 +204,8 @@
 <script>
 	layui.use(['layer', 'echarts', 'element', 'count', 'topBar','code', 'form'], function () {
 		layui.code();
+		let MODULE_PATH = rootPath+"/DashboardController";
+
 		let count = layui.count,
 				echarts = layui.echarts;
 		count.up("value4", {
@@ -207,6 +214,29 @@
 			num: 373.23,
 			regulator: 50
 		})
+
+		// 获取select选择框里面的值
+
+		$('#serverId').on('change', function() {
+			var serverId = $(this).val();
+			$.ajax({
+				url: MODULE_PATH + '/dashboard-overview/' + serverId,
+				data: data.field,
+				dataType: 'json',
+				contentType: 'application/x-www-form-urlencoded',
+				type: 'post',
+				success: function (result) {
+					if (result.code == 200) {
+
+					} else {
+						layer.msg(result.msg, {icon: 2, time: 1000});
+						layer.close(loader);
+					}
+				}
+			})
+
+		})
+
 
 		var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
 

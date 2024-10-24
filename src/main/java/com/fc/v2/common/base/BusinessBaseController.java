@@ -1,5 +1,6 @@
 package com.fc.v2.common.base;
 
+import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.service.monitor.MonitorClusterService;
 import com.fc.v2.service.monitor.MonitorServerService;
 import io.swagger.annotations.Api;
@@ -22,4 +23,7 @@ public class BusinessBaseController {
 
     @Autowired
     protected MonitorServerService monitorServerService;
+
+    @Autowired
+    protected DashboardService dashboardService;
 }

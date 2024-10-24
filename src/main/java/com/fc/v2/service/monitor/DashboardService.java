@@ -1,5 +1,6 @@
 package com.fc.v2.service.monitor;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.DashboardOverview;
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.dto.Processlist;
@@ -19,7 +20,7 @@ public interface DashboardService {
      * @return
      * @throws
      */
-    public DashboardOverview getDashboardOverview(Long serverId);
+    public AjaxResult getDashboardOverview(Long serverId);
     /**
      * 获取控制台显示数据
      * @Title: getDashboardProcesslist
@@ -27,6 +28,6 @@ public interface DashboardService {
      * @return
      * @throws
      */
-    public PagedDto<Processlist> getDashboardProcesslist(Long serverId);
+    public AjaxResult getDashboardProcesslist(Long serverId);
 
 }

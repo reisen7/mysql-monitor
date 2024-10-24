@@ -1,5 +1,6 @@
 package com.fc.v2.service.monitor.impl;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.*;
 import com.fc.v2.mapper.mysql.MysqlStatusHistoryMapper;
 import com.fc.v2.model.mysql.Constant;
@@ -33,7 +34,7 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardOverview(java.lang.Long)
      */
     @Override
-    public DashboardOverview getDashboardOverview(Long serverId)
+    public AjaxResult getDashboardOverview(Long serverId)
     {
         DashboardOverview dashboardOverview = getUptimeThreadsInnodbBytes(serverId);
         dashboardOverview = getSchemaTotalDataTotal(dashboardOverview, serverId);
@@ -41,7 +42,11 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
         dashboardOverview = getUserTotal(dashboardOverview, serverId);
         dashboardOverview = getQpsChatData(dashboardOverview, serverId);
         dashboardOverview = getQueryChatData(dashboardOverview, serverId);
-        return dashboardOverview;
+
+        if (dashboardOverview == null ){
+            return AjaxResult.error("查询数据为空");
+        }
+        return AjaxResult.successData(200,dashboardOverview);
     }
     
     /**
@@ -253,12 +258,12 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
         }
         return dashboardOverview;
     }
-    
+
     /* (non-Javadoc)
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardProcesslist(java.lang.Long)
      */
     @Override
-    public PagedDto<Processlist> getDashboardProcesslist(Long serverId)
+    public AjaxResult getDashboardProcesslist(Long serverId)
     {
         PagedDto<Processlist> pagedDto=null;
         String sql="show processlist";
@@ -290,7 +295,7 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
         {
             logger.error(queryResult.getException());
         }
-        return pagedDto;
+        return AjaxResult.successData(200,pagedDto);
     }
     
 }
