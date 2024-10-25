@@ -54,6 +54,7 @@ public class DashboardController extends BaseController {
      */
     @ApiOperation(value = "控制台概要信息", notes = "面板查看")
     @GetMapping("/dashboard-overview/{serverId}")
+    @ResponseBody
     public AjaxResult getDashboardOverview(@PathVariable Long serverId) {
         return dashboardService.getDashboardOverview(serverId);
     }
@@ -67,6 +68,7 @@ public class DashboardController extends BaseController {
      */
     @ApiOperation(value = "控制台显示进程数据", notes = "面板查看")
     @GetMapping("/processlist/{serverId}")
+    @ResponseBody
     public AjaxResult getDashboardProcesslist(@PathVariable Long serverId) {
         return dashboardService.getDashboardProcesslist(serverId);
     }

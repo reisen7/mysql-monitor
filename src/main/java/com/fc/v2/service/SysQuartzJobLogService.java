@@ -30,13 +30,13 @@ public class SysQuartzJobLogService implements BaseService<SysQuartzJobLog, SysQ
       	   	      	      	      	      	      	      	      	      	      	
 	/**
 	 * 分页查询
-	 * @param pageNum
-	 * @param pageSize
+	 * @param
+	 * @param
 	 * @return
 	 */
 	 public PageInfo<SysQuartzJobLog> list(Tablepar tablepar,String name){
 	        SysQuartzJobLogExample testExample=new SysQuartzJobLogExample();
-	        testExample.setOrderByClause("id DESC");
+	        testExample.setOrderByClause("start_time DESC");
 	        if(name!=null&&!"".equals(name)){
 	        	testExample.createCriteria().andJobNameLike("%"+name+"%");
 	        }

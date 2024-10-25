@@ -40,7 +40,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">cron执行表达式</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cronExpression" autocomplete="off" placeholder="cron执行表达式" class="layui-input">
+                        <input type="text" id="cronVal" name="cronExpression" autocomplete="off" placeholder="cron执行表达式" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -87,12 +87,33 @@
     </div>
 </form>
 <th:block th:include="include :: footer"/>
+<script th:src="@{/static/component/layui264/layui.js}"></script>
 <script>
-    layui.use(['form', 'jquery'], function () {
+    layui
+        .config({
+            // base: "/static/component/layui_exts/"
+            base: "/static/component/layui_exts/"
+        })
+        .extend({
+            cron: "cron/cron",
+        })
+        .use(['cron','form', 'jquery', 'cron'], function () {
         let form = layui.form;
         let $ = layui.jquery;
         let MODULE_PATH = rootPath+"/SysQuartzJobController";
         //名称验证
+
+        let cron = layui.cron;
+        cron.render({
+            elem: "#cronVal", // 绑定元素
+            run: "/static/component/json/run.json", // 获取最近运行时间的接口
+            lang:'cn',
+            btns:['confirm'], // 只显示确认按钮
+            done: function(cronStr) {
+                console.log(cronStr);
+            }
+        });
+
         form.verify({
             interName: function(value){
                 if(value.length < 2){
@@ -115,6 +136,7 @@
 
             }
         });
+
 
 
 
@@ -141,5 +163,16 @@
         });
     })
 </script>
+<!--<script>-->
+<!--    layui.config({-->
+<!--        base: "/static/component/", // 扩展组件跟路径-->
+<!--    }).extend({-->
+<!--        cron: "cron/cron" // 扩展组件-->
+<!--    }).use(["cron"], function() {-->
+
+
+<!--    });-->
+
+<!--</script>-->
 </body>
 </html>

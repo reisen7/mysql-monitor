@@ -100,7 +100,7 @@
                 {title: 'cron计划策略', field: 'misfirePolicy', align: 'left',toolbar: '#sysQuartzJob-misfirePolicy'},
                 {title: '是否并发执行', field: 'concurrent', align: 'left',toolbar: '#sysQuartzJob-concurrent'},
                 {title: '任务状态', field: 'status', align: 'center',toolbar: '#sysQuartzJob-enable'},
-                {title: '操作', toolbar: '#sysQuartzJob-bar', align: 'center'}
+                {title: '操作', toolbar: '#sysQuartzJob-bar', align: 'center',width:200}
             ]
         ]
 
@@ -112,11 +112,12 @@
             method: 'get',
             cols: cols,
             skin: 'line',
+
             toolbar: '#role-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
-            }, 'filter', 'print', 'exports']
+            }, 'filter', 'print', 'exports'],
         });
 
         //table图标事件绑定

@@ -65,19 +65,18 @@
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
-
         let MODULE_PATH = rootPath+"/SysQuartzJobLogController";
         let cols = [
             [
                 {type: 'checkbox'},
                 {title: 'ID', field: 'id', align: 'center'},
-                {title: '任务名称', field: 'jobName', align: 'left'},
-                {title: '任务组名', field: 'jobGroup', align: 'left'},
-                {title: '调用目标字符串', field: 'invokeTarget', align: 'left'},
-                {title: '日志信息', field: 'jobMessage', align: 'left'},
-                {title: '执行状态', field: 'status', align: 'center',toolbar: '#sysQuartzJobLog-status'},
-                {title: '开始时间', field: 'startTime', align: 'left'},
-                {title: '结束时间', field: 'endTime', align: 'left'},
+                {title: '任务名称', field: 'jobName', align: 'center'},
+                {title: '任务组名', field: 'jobGroup', align: 'center',width:100},
+                {title: '调用目标字符串', field: 'invokeTarget', align: 'center'},
+                {title: '日志信息', field: 'jobMessage', align: 'center'},
+                {title: '执行状态', field: 'status', align: 'center',toolbar: '#sysQuartzJobLog-status',width:100},
+                {title: '开始时间', field: 'startTime', align: 'center',width:160},
+                {title: '结束时间', field: 'endTime', align: 'center',width:160},
                 {title: '操作', toolbar: '#sysQuartzJobLog-bar', align: 'center'}
             ]
         ]
@@ -86,11 +85,12 @@
         table.render({
             elem: '#sysQuartzJobLog-table',
             url: MODULE_PATH + '/list',
+            loading: true,
             page: true,
-            method: 'get',
             cols: cols,
-            skin: 'line',
-            toolbar: '#role-toolbar',
+            skin: 'row,line',
+            even: true,
+            toolbar: '#topic-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',

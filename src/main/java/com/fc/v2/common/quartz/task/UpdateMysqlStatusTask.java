@@ -1,14 +1,18 @@
 package com.fc.v2.common.quartz.task;
 
+import com.fc.v2.common.exception.GlobalExceptionResolver;
 import com.fc.v2.dto.QueryResult;
-import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
 import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.monitor.MonitorServerExample;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.service.monitor.MonitorServerService;
+import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import com.fc.v2.service.monitor.impl.AbstractService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +25,10 @@ import java.util.Map;
  * @Description
  * @date 2024年10月24日
  **/
+@Component("UpdateMysqlStatusTask")
 public class UpdateMysqlStatusTask extends AbstractService {
+    private static Logger logger = LoggerFactory.getLogger(GlobalExceptionResolver.class);
+
     private static final String ZERO = "0";
 
     public final static long DELAY_TIME = 2000;
@@ -33,17 +40,17 @@ public class UpdateMysqlStatusTask extends AbstractService {
     
     
     @Autowired
-    protected MonitorServerService monitorServerMapper;
+    protected MonitorServerService monitorServerService;
 
     @Autowired
-    private ServerStatusHistoryMapper serverStatusHistoryMapper;
+    private ServerStatusHistoryService serverStatusHistoryService;
 
 
-    
     public void execute() {
         // 获取MySQL服务器信息
+        logger.info("正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
         MonitorServerExample monitorServerExample = new MonitorServerExample();
-        List<MonitorServer> monitorServers = monitorServerMapper.selectByExample(monitorServerExample);
+        List<MonitorServer> monitorServers = monitorServerService.selectByExample(monitorServerExample);
 
         for (MonitorServer monitorServer : monitorServers) {
             Long serverId = monitorServer.getId();
@@ -224,15 +231,15 @@ public class UpdateMysqlStatusTask extends AbstractService {
             serverStatusHistoryExample.setPageSize(1);
 
             Long lastId = 0L;
-            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryMapper
+            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService
                     .selectByExample(serverStatusHistoryExample);
             if (!lastServerStatusHistorys.isEmpty()) {
                 lastId = lastServerStatusHistorys.get(0).getId();
             }
-            serverStatusHistoryMapper.insertSelective(statusHistory);
+            serverStatusHistoryService.insertSelective(statusHistory);
 
             // 根据上一个记录的指标值，做增量计算，再做平均值计算
-            ServerStatusHistory lastStatusHistory = serverStatusHistoryMapper.selectByPrimaryKey(lastId);
+            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId.toString());
 
             if (lastStatusHistory != null) {
                 // 计算QPS
@@ -293,10 +300,12 @@ public class UpdateMysqlStatusTask extends AbstractService {
                 // 计算每秒从innodb表删除的行数
                 statusHistory
                         .setInnodbRowsDeletedPersecond(getInnodbRowsDeletedPersecond(statusHistory, lastStatusHistory));
-                serverStatusHistoryMapper.updateByPrimaryKeySelective(statusHistory);
+                serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
             }
 
         }
+
+        logger.info("UpdateMysqlStatusTask 执行完成 ");
     }
 
     /**
