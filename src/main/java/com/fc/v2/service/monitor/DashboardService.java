@@ -1,9 +1,6 @@
 package com.fc.v2.service.monitor;
 
 import com.fc.v2.common.domain.AjaxResult;
-import com.fc.v2.dto.DashboardOverview;
-import com.fc.v2.dto.PagedDto;
-import com.fc.v2.dto.Processlist;
 
 /**
  * @ClassName DashboardService

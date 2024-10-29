@@ -4,10 +4,11 @@ scan：当此属性设置为true时，配置文件如果发生改变，将会被
 scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
 debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
 -->
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://www.padual.com/java/logback.xsd">
-	
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
 	
 	<!-- 定义日志的根目录 -->
     <property name="LOG_HOME" value="/springbootv2-log" />
@@ -30,7 +31,8 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
         -->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!--<springProfile name="dev">-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} -> [%thread] -> %-5level %logger{50} - %msg%n</pattern>
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} -> [%thread] -> %-5level %logger{50} - %msg%n</pattern> -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
             <!--</springProfile>-->
             <!--<springProfile name="!dev">-->
                 <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
@@ -47,7 +49,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
         <!-- 指定日志文件的名称 -->
         <file>${LOG_HOME}/${appName}.log</file>
         <!-- 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。 -->
-　　　　	<append>true</append> 
+        	<append>true</append> 
         <!--
 	       	 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名
 	        TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。
