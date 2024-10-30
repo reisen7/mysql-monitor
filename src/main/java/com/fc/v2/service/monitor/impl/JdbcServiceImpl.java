@@ -5,6 +5,7 @@ import com.fc.v2.service.monitor.JdbcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.*;
@@ -16,6 +17,7 @@ import java.util.*;
  * @date: 2024-10-16
  */
 @Service
+@Transactional
 public class JdbcServiceImpl implements JdbcService {
     private final static Logger LOGGER = LoggerFactory.getLogger(JdbcServiceImpl.class);
 

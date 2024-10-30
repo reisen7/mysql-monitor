@@ -111,7 +111,8 @@ mybatis-plus:
   typeAliasesPackage: com.fc.v2.model
   # 控制台输出sql、下划线转驼峰
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
     map-underscore-to-camel-case: true
 
 #pagehelper分页插件

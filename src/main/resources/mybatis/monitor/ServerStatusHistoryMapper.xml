@@ -369,7 +369,7 @@
     )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.ServerStatusHistory">
+  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.ServerStatusHistory" useGeneratedKeys="true" keyProperty="id">
     insert into server_status_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
     

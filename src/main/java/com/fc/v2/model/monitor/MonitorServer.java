@@ -4,13 +4,14 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import nonapi.io.github.classgraph.json.Id;
 import cn.hutool.core.date.DateUtil;
 import java.util.Date;
 
 public class MonitorServer implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	
+	@Id
 	@ApiModelProperty(value = "主键")
 	private Long id;
 	

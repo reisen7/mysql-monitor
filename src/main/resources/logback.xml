@@ -80,11 +80,6 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 	
 	<!-- 文件输出-END -->
 	
-	
-	
-	
-	
-	 
 	<!--
         logger主要用于存放日志对象，也可以定义日志类型、级别
         name：表示匹配的logger类型前缀，也就是包的前半部分
@@ -100,7 +95,9 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <logger name="java.sql.Statement" level="DEBUG"/>
     <logger name="java.sql.PreparedStatement" level="DEBUG"/>
 	<!-- 自己项目的 -->
-	<logger name="com.fc" level="DEBUG"/>
+	<logger name="com.fc" level="INFO"/>
+
+    <logger name="org.apache.ibatis" level="OFF"/>
 	
 	
 	<!--
@@ -109,12 +106,18 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     -->
     
 
+    <root level="INFO">
+        <!-- 控制台 -->
+        <appender-ref ref="console" />
+        <appender-ref ref="appLogAppender"/>
+    </root>
+
 	<!-- dev环境 -->
 	<springProfile name="dev">
-	    <root level="INFO">
-			<!-- 控制台 -->
-			<appender-ref ref="console" />
-	    </root>
+    <root level="INFO">
+        <!-- 控制台 -->
+        <appender-ref ref="console" />
+    </root>
 	</springProfile>
 	
 	 <!-- 生产环境 -->

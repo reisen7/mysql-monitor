@@ -3,6 +3,8 @@ package com.fc.v2.mapper.mysql;
 import com.fc.v2.model.monitor.MonitorCluster;
 import com.fc.v2.model.monitor.MonitorClusterExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -11,6 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @Description
  * @date 2024-10-21 10:58:36
  */
+@Mapper
 public interface MonitorClusterMapper {
 
     long countByExample(MonitorClusterExample example);

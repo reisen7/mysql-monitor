@@ -3,6 +3,8 @@ package com.fc.v2.mapper.auto;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -11,6 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @Description
  * @date 2024-10-24 11:19:41
  */
+@Mapper
 public interface ServerStatusHistoryMapper {
 
     long countByExample(ServerStatusHistoryExample example);

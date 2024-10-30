@@ -11,6 +11,7 @@ import com.fc.v2.util.MiscUtil;
 import com.fc.v2.util.SysSampleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @date:  2024-10-16
  **/
 @Service
+@Transactional
 public class DashboardServiceImpl extends AbstractService implements DashboardService
 {
 
@@ -103,9 +105,9 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
         List<ServerStatusHistory> selectByExample = serverStatusHistoryMapper.selectByExample(example);
         //获取系统采样样本
         List<ServerStatusHistory> sampleList = SysSampleUtil.getSysSample(selectByExample, Constant.SAMPLE_COUNT);
-        List<String> xDataList = new ArrayList<String>();
+        List<String> xDataList = new ArrayList<>();
         //qps
-        List<String> qpsDataList = new ArrayList<String>();
+        List<String> qpsDataList = new ArrayList<>();
         for (ServerStatusHistory mysqlStatusHistory : sampleList)
         {
             xDataList.add(MiscUtil.getFormatDateTime(mysqlStatusHistory.getCreateTime()));

@@ -71,10 +71,10 @@ public class UpdateMysqlStatusTask extends AbstractService {
             ServerStatusHistory statusHistory = new ServerStatusHistory();
             statusHistory.setServerId(serverId);
             statusHistory.setCreateTime(new Date());
-            String Variable_name="VARIABLE_NAME";//"Variable_name";
-            String Value="VARIABLE_VALUE";//Value;
+            String Variable_name = "VARIABLE_NAME";//"Variable_name";
+            String Value = "VARIABLE_VALUE";//Value;
 
-            String Variable=(String)statusList.get(0).get(Variable_name);
+            String Variable = (String)statusList.get(0).get(Variable_name);
             if (Variable==null){
                 Variable_name="Variable_name";
                 Value="Value";
@@ -300,6 +300,8 @@ public class UpdateMysqlStatusTask extends AbstractService {
                 // 计算每秒从innodb表删除的行数
                 statusHistory
                         .setInnodbRowsDeletedPersecond(getInnodbRowsDeletedPersecond(statusHistory, lastStatusHistory));
+
+                
                 serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
             }
 
@@ -319,7 +321,6 @@ public class UpdateMysqlStatusTask extends AbstractService {
         Long currentQuestions = currentStatusHistory.getQuestions();
         Long lastQuestions = lastStatusHistory.getQuestions();
         String questionsPersecond = getAverage(currentCreateTime, lastCreateTime, currentQuestions, lastQuestions);
-
         return questionsPersecond;
     }
 

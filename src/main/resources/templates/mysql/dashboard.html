@@ -34,11 +34,9 @@
 				<label class="layui-form-label">数据库连接</label>
 				<div class="layui-input-inline">
 					<select lay-verify="required" id="serverId" lay-filter="selectOnchange">
-						<option selected></option>
-						<option th:each="item:${monitorServerList}" th:value="${item.id}" th:text="${item.tags}">
+						<option th:each="item,itemStat:${monitorServerList}" th:value="${item.id}" th:text="${item.tags}" th:selected="${itemStat.count} eq '1'">
 						</option>
 					</select>
-
 				</div>
 			</div>
 		</form>
@@ -480,8 +478,10 @@
 			var form = layui.form;
 
 
+
 			// 自动刷新
 			$(document).ready(function () {
+
 				let intervalId = null
 				let intervalValue = parseInt($("#time").val() * 1000, 10);
 
@@ -509,15 +509,11 @@
 			})
 
 
-
-
 			// 获取select选择框里面的值
 			form.on('select(selectOnchange)', function (data) {
 				fnDashboardOverviewInit();
 
 			});
-
-
 
 			var fnDashboardOverviewInit = function () {
 				var serverId = $("#serverId").val();
@@ -551,6 +547,8 @@
 				})
 			}
 
+			// 初始化加载
+			fnDashboardOverviewInit();
 
 			form.on('submit(formDemo)', function (data) {
 				layer.msg(JSON.stringify(data.field));
