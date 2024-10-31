@@ -3,12 +3,17 @@ package com.fc.v2.service.monitor.impl;
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.*;
 import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
+import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.util.MiscUtil;
 import com.fc.v2.util.SysSampleUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import cn.hutool.core.util.StrUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -265,39 +270,38 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardProcesslist(java.lang.Long)
      */
     @Override
-    public AjaxResult getDashboardProcesslist(Long serverId)
+    public PageInfo<Processlist> getDashboardProcesslist(Tablepar tablepar,Long serverId)
     {
-        PagedDto<Processlist> pagedDto=null;
+
         String sql="show processlist";
+        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
         QueryResult<List<Map<Object, Object>>> queryResult = getQueryResult(serverId, sql);
         if (queryResult.isSuccess())
         {
             List<Map<Object,Object>> resultList = queryResult.getData();
             List<Processlist> processlists=new ArrayList<>();
-            for (Map<Object, Object> map : resultList)
-            {
+            for (int i = (tablepar.getPage())*tablepar.getLimit(); i < ((tablepar.getPage()+1)*tablepar.getLimit() > resultList.size() ? resultList.size() : (tablepar.getPage()+1)*tablepar.getLimit()); i++)
+            {     
                 Processlist processlist=new Processlist();
-                processlist.setCommand(map.get("Command")==null?"":map.get("Command").toString());
-                processlist.setDb(map.get("db")==null?"":map.get("db").toString());
-                processlist.setHost(map.get("Host")==null?"":map.get("Host").toString());
-                processlist.setId(map.get("Id")==null?"":map.get("Id").toString());
-                processlist.setInfo(map.get("Info")==null?"":map.get("Info").toString());
-                processlist.setState(map.get("State")==null?"":map.get("State").toString());
-                processlist.setTime(map.get("Time")==null?"":map.get("Time").toString());
-                processlist.setUser(map.get("User")==null?"":map.get("User").toString());
+                processlist.setCommand(resultList.get(i).get("Command")==null?"":resultList.get(i).get("Command").toString());
+                processlist.setDb(resultList.get(i).get("db")==null?"":resultList.get(i).get("db").toString());
+                processlist.setHost(resultList.get(i).get("Host")==null?"":resultList.get(i).get("Host").toString());
+                processlist.setId(resultList.get(i).get("Id")==null?"":resultList.get(i).get("Id").toString());
+                processlist.setInfo(resultList.get(i).get("Info")==null?"":resultList.get(i).get("Info").toString());
+                processlist.setState(resultList.get(i).get("State")==null?"":resultList.get(i).get("State").toString());
+                processlist.setTime(resultList.get(i).get("Time")==null?"":resultList.get(i).get("Time").toString());
+                processlist.setUser(resultList.get(i).get("User")==null?"":resultList.get(i).get("User").toString());
                 processlists.add(processlist);
             }
-            pagedDto=new PagedDto<>();
-            pagedDto.setDraw(Constant.DEFAULT_DRAW);
-            pagedDto.setRecordsFiltered(resultList.size());
-            pagedDto.setRecordsTotal(resultList.size());
-            pagedDto.setData(processlists);
+            PageInfo<Processlist> pageInfo = new PageInfo<Processlist>(processlists);
+            pageInfo.setTotal(resultList.size());
+            return pageInfo;
         }
         else
         {
             logger.error(queryResult.getException());
         }
-        return AjaxResult.successData(200,pagedDto);
+        return new PageInfo<>(null);
     }
     
 }

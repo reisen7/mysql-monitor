@@ -5,6 +5,15 @@
 	<th:block th:include="include :: header('首页')" />
 	<link rel="stylesheet" th:href="@{/static/admin/css/other/console1.css}" />
 	<style>
+
+		/* 隐藏所有WebKit浏览器的滚动条 */  
+html, body {  
+    /* 针对WebKit内核的浏览器 */  
+    ::-webkit-scrollbar {  
+        display: none;  
+    }  
+}  
+
 		.cluster-select {
 			position: relative;
 			padding-bottom: 50px;
@@ -15,11 +24,38 @@
 			display: inline-flex;
 			right: 30px;
 		}
+
+		.cluster-form-left {
+			position: absolute;
+			display: inline-flex;
+			left: 30px;
+		}
+
+		.layui-form-radio>.lay-skin-tag,
+		.layui-form-checkbox>.lay-skin-tag {
+			font-size: 13px;
+			border-radius: 100px;
+		}
+
+		.layui-form-checked>.lay-skin-tag,
+		.layui-form-radioed>.lay-skin-tag {
+			color: #fff !important;
+			background-color: #16b777 !important;
+		}
 	</style>
 </head>
 
 <body class="pear-container">
 	<div class="cluster-select">
+		<form class="layui-form cluster-form-left" >
+			<div class="layui-form-item ">
+				<button type="button" id="overviewButton" class="layui-btn layui-btn-radius"
+				lay-event="overviewButton">概要信息</button>
+			<button type="button" id="processlistButton" class="layui-btn layui-btn-radius layui-btn-primary"
+				lay-event="processlistButton">当前进程</button>
+			</div>
+		</form>
+
 		<form class="layui-form cluster-form" action="" onsubmit="return false">
 
 			<div class="layui-form-item">
@@ -34,14 +70,15 @@
 				<label class="layui-form-label">数据库连接</label>
 				<div class="layui-input-inline">
 					<select lay-verify="required" id="serverId" lay-filter="selectOnchange">
-						<option th:each="item,itemStat:${monitorServerList}" th:value="${item.id}" th:text="${item.tags}" th:selected="${itemStat.count} eq '1'">
+						<option th:each="item,itemStat:${monitorServerList}" th:value="${item.id}"
+							th:text="${item.tags}" th:selected="${itemStat.count} eq '1'">
 						</option>
 					</select>
 				</div>
 			</div>
 		</form>
 	</div>
-	<div>
+	<div id="overviewDiv">
 		<div class="layui-row layui-col-space10">
 			<div class="layui-col-xs6 layui-col-md3">
 				<div class="layui-card top-panel">
@@ -466,18 +503,112 @@
 
 
 	</div>
+
+	<div id="processlistDiv">
+
+		<form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="searchText" placeholder="" class="layui-input">
+                </div>
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="processlist-query">
+                    <i class="layui-icon layui-icon-search"></i>
+                   	 查询
+                </button>
+                <button type="reset" class="pear-btn pear-btn-md">
+                    <i class="layui-icon layui-icon-refresh"></i>
+					重置
+                </button>
+
+            </div>
+        </form>
+
+		<div class="layui-card">
+			<div class="layui-card-body">
+				<table id="processlist-table" lay-filter="processlist-table"></table>
+			</div>
+		</div>
+
+		<script type="text/html" id="processlist-toolbar">
+		</script>
+
+	</div>
 	<th:block th:include="include :: footer" />
 	<script>
-		layui.use(['layer', 'echarts', 'element', 'count', 'topBar', 'code', 'form', 'jquery'], function () {
+		layui.use(['layer', 'echarts', 'element', 'count', 'topBar', 'code', 'form', 'jquery', 'table'], function () {
 			layui.code();
+			let table = layui.table;
 			let MODULE_PATH = rootPath + "/DashboardController";
 			let $ = layui.jquery;
 			let count = layui.count,
 				echarts = layui.echarts;
 
 			var form = layui.form;
+			$('#processlistDiv').removeClass('active').hide();
+			$("#overviewButton").click(function () {
+				// 隐藏内容块  
+				$('#processlistDiv').removeClass('active').hide();
+				// 显示指定ID的内容块  
+				$('#overviewDiv').addClass('active').show();
+				$('#overviewButton').removeClass('layui-btn-primary');
+				$('#processlistButton').addClass('layui-btn-primary');
+			});
+
+			$("#processlistButton").click(function () {
+
+				// 隐藏内容块  
+				$('#overviewDiv').removeClass('active').hide();
+				// 显示指定ID的内容块  
+				$('#processlistDiv').addClass('active').show();
+				$('#processlistButton').removeClass('layui-btn-primary');
+				$('#overviewButton').addClass('layui-btn-primary');
+			});
+
+			let cols = [
+            [
+               {type: 'checkbox'},
+                	
+               {title: 'id', field: 'id', align: 'center'},
+                	
+               {title: 'user', field: 'user', align: 'center'},
+                	
+               {title: 'host', field: 'host', align: 'center'},
+                	
+               {title: 'db', field: 'db', align: 'center'},
+
+			   {title: 'command', field: 'command', align: 'center'},
+
+			   {title: 'time', field: 'time', align: 'center'},
+
+			   {title: 'state', field: 'state', align: 'center'},
+
+			   {title: 'info', field: 'info', align: 'center'}
+                
+            ]
+        ]
+
+		//查询按钮绑定
+		form.on('submit(processlist-query)', function (data) {
+            table.reload('processlist-table', {page: {curr: 1}, where: data.field})
+            return false;
+        });
 
 
+        //table表单列表
+        table.render({
+            elem: '#processlist-table',
+            url: MODULE_PATH + '/processlist/' + $('#serverId').val(),
+            page: true,
+            method: 'get',
+            cols: cols,
+            skin: 'line',
+			toolbar: '#processlist-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            }, 'filter', 'print', 'exports']
+        });
 
 			// 自动刷新
 			$(document).ready(function () {
@@ -744,7 +875,18 @@
 					echartsRecords.resize();
 				}
 			}
+        
+		        //table工具栏绑定
+				table.on('toolbar(processlist-table)', function (obj) {
+            if (obj.event === 'refresh') {
+                window.refresh();
+            } 
+        });
 
+			//刷新按钮
+        window.refresh = function () {
+            table.reload('processlist-table');
+        }
 		});
 	</script>
 </body>

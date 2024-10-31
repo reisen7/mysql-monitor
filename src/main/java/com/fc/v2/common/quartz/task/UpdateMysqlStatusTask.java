@@ -9,6 +9,9 @@ import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.service.monitor.MonitorServerService;
 import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import com.fc.v2.service.monitor.impl.AbstractService;
+import com.fc.v2.util.DateUtils;
+import com.github.pagehelper.PageHelper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,9 +229,11 @@ public class UpdateMysqlStatusTask extends AbstractService {
             //获取最新状态记录的ID
             ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
             criteria.andServerIdEqualTo(serverId);
+            criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
             serverStatusHistoryExample.setOrderByClause("id desc");
-            serverStatusHistoryExample.setLimitStart(0);
-            serverStatusHistoryExample.setPageSize(1);
+            PageHelper.startPage(0, 1);
+            // serverStatusHistoryExample.setLimitStart(0);
+            // serverStatusHistoryExample.setPageSize(1);
 
             Long lastId = 0L;
             List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService

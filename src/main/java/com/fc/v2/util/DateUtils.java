@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.quartz.Calendar;
 
 /**
  * 日期处理
@@ -37,7 +41,9 @@ public class DateUtils  extends org.apache.commons.lang3.time.DateUtils{
         return null;
     }
     
-    
+            // 获取今天的日期  
+    public static LocalDate today = LocalDate.now();  
+  
     
     public static String YYYY = "yyyy";
 
@@ -63,6 +69,38 @@ public class DateUtils  extends org.apache.commons.lang3.time.DateUtils{
     {
         return new Date();
     }
+
+    /**
+     * 获取当前Date型日期,当天的开始时间
+     * 
+     * @return Date() 当前日期
+     */
+    public static Date getNowStartDate()
+    {
+        // 设置时间为00:00:00  
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
+        calendar.set(java.util.Calendar.MINUTE, 0);
+        calendar.set(java.util.Calendar.SECOND, 0);
+        calendar.set(java.util.Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+        /**
+     * 获取当前Date型日期,当天的结束时间
+     * 
+     * @return Date() 当前日期
+     */
+    public static Date getNowEndDate()
+    {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 23);
+        calendar.set(java.util.Calendar.MINUTE, 59);
+        calendar.set(java.util.Calendar.SECOND, 59);
+        calendar.set(java.util.Calendar.MILLISECOND, 999);
+        return calendar.getTime();
+    }
+
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd

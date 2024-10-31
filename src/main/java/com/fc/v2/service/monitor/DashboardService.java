@@ -1,6 +1,9 @@
 package com.fc.v2.service.monitor;
 
+import com.github.pagehelper.PageInfo;
 import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.dto.Processlist;
+import com.fc.v2.model.custom.Tablepar;
 
 /**
  * @ClassName DashboardService
@@ -25,6 +28,6 @@ public interface DashboardService {
      * @return
      * @throws
      */
-    public AjaxResult getDashboardProcesslist(Long serverId);
+    public PageInfo<Processlist> getDashboardProcesslist(Tablepar tablepar,Long serverId);
 
 }
