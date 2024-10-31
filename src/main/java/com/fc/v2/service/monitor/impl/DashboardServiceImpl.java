@@ -19,9 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**   
  * @ClassName:  DashboardServiceImpl   
@@ -270,15 +272,49 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
      * @see io.mycat.eye.agent.service.DashboardService#getDashboardProcesslist(java.lang.Long)
      */
     @Override
-    public PageInfo<Processlist> getDashboardProcesslist(Tablepar tablepar,Long serverId)
+    public PageInfo<Processlist> getDashboardProcesslist(Processlist process,Tablepar tablepar,Long serverId)
     {
 
         String sql="show processlist";
-        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
         QueryResult<List<Map<Object, Object>>> queryResult = getQueryResult(serverId, sql);
         if (queryResult.isSuccess())
         {
-            List<Map<Object,Object>> resultList = queryResult.getData();
+            List<Map<Object,Object>> resultListOriginal = queryResult.getData();
+            // 倒序
+            Collections.reverse(resultListOriginal);
+            // 搜索
+            List<Map<Object,Object>> resultList;
+            if (!process.equals(null)) {
+                resultList = resultListOriginal.stream().filter(x->{
+                    int flag = 0;
+                    if (x.get("Command")!=null&&!x.get("Command").equals("")&&(x.get("Command").toString()).equals(process.getCommand())) {
+                        flag ++;
+                    }
+                    if (x.get("db")!=null&&!x.get("db").equals("")&&(x.get("db").toString()).equals(process.getDb())) {
+                        flag ++;
+                    }
+                    if (x.get("Host")!=null&&!x.get("Host").equals("")&&(x.get("Host").toString()).equals(process.getHost())) {
+                        flag ++;
+                    }
+                    if (x.get("Info")!=null&&!x.get("Info").equals("")&&(x.get("Info").toString()).equals(process.getInfo())) {
+                        flag ++;
+                    }
+                    if (x.get("State")!=null&&!x.get("State").equals("")&&(x.get("State").toString()).equals(process.getState())) {
+                        flag ++;
+                    }
+                    if (x.get("Time")!=null&&!x.get("Time").equals("")&&(x.get("Time").toString()).equals(process.getTime())) {
+                        flag ++;
+                    }
+                    if (x.get("User")!=null&&!x.get("User").equals("")&&(x.get("User").toString()).equals(process.getUser())) {
+                        flag ++;
+                    }
+                    return flag > 0;
+                }
+                ).collect(Collectors.toList());
+            }else{
+                resultList = resultListOriginal;
+            }
+
             List<Processlist> processlists=new ArrayList<>();
             for (int i = (tablepar.getPage())*tablepar.getLimit(); i < ((tablepar.getPage()+1)*tablepar.getLimit() > resultList.size() ? resultList.size() : (tablepar.getPage()+1)*tablepar.getLimit()); i++)
             {     

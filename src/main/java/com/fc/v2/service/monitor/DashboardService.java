@@ -28,6 +28,6 @@ public interface DashboardService {
      * @return
      * @throws
      */
-    public PageInfo<Processlist> getDashboardProcesslist(Tablepar tablepar,Long serverId);
+    public PageInfo<Processlist> getDashboardProcesslist(Processlist process,Tablepar tablepar,Long serverId);
 
 }

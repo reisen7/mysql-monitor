@@ -129,5 +129,87 @@ public class Processlist
     {
         this.info = info;
     }
+    @Override
+    public String toString() {
+        return "Processlist [id=" + id + ", user=" + user + ", host=" + host + ", db=" + db + ", command=" + command
+                + ", time=" + time + ", state=" + state + ", info=" + info + "]";
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((host == null) ? 0 : host.hashCode());
+        result = prime * result + ((db == null) ? 0 : db.hashCode());
+        result = prime * result + ((command == null) ? 0 : command.hashCode());
+        result = prime * result + ((time == null) ? 0 : time.hashCode());
+        result = prime * result + ((state == null) ? 0 : state.hashCode());
+        result = prime * result + ((info == null) ? 0 : info.hashCode());
+        return result;
+    }
+    /***
+     * 判断是否为空
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null){
+            if (id==null&&user==null&&host==null&&db==null&&command==null&&time==null&&state==null&&info==null) {
+                return true;
+            }else if(id==""&&user==""&&host==""&&db==""&&command==""&&time==""&&state==""&&info==""){
+                return true;
+            }
+            return false;
+        }
+            
+        if (getClass() != obj.getClass())
+            return false;
+        Processlist other = (Processlist) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
+            return false;
+        if (host == null) {
+            if (other.host != null)
+                return false;
+        } else if (!host.equals(other.host))
+            return false;
+        if (db == null) {
+            if (other.db != null)
+                return false;
+        } else if (!db.equals(other.db))
+            return false;
+        if (command == null) {
+            if (other.command != null)
+                return false;
+        } else if (!command.equals(other.command))
+            return false;
+        if (time == null) {
+            if (other.time != null)
+                return false;
+        } else if (!time.equals(other.time))
+            return false;
+        if (state == null) {
+            if (other.state != null)
+                return false;
+        } else if (!state.equals(other.state))
+            return false;
+        if (info == null) {
+            if (other.info != null)
+                return false;
+        } else if (!info.equals(other.info))
+            return false;
+        return true;
+    }
+
+    
     
 }

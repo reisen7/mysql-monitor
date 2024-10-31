@@ -72,8 +72,8 @@ public class DashboardController extends BaseController {
     @ApiOperation(value = "控制台显示进程数据", notes = "面板查看")
     @GetMapping("/processlist/{serverId}")
     @ResponseBody
-    public ResultTable getDashboardProcesslist(Tablepar tablepar,@PathVariable Long serverId) {
-        PageInfo<Processlist> page = dashboardService.getDashboardProcesslist(tablepar,serverId);
+    public ResultTable getDashboardProcesslist(Processlist process,Tablepar tablepar,@PathVariable Long serverId) {
+        PageInfo<Processlist> page = dashboardService.getDashboardProcesslist(process,tablepar,serverId);
         return pageTable(page.getList(),page.getTotal());
     }
 
