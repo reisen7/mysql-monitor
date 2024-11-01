@@ -22,6 +22,14 @@ public interface DashboardService {
      */
     public AjaxResult getDashboardOverview(Long serverId);
     /**
+     * 获取图表
+     * @Title: getDashboardChart
+     * @param serverId
+     * @return
+     * @throws
+     */
+    public AjaxResult getDashboardChart(Long serverId);
+    /**
      * 获取控制台显示数据
      * @Title: getDashboardProcesslist
      * @param serverId

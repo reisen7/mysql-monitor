@@ -1,11 +1,14 @@
 package com.fc.v2.controller.mysql;
 
 import com.fc.v2.service.monitor.MonitorServerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Api(value = "MySQL信息")
 @RestController
 @RequestMapping("/mysql")
 public class MysqlController
@@ -21,6 +24,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getBinaryLogs", notes = "获取二进制文件列表")
     @RequestMapping(value = "/{serverId}/binaryLogs", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getBinaryLogs(@PathVariable Long serverId)
@@ -38,6 +42,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getBinaryLogData", notes = "显示二进制文件内容")
     @RequestMapping(value = "/{serverId}/binaryLogs/{logName}/{begin}/{end}", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getBinaryLogData(@PathVariable Long serverId, @PathVariable String logName, @PathVariable Long begin,
@@ -54,6 +59,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getShowBinlogEvents", notes = "根据语句显示二进制文件内容")
     @RequestMapping(value = "/{serverId}/showBinlogEvents", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getShowBinlogEvents(@PathVariable Long serverId, HttpServletRequest request)
@@ -61,22 +67,7 @@ public class MysqlController
         String showBinlogEvents = request.getParameter("showBinlogEvents");
         return monitorServerService.getShowBinlogEvents(serverId, showBinlogEvents);
     }
-    
-    /**
-     * 获取全局变量
-     * @Title: getGlobalVariables   
-     * @param serverId
-     * @param request
-     * @return        
-     * @throws
-     */
-    @RequestMapping(value = "/{serverId}/globalVariables", method = {RequestMethod.GET})
-    @CrossOrigin(origins = "*")
-    public Object getGlobalVariables(@PathVariable Long serverId, HttpServletRequest request)
-    {
-        String filter = request.getParameter("filter");
-        return monitorServerService.getGlobalVariables(serverId, filter);
-    }
+
     
     /**
      * 获取会话变量
@@ -85,6 +76,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getSessionVariables", notes = "获取会话变量")
     @RequestMapping(value = "/{serverId}/sessionVariables", method = {RequestMethod.GET})
     public Object getSessionVariables(@PathVariable Long serverId)
     {
@@ -100,6 +92,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "setGlobalVariables", notes = "设置全局变量值")
     @RequestMapping(value = "/{serverId}/globalVariables/{name}/{value}/")
     @CrossOrigin(origins = "*")
     public Object setGlobalVariables(@PathVariable Long serverId, @PathVariable String name, @PathVariable String value)
@@ -116,6 +109,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "setSessionVariables", notes = "设置会话变量值")
     @RequestMapping(value = "/{serverId}/sessionVariables/{name}/{value}/", method = {RequestMethod.POST})
     public Object setSessionVariables(@PathVariable Long serverId, @PathVariable String name,
         @PathVariable String value)
@@ -133,6 +127,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "mysqlVerify", notes = "MySQL登录身份验证")
     @RequestMapping(value = "/verify/{host}/{port}/{username}/{password}", method = {RequestMethod.POST,
         RequestMethod.GET})
     public Object mysqlVerify(@PathVariable String host, @PathVariable Integer port, @PathVariable String username,
@@ -151,6 +146,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getDatabases", notes = "获取数据库列表")
     @RequestMapping(value = "/{serverId}/databases", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getDatabases(@PathVariable Long serverId)
@@ -159,13 +155,14 @@ public class MysqlController
     }
     
     /**
-     * 获取数据库列表
+     * 获取数据表列表
      * @Title: getDatabases   
      * @param serverId
      * @param schema
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getDatabases", notes = "获取数据表列表")
     @RequestMapping(value = "/{serverId}/{schema}/tables", method = {RequestMethod.GET})
     public Object getDatabases(@PathVariable Long serverId, @PathVariable String schema)
     {
@@ -180,6 +177,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getUserPriv", notes = "根据Schema获取对应用户权限信息")
     @RequestMapping(value = "/{serverId}/{schema}/priv", method = {RequestMethod.GET})
     public Object getUserPriv(@PathVariable Long serverId, @PathVariable String schema)
     {
@@ -194,6 +192,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getStatus", notes = "获取状态")
     @RequestMapping(value = "/{serverId}/status", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getStatus(@PathVariable Long serverId, HttpServletRequest request)
@@ -209,6 +208,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getOverview", notes = "获取节点概要信息")
     @RequestMapping(value = "/get/overview/{serverId}", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getOverview(@PathVariable Long serverId)
@@ -223,6 +223,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getMasterInfo", notes = "获取主库相关信息")
     @RequestMapping(value = "/{serverId}/master-info", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getMasterInfo(@PathVariable Long serverId)
@@ -237,6 +238,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getSlaveInfo", notes = "获取从库相关信息")
     @RequestMapping(value = "/{serverId}/slave-info", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getSlaveInfo(@PathVariable Long serverId)
@@ -251,6 +253,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getNodeList", notes = "获取节点列表")
     @RequestMapping(value = "/node/list", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getNodeList(HttpServletRequest request)
@@ -268,6 +271,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "saveNode", notes = "保存节点信息")
     @RequestMapping(value = "/node/save", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object saveNode(HttpServletRequest request)
@@ -290,6 +294,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "deleteNode", notes = "删除节点信息")
     @RequestMapping(value = "/node/delete", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object deleteNode(HttpServletRequest request)
@@ -305,6 +310,7 @@ public class MysqlController
      * @return        
      * @throws
      */
+    @ApiOperation(value = "getNodeInfo", notes = "获取节点信息")
     @RequestMapping(value = "/node/info", method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
     public Object getNodeInfo(HttpServletRequest request)

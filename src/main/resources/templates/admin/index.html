@@ -16,23 +16,42 @@
         <!-- 顶 部 左 侧 功 能 -->
         <ul class="layui-nav layui-layout-left">
             <li class="collaspe layui-nav-item"><a href="#" class="layui-icon layui-icon-shrink-right"></a></li>
-            <li class="refresh layui-nav-item"><a href="#" class="layui-icon layui-icon-refresh-1" title="刷新页面" loading=600></a></li>
+            <li class="refresh layui-nav-item"><a href="#" class="layui-icon layui-icon-refresh-1" title="刷新页面"
+                                                  loading=600></a></li>
         </ul>
         <!-- 顶 部 右 侧 菜 单 -->
         <div id="control" class="layui-layout-control"></div>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item layui-hide-xs"><a href="#" class="fullScreen layui-icon layui-icon-screen-full"></a></li>
+            <li class="layui-nav-item">
+                <div class="layui-card-body">
+                    <form class="layui-form" action="" onsubmit="return false">
+                        <div class="layui-form-item" style="color: #0C0C0C">
+                            <label class="layui-form-label" >数据库连接</label>
+                            <div class="layui-input-inline">
+                                <select id="serverId" lay-verify="required" lay-search lay-filter="selectOnchange">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </li>
+            <li class="layui-nav-item layui-hide-xs"><a href="#"
+                                                        class="fullScreen layui-icon layui-icon-screen-full"></a></li>
             <li class="layui-nav-item layui-hide-xs">
                 <!--<a th:href="@{/SysNoticeController/viewUser}" class="layui-icon layui-icon-notice">
                     <span class="layui-badge" th:text="${session.notices.size()}"></span>
                 </a>-->
 
 
-                <a id="menu-msg" class="layui-icon layui-icon-notice" menu-type="1" th:menu-url="@{/SysNoticeController/viewUser}" menu-id="n4" href="javascript:;">
+                <a id="menu-msg" class="layui-icon layui-icon-notice" menu-type="1"
+                   th:menu-url="@{/SysNoticeController/viewUser}" menu-id="n4" href="javascript:;">
                     <span class="layui-badge" th:text="${session.notices.size()}"></span>
                 </a>
 
             </li>
+
+
             <li class="layui-nav-item">
                 <!-- 头 像 -->
                 <a href="javascript:;">
@@ -74,41 +93,75 @@
 <th:block th:include="include :: footer"/>
 <script th:src="@{/static/admin/js/headImg.js}"></script>
 <script th:inline="javascript">
-    layui.use(['admin','jquery','layer','popup'], function () {
+    layui.use(['admin', 'jquery', 'layer', 'popup', 'form'], function () {
         let admin = layui.admin;
         let $ = layui.jquery;
         let layer = layui.layer;
         let popup = layui.popup;
+        let form = layui.form;
+
         admin.render();
 
-        $('#headImg').attr("src",makeHeadImgByUserName([[${session.sessionUserName}]]));
+        $('#headImg').attr("src", makeHeadImgByUserName([[${session.sessionUserName}]]));
 
-         $("#menu-msg").click(function(){
+        $("#menu-msg").click(function () {
 
-            layui.tab.addTabOnlyByElem("content",{id:$(this).attr("menu-id"),title:"公告展示",url:$(this).attr("menu-url"),close:"允许关闭"})
+            layui.tab.addTabOnlyByElem("content", {
+                id: $(this).attr("menu-id"),
+                title: "公告展示",
+                url: $(this).attr("menu-url"),
+                close: "允许关闭"
+            })
         })
-        
+
         // 注销实现
-        admin.logout(function(){
-        	 let loading = layer.load();
-        	 $.ajax({
-     			url: rootPath+'/admin/Loginout',
-     			dataType: 'json',
-     			type: 'get',
-     			success: function(result) {
-     				if (result.code==200) {
-     					popup.success(result.msg, function() {
-     						location.href = rootPath+"/";
+        admin.logout(function () {
+            let loading = layer.load();
+            $.ajax({
+                url: rootPath + '/admin/Loginout',
+                dataType: 'json',
+                type: 'get',
+                success: function (result) {
+                    if (result.code == 200) {
+                        popup.success(result.msg, function () {
+                            location.href = rootPath + "/";
                         });
                         return true;
-     				}
-     			}
-     		})
-     		 return true;
+                    }
+                }
+            })
+            return true;
         })
-        			
-		
-        
+
+        $.ajax({
+            url: rootPath + '/MonitorServerController/' + '/listAll',
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+            type: 'get',
+            success: function (result) {
+                if (result.code == 200) {
+                    data = result.data;
+                    var select = $("#serverId")
+                    select.append(new Option("请选择",""))
+                    for (var i = 0; i < data.length; i++) {
+                        select.append(new Option(data[i].tags,data[i].id))
+                    }
+                    var curServer = window.localStorage.getItem("curServer");
+                    if (curServer != ""){
+                        select.val(curServer);
+                    }
+                    form.render();
+                } else {
+                    layer.msg(result.msg, {icon: 2, time: 3000});
+                }
+            }
+        })
+
+
+        form.on('select(selectOnchange)', function (data) {
+            var curServer = $("#serverId").val();
+            localStorage.setItem('curServer', curServer);
+        });
 
     })
 

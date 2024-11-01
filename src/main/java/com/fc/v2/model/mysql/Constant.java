@@ -9,6 +9,7 @@ package com.fc.v2.model.mysql;
  */
 public class Constant {
     public static final Long ZERO = 0L;
+    public static final int INT_ZERO = 0;
     public static final String SUCCESS_CODE_ZERO = "0";
     public static final Integer SUCCESS_CODE = 200;
     public static final String SUCCESS_MESSAGE = "SUCCESS";

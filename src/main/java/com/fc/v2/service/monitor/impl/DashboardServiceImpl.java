@@ -57,7 +57,19 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
         }
         return AjaxResult.successData(200,dashboardOverview);
     }
-    
+
+    @Override
+    public AjaxResult getDashboardChart(Long serverId) {
+        DashboardOverview dashboardOverview = new DashboardOverview();
+        dashboardOverview = getQpsChatData(dashboardOverview, serverId);
+        dashboardOverview = getQueryChatData(dashboardOverview, serverId);
+
+        if (dashboardOverview == null ){
+            return AjaxResult.error("查询数据为空");
+        }
+        return AjaxResult.successData(200,dashboardOverview);
+    }
+
     /**
      * 获取查询统计图表信息
      * @Title: getQueryChatData   
@@ -299,6 +311,9 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
                     if (x.get("Info")!=null&&!x.get("Info").equals("")&&(x.get("Info").toString()).equals(process.getInfo())) {
                         flag ++;
                     }
+                    if (x.get("Id")!=null&&!x.get("Id").equals("")&&(x.get("Id").toString()).equals(process.getId())) {
+                        flag ++;
+                    }
                     if (x.get("State")!=null&&!x.get("State").equals("")&&(x.get("State").toString()).equals(process.getState())) {
                         flag ++;
                     }
@@ -310,13 +325,16 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
                     }
                     return flag > 0;
                 }
+
                 ).collect(Collectors.toList());
             }else{
                 resultList = resultListOriginal;
             }
 
+            System.out.println(resultList);
+
             List<Processlist> processlists=new ArrayList<>();
-            for (int i = (tablepar.getPage())*tablepar.getLimit(); i < ((tablepar.getPage()+1)*tablepar.getLimit() > resultList.size() ? resultList.size() : (tablepar.getPage()+1)*tablepar.getLimit()); i++)
+            for (int i = (tablepar.getPage()-1)*tablepar.getLimit(); i < ((tablepar.getPage()+1)*tablepar.getLimit() > resultList.size() ? resultList.size() : (tablepar.getPage()+1)*tablepar.getLimit()); i++)
             {     
                 Processlist processlist=new Processlist();
                 processlist.setCommand(resultList.get(i).get("Command")==null?"":resultList.get(i).get("Command").toString());

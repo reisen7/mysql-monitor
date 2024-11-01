@@ -2,6 +2,7 @@ package com.fc.v2.service.monitor;
 
 import java.util.*;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.*;
 import com.fc.v2.mapper.mysql.MonitorClusterMapper;
 import com.fc.v2.model.monitor.MonitorCluster;
@@ -236,13 +237,13 @@ public class MonitorServerService extends AbstractService implements BaseService
 		return monitorServer;
 	}
 
-	public RestResponse<Object> getBinaryLogs(Long serverId)
+	public AjaxResult getBinaryLogs(Long serverId)
 	{
 		String sql = "SHOW BINARY LOGS;";
 		return executeSqlForList(serverId, sql);
 	}
 
-	public RestResponse<Object> getBinaryLogData(Long serverId, String logName, Long begin, Long end)
+	public AjaxResult getBinaryLogData(Long serverId, String logName, Long begin, Long end)
 	{
 		begin = begin == null ? 0 : begin;
 		end = end == null ? 25 : end;
@@ -250,7 +251,7 @@ public class MonitorServerService extends AbstractService implements BaseService
 		return executeSqlForList(serverId, sql);
 	}
 
-	public RestResponse<Object> getSessionVariables(Long serverId)
+	public AjaxResult getSessionVariables(Long serverId)
 	{
 		String sql = "SHOW VARIABLES;";
 		return executeSqlForList(serverId, sql);
@@ -268,7 +269,7 @@ public class MonitorServerService extends AbstractService implements BaseService
 		return executeSqlForBoolean(serverId, sql);
 	}
 
-	public RestResponse<Object> getDatabases(Long serverId)
+	public AjaxResult getDatabases(Long serverId)
 	{
 		String sql =
 				"SELECT concat(round((sum(DATA_LENGTH)+sum(INDEX_LENGTH))/1024/1024,2),'MB') as size,TABLE_SCHEMA FROM information_schema.TABLES group by TABLE_SCHEMA";
@@ -452,12 +453,12 @@ public class MonitorServerService extends AbstractService implements BaseService
 		return restResponse;
 	}
 
-	public RestResponse<Object> getShowBinlogEvents(Long serverId, String showBinlogEvents)
+	public AjaxResult getShowBinlogEvents(Long serverId, String showBinlogEvents)
 	{
 		return executeSqlForList(serverId, showBinlogEvents);
 	}
 
-	public RestResponse<Object> getGlobalVariables(Long serverId, String filter)
+	public AjaxResult getGlobalVariables(Long serverId, String filter)
 	{
 		String sql = "SHOW GLOBAL VARIABLES like '%" + filter + "%'";
 		return executeSqlForList(serverId, sql);

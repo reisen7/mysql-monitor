@@ -86,7 +86,14 @@ public class AjaxResult extends HashMap<String, Object>
          json.put("data", value);
          return json;
     }
-   
+
+    public static AjaxResult successData(int code, String msg, Object value){
+        AjaxResult json = new AjaxResult();
+        json.put("code", code);
+        json.put("msg", msg);
+        json.put("data", value);
+        return json;
+    }
     
     /**
      * 返回成功消息

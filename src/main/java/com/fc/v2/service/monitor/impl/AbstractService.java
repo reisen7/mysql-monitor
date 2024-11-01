@@ -1,5 +1,6 @@
 package com.fc.v2.service.monitor.impl;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.dto.RestResponse;
 import com.fc.v2.mapper.mysql.MonitorServerMapper;
@@ -200,9 +201,8 @@ public class AbstractService
         MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(id);
         return monitorServer;
     }
-    
-    protected  RestResponse<Object> executeSqlForList(Long serverId, String sql) {
-        RestResponse<Object> restResponse = new RestResponse<Object>();
+
+    protected AjaxResult executeSqlForList(Long serverId, String sql) {
         // 获取MySQL服务器信息
         MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
         String host = monitorServer.getHost();
@@ -214,14 +214,9 @@ public class AbstractService
         url = getDataSourceUrl(host, port,"", username, password, version);
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password, version);
         if (queryResult.isSuccess() == false) {
-            restResponse.setCode(1);
-            restResponse.setMessage(queryResult.getException());
-            return restResponse;
+            return AjaxResult.error(Constant.DEFAULT_DRAW,queryResult.getException());
         }
-        restResponse.setCode(Constant.SUCCESS_CODE);
-        restResponse.setMessage("SUCCESS");
-        restResponse.setData(queryResult.getData());
-        return restResponse;
+        return AjaxResult.successData(Constant.INT_ZERO, Constant.SUCCESS_MESSAGE, queryResult.getData());
     }
     
     public  RestResponse<Object> executeSqlForBoolean(Long serverId, String sql) {

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('变量管理')"/>
+</head>
+<body class="pear-container">
+<div class="layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="searchText" placeholder="" class="layui-input">
+                </div>
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="var-query">
+                    <i class="layui-icon layui-icon-search"></i>
+                    查询
+                </button>
+                <button type="reset" class="pear-btn pear-btn-md">
+                    <i class="layui-icon layui-icon-refresh"></i>
+                    重置
+                </button>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-body">
+        <table id="var-table" lay-filter="var-table"></table>
+    </div>
+</div>
+</body>
+
+<script type="text/html" id="var-toolbar">
+
+</script>
+
+<script type="text/html" id="var-bar">
+    <button sa:hasPermission="gen:monitorServer:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="修改"><i class="layui-icon layui-icon-edit"></i>
+    </button>
+</script>
+
+
+
+
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['table', 'form', 'jquery'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+
+        let MODULE_PATH = rootPath+"/ShowVarController";
+        let cols = [
+            [
+                {title: '变量名', field: 'Variable_name', align: 'center'},
+
+                {title: '值', field: 'Value', align: 'center'},
+
+                {title: '操作', toolbar: '#var-bar', align: 'center'}
+            ]
+        ]
+
+        var serverId = window.localStorage.getItem("curServer");
+
+        //table表单列表
+        table.render({
+            elem: '#var-table',
+            url: MODULE_PATH + '/'+ window.localStorage.getItem("curServer") +'/globalVariables',
+            method: 'get',
+            cols: cols,
+            page: false,
+            skin: 'line',
+            toolbar: '#monitorServer-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            }, 'filter', 'print', 'exports']
+        });
+
+
+        //修改
+        window.edit = function (obj) {
+            layer.open({
+                type: 2,
+                title: '修改',
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: MODULE_PATH + 'edit/' + obj.data['id']
+            });
+        }
+
+        //table工具栏绑定
+        table.on('toolbar(var-table)', function (obj) {
+            if (obj.event === 'refresh') {
+                window.refresh();
+            }
+        });
+
+        //查询按钮绑定
+        form.on('submit(var-query)', function (data) {
+            table.reload('var-table', { where: data.field})
+            return false;
+        });
+
+        // 监测本地连接id的变化
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'curServer') { // 检查是否是关心的键发生了变化
+                console.log('localStorage key "curServer" changed to:', event.newValue);
+                table.reload('var-table',{url: MODULE_PATH + '/'+ window.localStorage.getItem("curServer") +'/globalVariables'})
+            }
+        });
+
+        //刷新按钮
+        window.refresh = function () {
+            table.reload('var-table');
+        }
+    })
+</script>
+</html>

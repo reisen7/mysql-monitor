@@ -63,6 +63,19 @@ public class DashboardController extends BaseController {
     }
 
     /**
+     * 获取图表
+     * @Title: getDashboardOverview
+     * @param serverId
+     * @date 2024年10月24日
+     */
+    @ApiOperation(value = "获取图表", notes = "获取图表")
+    @GetMapping("/dashboard-chart/{serverId}")
+    @ResponseBody
+    public AjaxResult getDashboardChart(@PathVariable Long serverId) {
+        return dashboardService.getDashboardChart(serverId);
+    }
+
+    /**
      * 获取控制台显示数据
      * @Title: getDashboardProcesslist
      * @param serverId

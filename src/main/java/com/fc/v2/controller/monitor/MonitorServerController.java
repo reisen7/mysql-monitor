@@ -66,6 +66,16 @@ public class MonitorServerController extends BaseController{
 		PageInfo<MonitorServer> page=monitorServerService.list(tablepar,monitorServer) ; 
 		return pageTable(page.getList(),page.getTotal());
 	}
+
+
+	@ApiOperation(value = "获取全部", notes = "获取全部")
+	@GetMapping("/listAll")
+	@ResponseBody
+	public AjaxResult listAll(){
+		List<MonitorServer> monitorServerList = monitorServerService.selectByExample(null);
+		return AjaxResult.successData(200,monitorServerList);
+	}
+
 	
 	/**
      * 新增跳转
