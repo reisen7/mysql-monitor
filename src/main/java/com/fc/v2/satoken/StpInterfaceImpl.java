@@ -25,7 +25,7 @@ public class StpInterfaceImpl implements StpInterface {
 	
 	@Autowired
 	private RoleDao roleDao ;//角色dao
-	
+
     /**
      * 返回一个账号所拥有的权限码集合 
      * <p> 注：权限变动时需要清除缓存：SaSessionCustomUtil.getSessionById("role-" + roleId).delete("Permission_List");
