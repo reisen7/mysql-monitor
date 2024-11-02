@@ -83,22 +83,7 @@ public class MysqlController
         return monitorServerService.getSessionVariables(serverId);
     }
     
-    /**
-     * 设置全局变量值
-     * @Title: setGlobalVariables   
-     * @param serverId
-     * @param name
-     * @param value
-     * @return        
-     * @throws
-     */
-    @ApiOperation(value = "setGlobalVariables", notes = "设置全局变量值")
-    @RequestMapping(value = "/{serverId}/globalVariables/{name}/{value}/")
-    @CrossOrigin(origins = "*")
-    public Object setGlobalVariables(@PathVariable Long serverId, @PathVariable String name, @PathVariable String value)
-    {
-        return monitorServerService.setGlobalVariables(serverId, name, value);
-    }
+
     
     /**
      * 设置会话变量值

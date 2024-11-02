@@ -28,7 +28,7 @@ public class ShowVarController extends BaseController {
     private String prefix = "gen/showVarController";
 
     /**
-     * 数据库连接页面展示
+     * 分页
      * @param model
      * @return String
      * @author reisen
@@ -39,6 +39,23 @@ public class ShowVarController extends BaseController {
     public String view(ModelMap model)
     {
         return prefix + "/list";
+    }
+
+    /**
+     * 修改
+     * @param varName 变量名称
+     * @param var 变量值
+     * @return String
+     * @author reisen
+     */
+    @ApiOperation(value = "修改页面", notes = "修改页面")
+    @GetMapping("/edit/{varName}/{var}")
+    @SaCheckPermission("gen:showVar:edit")
+    public String edit(@PathVariable("varName") String varName, @PathVariable("var") String var, ModelMap map)
+    {
+        map.put("var",var);
+        map.put("varName",varName);
+        return prefix + "/edit";
     }
 
     /**
@@ -58,6 +75,24 @@ public class ShowVarController extends BaseController {
             tablepar.setSearchText("");
         }
         return monitorServerService.getGlobalVariables(serverId, tablepar.getSearchText());
+    }
+
+
+    /**
+     * 设置全局变量值
+     * @Title: setGlobalVariables
+     * @param serverId
+     * @param name
+     * @param value
+     * @return
+     * @throws
+     */
+    @ApiOperation(value = "setGlobalVariables", notes = "设置全局变量值")
+    @GetMapping(value = "/{serverId}/globalVariables/{name}/{value}/")
+    @ResponseBody
+    public AjaxResult setGlobalVariables(@PathVariable Long serverId, @PathVariable String name, @PathVariable String value)
+    {
+        return monitorServerService.setGlobalVariables(serverId, name, value);
     }
 
 }

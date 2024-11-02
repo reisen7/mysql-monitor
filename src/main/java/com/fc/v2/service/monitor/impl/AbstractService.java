@@ -219,8 +219,7 @@ public class AbstractService
         return AjaxResult.successData(Constant.INT_ZERO, Constant.SUCCESS_MESSAGE, queryResult.getData());
     }
     
-    public  RestResponse<Object> executeSqlForBoolean(Long serverId, String sql) {
-        RestResponse<Object> restResponse = new RestResponse<Object>();
+    public  AjaxResult executeSqlForBoolean(Long serverId, String sql) {
         // 获取MySQL服务器信息
         MonitorServer monitorServer = monitorServerMapper.selectByPrimaryKey(serverId);
         String host = monitorServer.getHost();
@@ -234,14 +233,9 @@ public class AbstractService
         url = getDataSourceUrl(host, port,"", username, password, version);
         QueryResult<Integer> queryResult = jdbcService.executeSqlForBoolean(url,sql,username,password, version);
         if (queryResult.isSuccess() == false) {
-            restResponse.setCode(Constant.FAIL_CODE);
-            restResponse.setMessage(queryResult.getException());
-            return restResponse;
+            return AjaxResult.error(Constant.FAIL_CODE,queryResult.getException());
         }
-        restResponse.setCode(Constant.SUCCESS_CODE);
-        restResponse.setMessage("SUCCESS");
-        restResponse.setData(queryResult.getData());
-        return restResponse;
+        return AjaxResult.successData(Constant.SUCCESS_CODE,Constant.SUCCESS_MESSAGE,queryResult.getData());
     }
 
 

@@ -257,13 +257,13 @@ public class MonitorServerService extends AbstractService implements BaseService
 		return executeSqlForList(serverId, sql);
 	}
 
-	public RestResponse<Object> setSessionVariables(Long serverId, String name, String value)
+	public AjaxResult setSessionVariables(Long serverId, String name, String value)
 	{
 		String sql = "SET " + name + "=" + value + ";";
 		return executeSqlForBoolean(serverId, sql);
 	}
 
-	public RestResponse<Object> setGlobalVariables(Long serverId, String name, String value)
+	public AjaxResult setGlobalVariables(Long serverId, String name, String value)
 	{
 		String sql = "SET GLOBAL " + name + "=" + value + ";";
 		return executeSqlForBoolean(serverId, sql);
