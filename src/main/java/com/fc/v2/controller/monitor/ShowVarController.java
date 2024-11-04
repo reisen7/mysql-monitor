@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @ClassName ShowVarController
  * @Author reisen
@@ -49,9 +46,9 @@ public class ShowVarController extends BaseController {
      * @author reisen
      */
     @ApiOperation(value = "修改页面", notes = "修改页面")
-    @GetMapping("/edit/{varName}/{var}")
+    @GetMapping("/edit")
     @SaCheckPermission("gen:showVar:edit")
-    public String edit(@PathVariable("varName") String varName, @PathVariable("var") String var, ModelMap map)
+    public String edit( String varName, String var, ModelMap map)
     {
         map.put("var",var);
         map.put("varName",varName);
@@ -88,7 +85,8 @@ public class ShowVarController extends BaseController {
      * @throws
      */
     @ApiOperation(value = "setGlobalVariables", notes = "设置全局变量值")
-    @GetMapping(value = "/{serverId}/globalVariables/{name}/{value}/")
+    @GetMapping(value = "/edit/{serverId}/globalVariables/{name}/{value}")
+    @SaCheckPermission("gen:showVar:edit")
     @ResponseBody
     public AjaxResult setGlobalVariables(@PathVariable Long serverId, @PathVariable String name, @PathVariable String value)
     {

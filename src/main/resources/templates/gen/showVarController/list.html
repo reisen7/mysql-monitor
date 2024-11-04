@@ -38,8 +38,12 @@
 </script>
 
 <script type="text/html" id="var-bar">
-    <button sa:hasPermission="gen:monitorServer:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="修改"><i class="layui-icon layui-icon-edit"></i>
+    <button sa:hasPermission="gen:showVar:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="修改"><i class="layui-icon layui-icon-edit"></i>
     </button>
+
+    <button sa:hasPermission="gen:showVar:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="query" title="查看"><i class="layui-icon layui-icon-search"></i>
+    </button>
+
 </script>
 
 
@@ -47,7 +51,7 @@
 
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['table', 'form', 'jquery'], function () {
+    layui.use(['table', 'form', 'topBar', 'jquery'], function () {
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
@@ -80,17 +84,14 @@
             }, 'filter', 'print', 'exports']
         });
 
-
-        //修改
-        window.edit = function (obj) {
-            layer.open({
-                type: 2,
-                title: '修改',
-                shade: 0.1,
-                area: ['500px', '500px'],
-                content: MODULE_PATH + 'edit/' + obj.data['Variable_name'] + '/' + obj.data['Value']
-            });
-        }
+        //table图标事件绑定
+        table.on('tool(var-table)', function (obj) {
+            if (obj.event === 'edit') {
+                window.edit(obj);
+            }else if(obj.event === 'query') {
+                window.query(obj);
+            }
+        });
 
         //table工具栏绑定
         table.on('toolbar(var-table)', function (obj) {
@@ -104,6 +105,42 @@
             table.reload('var-table', { where: data.field})
             return false;
         });
+
+        //修改
+        window.edit = function (obj) {
+            layer.open({
+                type: 2,
+                title: '修改',
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: MODULE_PATH + '/edit?' + 'varName='+ obj.data['Variable_name'] + '&' + 'var=' + obj.data['Value']
+            });
+        }
+        //查询
+        window.query = function (obj) {
+            var curServer = window.localStorage.getItem("curServer")
+            var server = window.localStorage.getItem("server");
+            server = JSON.parse(server);
+            for (var i = 0; i < server.length; i++){
+                if (server[i].id == curServer){
+                    console.log(server[i].version)
+                    if (server[i].version == '8'){
+                        window.open('https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_' + obj.data['Variable_name'], '_blank');
+                    }else{
+                        window.open('https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_' + obj.data['Variable_name'], '_blank');
+                    }
+                }
+            }
+
+
+            // layer.open({
+            //     type: 2,
+            //     title: '查询',
+            //     shade: 0.1,
+            //     area: ['500px', '500px'],
+            //     content: 'https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_' + obj.data['Variable_name']
+            // });
+        }
 
         // 监测本地连接id的变化
         window.addEventListener('storage', function(event) {

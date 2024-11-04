@@ -32,6 +32,7 @@
                                 </select>
                             </div>
                         </div>
+
                     </form>
                 </div>
 
@@ -133,6 +134,7 @@
             return true;
         })
 
+        // 获取数据库连接
         $.ajax({
             url: rootPath + '/MonitorServerController/' + '/listAll',
             dataType: 'json',
@@ -147,6 +149,7 @@
                         select.append(new Option(data[i].tags,data[i].id))
                     }
                     var curServer = window.localStorage.getItem("curServer");
+                    localStorage.setItem('server', JSON.stringify(data));
                     if (curServer != ""){
                         select.val(curServer);
                     }

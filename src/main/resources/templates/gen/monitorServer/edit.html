@@ -60,9 +60,8 @@
 <!--		                        <input th:value="*{version}" type="text" name="version" autocomplete="off" placeholder="版本" class="layui-input">-->
 
 								<select lay-verify="required" name="version" lay-filter="selectOnchange">
-									<option th:selected="${version} eq 8" value="8">8</option>
-									<option th:selected="${version} eq 5.7" value="5.7">5.7</option>
-
+									<option th:selected="*{version} eq '8'" value="8">8</option>
+									<option th:selected="*{version} eq '5.7'" value="5.7">5.7</option>
 								</select>
 							</div>
 		                </div>
