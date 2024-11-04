@@ -48,14 +48,32 @@
             <version>3.5.0</version>
         </dependency>
 
-		<!--自动分库分表-->
+		<!--sharding-jdbc 依赖-->
 		<dependency>
 			<groupId>org.apache.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-			<version>4.0.0-RC1</version>
+			<artifactId>shardingsphere-jdbc-core</artifactId>
+			<version>5.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.33</version>
+		</dependency>
+		<!-- Hikari -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.4.5</version>
 		</dependency>
 
-        <dependency>
+		<!--Lombok引入-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+
+		<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
             <version>3.5.0</version>

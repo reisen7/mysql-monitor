@@ -25,7 +25,7 @@ import com.fc.v2.model.custom.Tablepar;
  * @date 2024-10-24 11:19:41
  **/
 @Service
-public class ServerStatusHistoryService implements BaseService<ServerStatusHistory, ServerStatusHistoryExample>{
+public class ServerStatusHistoryService  implements BaseService<ServerStatusHistory, ServerStatusHistoryExample> {
 
 	@Autowired
 	private ServerStatusHistoryMapper serverStatusHistoryMapper;

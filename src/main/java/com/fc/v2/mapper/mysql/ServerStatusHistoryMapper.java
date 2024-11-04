@@ -1,5 +1,6 @@
 package com.fc.v2.mapper.mysql;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * @Description
  * @date 2024-11-04 15:20:27
  */
-public interface ServerStatusHistoryMapper {
+public interface ServerStatusHistoryMapper extends BaseMapper<ServerStatusHistory> {
 
     long countByExample(ServerStatusHistoryExample example);
 
