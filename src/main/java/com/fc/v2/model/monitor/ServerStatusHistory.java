@@ -1,24 +1,25 @@
 package com.fc.v2.model.monitor;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import nonapi.io.github.classgraph.json.Id;
 import cn.hutool.core.date.DateUtil;
 import java.util.Date;
 
 public class ServerStatusHistory implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	@Id
-	@ApiModelProperty(value = "主键")
-	private Long id;
+	@TableId
+	@ApiModelProperty(value = "")
+	private String id;
 	
-	@ApiModelProperty(value = "数据库")
+	@ApiModelProperty(value = "")
 	private Long serverId;
 	
-	@ApiModelProperty(value = "启动时间")
+	@ApiModelProperty(value = "")
 	private String uptime;
 	
 	@ApiModelProperty(value = "打开的表数量")
@@ -211,11 +212,11 @@ public class ServerStatusHistory implements Serializable {
 	private Date updateDate;
 	
 	@JsonProperty("id")
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id =  id;
 	}
 	@JsonProperty("serverId")
@@ -740,7 +741,7 @@ public class ServerStatusHistory implements Serializable {
 	}
 
 
-	public ServerStatusHistory(Long id,Long serverId,String uptime,Integer openTables,Integer threadsConnected,Integer threadsRunning,Integer threadsCreated,Integer threadsCached,Integer connections,Integer abortedClients,Integer abortedConnects,Long bytesReceived,String bytesReceivedPersecond,Long bytesSent,String bytesSentPersecond,Long comSelect,String comSelectPersecond,Long comInsert,String comInsertPersecond,Long comUpdate,String comUpdatePersecond,Long comDelete,String comDeletePersecond,Long comCommit,String comCommitPersecond,Long comRollback,String comRollbackPersecond,Long questions,String questionsPersecond,Long transactions,String transactionsPersecond,Long createdTmpTables,String createdTmpTablesPersecond,Long createdTmpDiskTables,String createdTmpDiskTablesPersecond,Long createdTmpFiles,String createdTmpFilesPersecond,Long innodbDataReads,String innodbDataReadsPersecond,Long innodbDataWrites,String innodbDataWritesPersecond,Long innodbDataFsyncs,String innodbDataFsyncsPersecond,Long innodbDataRead,String innodbDataReadPersecond,Long innodbDataWritten,String innodbDataWrittenPersecond,Long innodbBufferPoolPagesDirty,String innodbBufferPoolPagesDirtyPersecond,Long innodbBufferPoolPagesFlushed,String innodbBufferPoolPagesFlushedPersecond,String innodbBufferReadHitRatio,String innodbBufferUsage,Long innodbRowsInserted,String innodbRowsInsertedPersecond,Long innodbRowsUpdated,String innodbRowsUpdatedPersecond,Long innodbRowsDeleted,String innodbRowsDeletedPersecond,Long innodbBufferPoolPagesTotal,Long innodbBufferPoolPagesFree,Integer innodbPageSize,Integer slowQueries,Long slaveDelay,Date createTime,Date updateDate) {
+	public ServerStatusHistory(String id,Long serverId,String uptime,Integer openTables,Integer threadsConnected,Integer threadsRunning,Integer threadsCreated,Integer threadsCached,Integer connections,Integer abortedClients,Integer abortedConnects,Long bytesReceived,String bytesReceivedPersecond,Long bytesSent,String bytesSentPersecond,Long comSelect,String comSelectPersecond,Long comInsert,String comInsertPersecond,Long comUpdate,String comUpdatePersecond,Long comDelete,String comDeletePersecond,Long comCommit,String comCommitPersecond,Long comRollback,String comRollbackPersecond,Long questions,String questionsPersecond,Long transactions,String transactionsPersecond,Long createdTmpTables,String createdTmpTablesPersecond,Long createdTmpDiskTables,String createdTmpDiskTablesPersecond,Long createdTmpFiles,String createdTmpFilesPersecond,Long innodbDataReads,String innodbDataReadsPersecond,Long innodbDataWrites,String innodbDataWritesPersecond,Long innodbDataFsyncs,String innodbDataFsyncsPersecond,Long innodbDataRead,String innodbDataReadPersecond,Long innodbDataWritten,String innodbDataWrittenPersecond,Long innodbBufferPoolPagesDirty,String innodbBufferPoolPagesDirtyPersecond,Long innodbBufferPoolPagesFlushed,String innodbBufferPoolPagesFlushedPersecond,String innodbBufferReadHitRatio,String innodbBufferUsage,Long innodbRowsInserted,String innodbRowsInsertedPersecond,Long innodbRowsUpdated,String innodbRowsUpdatedPersecond,Long innodbRowsDeleted,String innodbRowsDeletedPersecond,Long innodbBufferPoolPagesTotal,Long innodbBufferPoolPagesFree,Integer innodbPageSize,Integer slowQueries,Long slaveDelay,Date createTime,Date updateDate) {
 		
 		this.id = id;
 		

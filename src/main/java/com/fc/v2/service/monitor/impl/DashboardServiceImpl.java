@@ -2,7 +2,7 @@ package com.fc.v2.service.monitor.impl;
 
 import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.*;
-import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
+import com.fc.v2.mapper.mysql.ServerStatusHistoryMapper;
 import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
@@ -10,9 +10,7 @@ import com.fc.v2.model.mysql.Constant;
 import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.util.MiscUtil;
 import com.fc.v2.util.SysSampleUtil;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

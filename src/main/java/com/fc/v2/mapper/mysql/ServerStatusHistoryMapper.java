@@ -1,26 +1,23 @@
-package com.fc.v2.mapper.auto;
+package com.fc.v2.mapper.mysql;
 
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
  * 数据库状态历史表 ServerStatusHistoryMapper
  * @author reisen_自动生成
  * @Description
- * @date 2024-10-24 11:19:41
+ * @date 2024-11-04 15:20:27
  */
-@Mapper
 public interface ServerStatusHistoryMapper {
 
     long countByExample(ServerStatusHistoryExample example);
 
     int deleteByExample(ServerStatusHistoryExample example);
 	
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String id);
 	
     int insert(ServerStatusHistory record);
 
@@ -28,7 +25,7 @@ public interface ServerStatusHistoryMapper {
 
     List<ServerStatusHistory> selectByExample(ServerStatusHistoryExample example);
 	
-    ServerStatusHistory selectByPrimaryKey(Long id);
+    ServerStatusHistory selectByPrimaryKey(String id);
 	
     int updateByExampleSelective(@Param("record") ServerStatusHistory record, @Param("example") ServerStatusHistoryExample example);
 

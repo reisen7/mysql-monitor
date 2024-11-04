@@ -1,16 +1,6 @@
 package com.fc.v2.common.quartz.task;
 import cn.hutool.core.date.DateUtil;
-import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
-import com.fc.v2.mapper.auto.TsysUserMapper;
-import com.fc.v2.model.auto.TsysUser;
-import com.fc.v2.model.auto.TsysUserExample;
-import com.fc.v2.service.monitor.MonitorServerService;
-import com.fc.v2.service.monitor.ServerStatusHistoryService;
-import com.fc.v2.service.monitor.impl.AbstractService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  *测试类

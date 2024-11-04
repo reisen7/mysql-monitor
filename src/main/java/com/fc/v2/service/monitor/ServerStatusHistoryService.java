@@ -2,6 +2,8 @@ package com.fc.v2.service.monitor;
 
 import java.util.List;
 import java.util.Arrays;
+
+import com.fc.v2.util.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
@@ -9,7 +11,7 @@ import com.github.pagehelper.PageInfo;
 import cn.hutool.core.util.StrUtil;
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
-import com.fc.v2.mapper.auto.ServerStatusHistoryMapper;
+import com.fc.v2.mapper.mysql.ServerStatusHistoryMapper;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.model.custom.Tablepar;
@@ -24,6 +26,7 @@ import com.fc.v2.model.custom.Tablepar;
  **/
 @Service
 public class ServerStatusHistoryService implements BaseService<ServerStatusHistory, ServerStatusHistoryExample>{
+
 	@Autowired
 	private ServerStatusHistoryMapper serverStatusHistoryMapper;
 	
@@ -57,23 +60,19 @@ public class ServerStatusHistoryService implements BaseService<ServerStatusHisto
 	@Override
 	public int deleteByPrimaryKey(String ids) {
 		
-			Long[] integers = ConvertUtil.toLongArray(",", ids);
-			List<Long> stringB = Arrays.asList(integers);
+			String[] strings = ConvertUtil.toStrArray(",", ids);
+			List<String> stringB = Arrays.asList(strings);
 			ServerStatusHistoryExample example=new ServerStatusHistoryExample();
 			example.createCriteria().andIdIn(stringB);
 			return serverStatusHistoryMapper.deleteByExample(example);
-		
-		
+
 	}
 	
 	
 	@Override
 	public ServerStatusHistory selectByPrimaryKey(String id) {
-		
-			Long id1 = Long.valueOf(id);
-			return serverStatusHistoryMapper.selectByPrimaryKey(id1);
-			
-		
+
+			return serverStatusHistoryMapper.selectByPrimaryKey(id);
 	}
 
 	
@@ -88,10 +87,7 @@ public class ServerStatusHistoryService implements BaseService<ServerStatusHisto
 	 */
 	@Override
 	public int insertSelective(ServerStatusHistory record) {
-		
-		record.setId(null);
-		
-		
+		record.setId(SnowflakeIdWorker.getUUID());
 		return serverStatusHistoryMapper.insertSelective(record);
 	}
 	

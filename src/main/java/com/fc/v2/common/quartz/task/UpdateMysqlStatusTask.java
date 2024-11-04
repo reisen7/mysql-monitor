@@ -10,6 +10,7 @@ import com.fc.v2.service.monitor.MonitorServerService;
 import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import com.fc.v2.service.monitor.impl.AbstractService;
 import com.fc.v2.util.DateUtils;
+import com.fc.v2.util.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 
 import org.slf4j.Logger;
@@ -230,12 +231,9 @@ public class UpdateMysqlStatusTask extends AbstractService {
             ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
             criteria.andServerIdEqualTo(serverId);
             criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
-            serverStatusHistoryExample.setOrderByClause("id desc");
+            serverStatusHistoryExample.setOrderByClause("update_date desc");
             PageHelper.startPage(0, 1);
-            // serverStatusHistoryExample.setLimitStart(0);
-            // serverStatusHistoryExample.setPageSize(1);
-
-            Long lastId = 0L;
+            String lastId = SnowflakeIdWorker.getUUID();
             List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService
                     .selectByExample(serverStatusHistoryExample);
             if (!lastServerStatusHistorys.isEmpty()) {
@@ -244,7 +242,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
             serverStatusHistoryService.insertSelective(statusHistory);
 
             // 根据上一个记录的指标值，做增量计算，再做平均值计算
-            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId.toString());
+            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId);
 
             if (lastStatusHistory != null) {
                 // 计算QPS

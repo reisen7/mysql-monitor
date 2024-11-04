@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fc.v2.mapper.auto.ServerStatusHistoryMapper">
+<mapper namespace="com.fc.v2.mapper.mysql.ServerStatusHistoryMapper">
   <resultMap id="BaseResultMap" type="com.fc.v2.model.monitor.ServerStatusHistory">
-    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="server_id" jdbcType="BIGINT" property="serverId" />
     <result column="uptime" jdbcType="VARCHAR" property="uptime" />
     <result column="open_tables" jdbcType="INTEGER" property="openTables" />
@@ -212,16 +212,16 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from server_status_history
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from server_status_history
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.fc.v2.model.monitor.ServerStatusHistoryExample">
     delete from server_status_history
@@ -300,7 +300,7 @@
    	  update_date
     )
     values (
-     	#{id,jdbcType=BIGINT},
+     	#{id,jdbcType=VARCHAR},
      	#{serverId,jdbcType=BIGINT},
      	#{uptime,jdbcType=VARCHAR},
      	#{openTables,jdbcType=INTEGER},
@@ -369,7 +369,7 @@
     )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.ServerStatusHistory" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.fc.v2.model.monitor.ServerStatusHistory" keyProperty="id">
     insert into server_status_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
     
@@ -639,7 +639,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="serverId != null">
         #{serverId,jdbcType=BIGINT},
@@ -850,7 +850,7 @@
     update server_status_history
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.serverId != null">
         server_id = #{record.serverId,jdbcType=BIGINT},
@@ -1059,7 +1059,7 @@
     update server_status_history
     set
     	 
-    	 id = #{record.id,jdbcType=BIGINT},
+    	 id = #{record.id,jdbcType=VARCHAR},
     	 
     	 server_id = #{record.serverId,jdbcType=BIGINT},
     	 
@@ -1464,7 +1464,7 @@
     
     where 
     
-    id = #{id,jdbcType=BIGINT}
+    id = #{id,jdbcType=VARCHAR}
   
   </update>
 
@@ -1606,7 +1606,7 @@
 	
     where 
     
-    id = #{id,jdbcType=BIGINT}
+    id = #{id,jdbcType=VARCHAR}
     
   </update>
   
