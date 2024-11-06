@@ -3,15 +3,20 @@ package com.fc.v2.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fc.v2.model.monitor.MonitorServerExample;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.lang.Nullable;
-
+import org.apache.http.impl.client.CloseableHttpClient;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,58 +34,27 @@ public class HttpUtil {
 
     /**
      * Http get请求
-     * @param httpUrl 连接
+     * @param url 连接
      * @return 响应数据
      */
-    public static String doGet(String httpUrl){
-        //链接
-        HttpURLConnection connection = null;
-        InputStream is = null;
-        BufferedReader br = null;
-        StringBuffer result = new StringBuffer();
-        try {
-            //创建连接
-            URL url = new URL(httpUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            //设置请求方式
-            connection.setRequestMethod("GET");
-            //设置连接超时时间
-            connection.setReadTimeout(15000);
-            //开始连接
-            connection.connect();
-            //获取响应数据
-            if (connection.getResponseCode() == 200) {
-                //获取返回的数据
-                is = connection.getInputStream();
-                if (null != is) {
-                    br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                    String temp = null;
-                    while (null != (temp = br.readLine())) {
-                        result.append(temp);
-                    }
-                }
+    public static String doGet(String url){
+
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()){
+            CloseableHttpResponse response = null;
+            HttpGet httpget = new HttpGet(url);
+            response = httpclient.execute(httpget);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (HttpStatus.SC_OK == statusCode) {
+                String result = EntityUtils.toString(response.getEntity());
+                return result;
+            }else{
+                return "调用GET失败";
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != br) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (null != is) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            //关闭远程连接
-            connection.disconnect();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            return "调用GET失败";
         }
-        return result.toString();
+
     }
 
 
@@ -91,8 +65,7 @@ public class HttpUtil {
      * @return
      */
     public static String doPost(String url, JSONObject json) {
-        try {
-            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()){
             HttpPost post = new HttpPost(url);
 
             // 首先Header部分需要设定字符集为：uft-8
@@ -109,7 +82,6 @@ public class HttpUtil {
             if (HttpStatus.SC_OK == statusCode){
                 //返回String
                 String res = EntityUtils.toString(response.getEntity());
-                System.out.println(res);
                 return res;
             }else{
                 return "调用POST请求失败";

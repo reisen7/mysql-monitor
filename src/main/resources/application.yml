@@ -51,8 +51,8 @@ spring :
   output :
     ansi : 
       enabled: always	
-#  profiles :
-#    active : dev
+  profiles :
+    active : dev
     #引入其他配置文件，例如ftpHX 未配置文件application-ftpHX.yml
     #include: ftpHX,ftpCloud
   servlet:

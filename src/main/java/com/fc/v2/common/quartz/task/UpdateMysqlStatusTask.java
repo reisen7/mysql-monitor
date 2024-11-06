@@ -1,5 +1,7 @@
 package com.fc.v2.common.quartz.task;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.fc.v2.common.exception.GlobalExceptionResolver;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.model.monitor.MonitorServer;
@@ -10,6 +12,7 @@ import com.fc.v2.service.monitor.MonitorServerService;
 import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import com.fc.v2.service.monitor.impl.AbstractService;
 import com.fc.v2.util.DateUtils;
+import com.fc.v2.util.HttpUtil;
 import com.fc.v2.util.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.alibaba.fastjson.JSON;
@@ -58,9 +61,9 @@ public class UpdateMysqlStatusTask extends AbstractService {
         // 获取MySQL服务器信息
         logger.info(">>>>>>>>>> 正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
         MonitorServerExample monitorServerExample = new MonitorServerExample();
-
         String jsonString = JSON.toJSONString(monitorServerExample);
-        List<MonitorServer> monitorServers = monitorServerService.selectByExample(monitorServerExample);
+        String message = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/getListMonitorServer", JSONObject.parseObject(jsonString));
+        List<MonitorServer> monitorServers = JSON.parseObject(message, new TypeReference<List<MonitorServer>>(){});
 
         for (MonitorServer monitorServer : monitorServers) {
             Long serverId = monitorServer.getId();
@@ -232,23 +235,33 @@ public class UpdateMysqlStatusTask extends AbstractService {
                 }
             }
 
-            ServerStatusHistoryExample serverStatusHistoryExample = new ServerStatusHistoryExample();
-            //获取最新状态记录的ID
-            ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
-            criteria.andServerIdEqualTo(serverId);
-            criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
-            serverStatusHistoryExample.setOrderByClause("update_date desc");
-            PageHelper.startPage(0, 1);
+//            ServerStatusHistoryExample serverStatusHistoryExample = new ServerStatusHistoryExample();
+//            //获取最新状态记录的ID
+//            ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
+//            criteria.andServerIdEqualTo(serverId);
+//            criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
+//            serverStatusHistoryExample.setOrderByClause("update_date desc");
+//            PageHelper.startPage(0, 1);
             String lastId = SnowflakeIdWorker.getUUID();
-            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService.selectByExample(serverStatusHistoryExample);
+
+            String serverStatusHistoryJsonString = JSON.toJSONString("{\"name\":\"张三\",\"age\":30,\"email\":\"zhangsan@example.com\"}\n");
+            String serverStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/getListServerStatusHistory?serverId="+serverId, JSONObject.parseObject("{\"name\":\"张三\",\"age\":30,\"email\":\"zhangsan@example.com\"}\n"));
+            List<ServerStatusHistory> lastServerStatusHistorys = JSON.parseObject(serverStatusHistoryMessage, new TypeReference<List<ServerStatusHistory>>(){});
+
             if (!lastServerStatusHistorys.isEmpty()) {
                 lastId = lastServerStatusHistorys.get(0).getId();
             }
 
-            serverStatusHistoryService.insertSelective(statusHistory);
+            String insertServerStatusHistoryJsonString = JSON.toJSONString(statusHistory);
+            String insertStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/insertServerStatusHistory", JSONObject.parseObject(insertServerStatusHistoryJsonString));
+            statusHistory = JSON.parseObject(insertStatusHistoryMessage,ServerStatusHistory.class);
+//            serverStatusHistoryService.insertSelective(statusHistory);
 
+
+            String selectStatusHistoryMessage = HttpUtil.doGet("http://localhost:8080/ServerStatusHistoryController/getOneServerStatusHistory?lastId="+lastId);
+            ServerStatusHistory lastStatusHistory = JSON.parseObject(selectStatusHistoryMessage,ServerStatusHistory.class);
             // 根据上一个记录的指标值，做增量计算，再做平均值计算
-            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId);
+//            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId);
 
             if (lastStatusHistory != null) {
                 // 计算QPS
@@ -310,8 +323,11 @@ public class UpdateMysqlStatusTask extends AbstractService {
                 statusHistory
                         .setInnodbRowsDeletedPersecond(getInnodbRowsDeletedPersecond(statusHistory, lastStatusHistory));
 
-                
-                serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
+
+                String updateServerStatusHistoryJsonString = JSON.toJSONString(statusHistory);
+                String updateStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/updateServerStatusHistory", JSONObject.parseObject(updateServerStatusHistoryJsonString));
+
+//                serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
             }
 
         }

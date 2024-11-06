@@ -887,6 +887,76 @@ public class ServerStatusHistory implements Serializable {
 		}
 		return "";
 	}
-	
 
+	@Override
+	public String toString() {
+		return "ServerStatusHistory{" +
+				"id='" + id + '\'' +
+				", serverId=" + serverId +
+				", uptime='" + uptime + '\'' +
+				", openTables=" + openTables +
+				", threadsConnected=" + threadsConnected +
+				", threadsRunning=" + threadsRunning +
+				", threadsCreated=" + threadsCreated +
+				", threadsCached=" + threadsCached +
+				", connections=" + connections +
+				", abortedClients=" + abortedClients +
+				", abortedConnects=" + abortedConnects +
+				", bytesReceived=" + bytesReceived +
+				", bytesReceivedPersecond='" + bytesReceivedPersecond + '\'' +
+				", bytesSent=" + bytesSent +
+				", bytesSentPersecond='" + bytesSentPersecond + '\'' +
+				", comSelect=" + comSelect +
+				", comSelectPersecond='" + comSelectPersecond + '\'' +
+				", comInsert=" + comInsert +
+				", comInsertPersecond='" + comInsertPersecond + '\'' +
+				", comUpdate=" + comUpdate +
+				", comUpdatePersecond='" + comUpdatePersecond + '\'' +
+				", comDelete=" + comDelete +
+				", comDeletePersecond='" + comDeletePersecond + '\'' +
+				", comCommit=" + comCommit +
+				", comCommitPersecond='" + comCommitPersecond + '\'' +
+				", comRollback=" + comRollback +
+				", comRollbackPersecond='" + comRollbackPersecond + '\'' +
+				", questions=" + questions +
+				", questionsPersecond='" + questionsPersecond + '\'' +
+				", transactions=" + transactions +
+				", transactionsPersecond='" + transactionsPersecond + '\'' +
+				", createdTmpTables=" + createdTmpTables +
+				", createdTmpTablesPersecond='" + createdTmpTablesPersecond + '\'' +
+				", createdTmpDiskTables=" + createdTmpDiskTables +
+				", createdTmpDiskTablesPersecond='" + createdTmpDiskTablesPersecond + '\'' +
+				", createdTmpFiles=" + createdTmpFiles +
+				", createdTmpFilesPersecond='" + createdTmpFilesPersecond + '\'' +
+				", innodbDataReads=" + innodbDataReads +
+				", innodbDataReadsPersecond='" + innodbDataReadsPersecond + '\'' +
+				", innodbDataWrites=" + innodbDataWrites +
+				", innodbDataWritesPersecond='" + innodbDataWritesPersecond + '\'' +
+				", innodbDataFsyncs=" + innodbDataFsyncs +
+				", innodbDataFsyncsPersecond='" + innodbDataFsyncsPersecond + '\'' +
+				", innodbDataRead=" + innodbDataRead +
+				", innodbDataReadPersecond='" + innodbDataReadPersecond + '\'' +
+				", innodbDataWritten=" + innodbDataWritten +
+				", innodbDataWrittenPersecond='" + innodbDataWrittenPersecond + '\'' +
+				", innodbBufferPoolPagesDirty=" + innodbBufferPoolPagesDirty +
+				", innodbBufferPoolPagesDirtyPersecond='" + innodbBufferPoolPagesDirtyPersecond + '\'' +
+				", innodbBufferPoolPagesFlushed=" + innodbBufferPoolPagesFlushed +
+				", innodbBufferPoolPagesFlushedPersecond='" + innodbBufferPoolPagesFlushedPersecond + '\'' +
+				", innodbBufferReadHitRatio='" + innodbBufferReadHitRatio + '\'' +
+				", innodbBufferUsage='" + innodbBufferUsage + '\'' +
+				", innodbRowsInserted=" + innodbRowsInserted +
+				", innodbRowsInsertedPersecond='" + innodbRowsInsertedPersecond + '\'' +
+				", innodbRowsUpdated=" + innodbRowsUpdated +
+				", innodbRowsUpdatedPersecond='" + innodbRowsUpdatedPersecond + '\'' +
+				", innodbRowsDeleted=" + innodbRowsDeleted +
+				", innodbRowsDeletedPersecond='" + innodbRowsDeletedPersecond + '\'' +
+				", innodbBufferPoolPagesTotal=" + innodbBufferPoolPagesTotal +
+				", innodbBufferPoolPagesFree=" + innodbBufferPoolPagesFree +
+				", innodbPageSize=" + innodbPageSize +
+				", slowQueries=" + slowQueries +
+				", slaveDelay=" + slaveDelay +
+				", createTime=" + createTime +
+				", updateDate=" + updateDate +
+				'}';
+	}
 }

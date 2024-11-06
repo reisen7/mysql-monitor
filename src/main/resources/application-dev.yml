@@ -1,7 +1,5 @@
 #dev环境  mysql7.0
 spring:
-  main:
-    allow-bean-definition-overriding: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver

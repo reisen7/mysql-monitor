@@ -1,6 +1,8 @@
 package com.fc.v2;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.monitor.MonitorServerExample;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
@@ -57,9 +59,9 @@ public class ShardingTestApplication {
     @Test
     public void doPostTest(){
         MonitorServerExample monitorServerExample = new MonitorServerExample();
-
         String jsonString = JSON.toJSONString(monitorServerExample);
         String message = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/getListMonitorServer", JSONObject.parseObject(jsonString));
-        System.out.println(message);
+        List<MonitorServer> MonitorServerList = JSON.parseObject(message, new TypeReference<List<MonitorServer>>(){});
+        System.out.println(MonitorServerList.get(0));
     }
 }

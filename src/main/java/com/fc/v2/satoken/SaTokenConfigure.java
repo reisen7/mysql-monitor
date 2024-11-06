@@ -46,6 +46,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 			"/", "/index",
 			// 任务调度暂时放开
 			"/quartz/**",
+			"/ServerStatusHistoryController/**",
 			// 开放APicontroller
 			"/ApiController/**",
 			"/oss/**", "/druid/**"};

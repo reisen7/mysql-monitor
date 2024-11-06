@@ -5,10 +5,9 @@ import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.monitor.MonitorServerExample;
 import com.fc.v2.model.monitor.ServerStatusHistory;
 import com.fc.v2.model.monitor.ServerStatusHistoryExample;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fc.v2.util.DateUtils;
+import com.github.pagehelper.PageHelper;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,17 +28,24 @@ public class ServerStatusHistoryController extends BaseController {
      * @return
      */
     @PostMapping("/getListMonitorServer")
-    private List<MonitorServer> getListMonitorServer(MonitorServerExample monitorServerExample){
-        return monitorServerService.selectByExample(monitorServerExample);
+    private List<MonitorServer> getListMonitorServer(@RequestBody MonitorServerExample monitorServerExample){
+        return monitorServerService.selectByExample(null);
     }
 
     /**
      *
-     * @param serverStatusHistoryExample
+     * @param serverId
      * @return
      */
     @PostMapping("/getListServerStatusHistory")
-    private List<ServerStatusHistory> getListServerStatusHistory(ServerStatusHistoryExample serverStatusHistoryExample){
+    private List<ServerStatusHistory> getListServerStatusHistory(Long serverId){
+        ServerStatusHistoryExample serverStatusHistoryExample = new ServerStatusHistoryExample();
+            //获取最新状态记录的ID
+        ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
+        criteria.andServerIdEqualTo(serverId);
+        criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
+            serverStatusHistoryExample.setOrderByClause("update_date desc");
+            PageHelper.startPage(0, 1);
         return serverStatusHistoryService.selectByExample(serverStatusHistoryExample);
     }
 
@@ -59,7 +65,7 @@ public class ServerStatusHistoryController extends BaseController {
      * @return
      */
     @PostMapping("/insertServerStatusHistory")
-    private ServerStatusHistory insertServerStatusHistory(ServerStatusHistory serverStatusHistory){
+    private ServerStatusHistory insertServerStatusHistory(@RequestBody ServerStatusHistory serverStatusHistory){
         int n = serverStatusHistoryService.insertSelective(serverStatusHistory);
         return serverStatusHistory;
     }
@@ -70,7 +76,7 @@ public class ServerStatusHistoryController extends BaseController {
      * @return
      */
     @PostMapping("/updateServerStatusHistory")
-    private int updateServerStatusHistory(ServerStatusHistory serverStatusHistory){
+    private int updateServerStatusHistory(@RequestBody ServerStatusHistory serverStatusHistory){
         return serverStatusHistoryService.updateByPrimaryKeySelective(serverStatusHistory);
     }
 }

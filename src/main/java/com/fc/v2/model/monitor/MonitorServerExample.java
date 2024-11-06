@@ -1035,5 +1035,16 @@ public class MonitorServerExample {
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
         }
+
+        public Criterion(String condition, Object value, Object secondValue, boolean noValue, boolean singleValue, boolean betweenValue, boolean listValue, String typeHandler) {
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.noValue = noValue;
+            this.singleValue = singleValue;
+            this.betweenValue = betweenValue;
+            this.listValue = listValue;
+            this.typeHandler = typeHandler;
+        }
     }
 }

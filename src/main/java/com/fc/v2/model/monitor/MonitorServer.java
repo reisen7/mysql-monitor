@@ -172,6 +172,21 @@ public class MonitorServer implements Serializable {
 		}
 		return "";
 	}
-	
 
+	@Override
+	public String toString() {
+		return "MonitorServer{" +
+				"id=" + id +
+				", host='" + host + '\'' +
+				", port=" + port +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", version='" + version + '\'' +
+				", tags='" + tags + '\'' +
+				", clusterId=" + clusterId +
+				", monitorCluster=" + monitorCluster +
+				", createTime=" + createTime +
+				", updateTime=" + updateTime +
+				'}';
+	}
 }

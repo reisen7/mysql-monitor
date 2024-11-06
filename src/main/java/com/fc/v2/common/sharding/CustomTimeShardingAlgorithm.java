@@ -55,7 +55,10 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
 
         String logicTableName = preciseShardingValue.getLogicTableName();
         String actualTableName = logicTableName.concat("_").concat(tableSuffix);
-
+        if (collection.contains(logicTableName)){
+            collection.add(actualTableName);
+            return actualTableName;
+        }
         // 检查是否需要初始化
         if (collection.size() == 1) {
             // 如果只有一个表，说明需要获取所有表名
