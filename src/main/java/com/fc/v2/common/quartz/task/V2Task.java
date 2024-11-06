@@ -1,6 +1,14 @@
 package com.fc.v2.common.quartz.task;
 import cn.hutool.core.date.DateUtil;
+import com.fc.v2.model.monitor.ServerStatusHistory;
+import com.fc.v2.model.monitor.ServerStatusHistoryExample;
+import com.fc.v2.service.monitor.ServerStatusHistoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  *测试类
@@ -9,13 +17,22 @@ import org.springframework.stereotype.Component;
  * @Auther Jan  橙寂
  * @DATE 2019/9/2 0002 15:33
  */
+@Order(value = 3) // 数字越小，越先执行
 @Component("v2Task")
 public class V2Task {
+    @Autowired
+    private ServerStatusHistoryService serverStatusHistoryService;
     /**
      * 无参的任务
      */
     public void runTask1()
     {
+        ServerStatusHistoryExample example = new ServerStatusHistoryExample();
+        example.createCriteria().andCreateTimeEqualTo(new Date());
+        List<ServerStatusHistory> serverStatusHistoryList = serverStatusHistoryService.selectByExample(example);
+        example.setOrderByClause(" create_time desc limit 1");
+        System.out.println(">>>>>>>>>> 【Result】<<<<<<<<<< ");
+        System.out.println(serverStatusHistoryList.size());
         System.out.println("正在执行定时任务，无参方法 runTask1 ");
     }
 

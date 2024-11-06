@@ -90,6 +90,15 @@ public class ServerStatusHistoryService  implements BaseService<ServerStatusHist
 		record.setId(SnowflakeIdWorker.getUUID());
 		return serverStatusHistoryMapper.insertSelective(record);
 	}
+
+
+	/**
+	 * 添加
+	 */
+	public int insert(ServerStatusHistory record) {
+		record.setId(SnowflakeIdWorker.getUUID());
+		return serverStatusHistoryMapper.insert(record);
+	}
 	
 	
 	@Override

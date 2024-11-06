@@ -1,6 +1,7 @@
 package com.fc.v2.common.sharding;
 import com.fc.v2.util.SpringUtil;
 import com.google.common.collect.Range;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName CustomTimeShardingAlgorithm
@@ -28,6 +30,9 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    @Getter
+    private int autoTablesAmount;
+
     /**
      * 精准分片
      * @param collection 对应分片库中所有分片表的集合
@@ -36,8 +41,9 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
      */
     @Override
     public String doSharding(Collection<String> collection, PreciseShardingValue<Date> preciseShardingValue) {
-        log.info("进入doSharding返回字符串");
+        log.info(">>>>>>>>>> 【INFO】精确分片，节点配置表名：{}" ,collection);
         Object value = preciseShardingValue.getValue();
+        log.info(">>>>>>>>>> 【INFO】分片键值：{}", value);
         String tableSuffix = null;
         if(value instanceof Date){
             LocalDate localDate = ((Date) value).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -46,12 +52,24 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
             String column = (String)value;
             tableSuffix = LocalDateTime.parse(column, formatter).format(DateTimeFormatter.ofPattern("yyyyMM"));
         }
+
         String logicTableName = preciseShardingValue.getLogicTableName();
         String actualTableName = logicTableName.concat("_").concat(tableSuffix);
+
+        // 检查是否需要初始化
+        if (collection.size() == 1) {
+            // 如果只有一个表，说明需要获取所有表名
+            List<String> allTableNameBySchema = ShardingAlgorithmTool.getAllTableNameBySchema(logicTableName);
+            collection.clear();
+            collection.addAll(allTableNameBySchema);
+            autoTablesAmount = allTableNameBySchema.size();
+            return getShardingTableAndCreate(logicTableName,actualTableName,collection);
+        }
+
         if(!collection.contains(actualTableName)){
             collection.add(actualTableName);
         }
-        return actualTableName;
+        return getShardingTableAndCreate(logicTableName,actualTableName,collection);
     }
 
     /**
@@ -62,7 +80,7 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
      */
     @Override
     public Collection<String> doSharding(Collection<String> collection, RangeShardingValue<Date> rangeShardingValue) {
-        log.info("进入doSharding返回列表");
+        log.info(">>>>>>>>>> 【INFO】范围分片，节点配置表名：{}" ,collection);
         // 逻辑表名
         String logicTableName = rangeShardingValue.getLogicTableName();
         // 范围参数
@@ -72,8 +90,8 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
         LocalDateTime end = null;
         Object lowerEndpoint = (Object)valueRange.lowerEndpoint();
         Object upperEndpoint = (Object)valueRange.upperEndpoint();
-        log.info("lowerEndpoint ======"+lowerEndpoint.toString());
-        log.info("upperEndpoint ======"+upperEndpoint.toString());
+        log.info(">>>>>>>>>> lowerEndpoint ======"+lowerEndpoint.toString());
+        log.info(">>>>>>>>>> upperEndpoint ======"+upperEndpoint.toString());
         if(lowerEndpoint instanceof  String){
             String lower = (String) lowerEndpoint;
             String upper = (String) upperEndpoint;
@@ -82,15 +100,19 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
         }else{
             start = valueRange.lowerEndpoint().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             end = valueRange.upperEndpoint().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            log.info("start ======",start.format(DateTimeFormatter.ofPattern("yyyyMM")));
-            log.info("end ======"+end.format(DateTimeFormatter.ofPattern("yyyyMM")));
+            log.info(">>>>>>>>>> start ====== {}",start.format(DateTimeFormatter.ofPattern("yyyyMM")));
+            log.info(">>>>>>>>>> end ====== {}",end.format(DateTimeFormatter.ofPattern("yyyyMM")));
         }
         if(end.isAfter(LocalDateTime.now())){
             end = LocalDateTime.now();
         }
+        // 开始和结束为同一月，直接返回当前月
+        if (start.format(DateTimeFormatter.ofPattern("yyyyMM")).equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))){
+            return Collections.singleton(getTableNameByDate(start,logicTableName));
+        }
         // 查询范围的表
         Set<String> queryRangeTables = extracted(logicTableName, start, end);
-        return queryRangeTables;
+        return getShardingTablesAndCreate(logicTableName,queryRangeTables,collection);
     }
 
     @Override
@@ -138,4 +160,47 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
     public void init(Properties properties) {
 
     }
+
+
+    /**
+     * 检查分表获取的表名是否存在，不存在则自动建表
+     *
+     * @param logicTableName        逻辑表
+     * @param resultTableNames     真实表名，例：t_user_202201
+     * @param availableTargetNames 可用的数据库表名
+     * @return 存在于数据库中的真实表名集合
+     */
+    public Set<String> getShardingTablesAndCreate(String logicTableName, Collection<String> resultTableNames, Collection<String> availableTargetNames) {
+        return resultTableNames.stream().map(o -> getShardingTableAndCreate(logicTableName, o, availableTargetNames)).collect(Collectors.toSet());
+    }
+
+
+    /**
+     * 检查分表获取的表名是否存在，不存在则自动建表
+     * @param logicTableName   逻辑表
+     * @param resultTableName 真实表名，例：t_user_202201
+     * @return 确认存在于数据库中的真实表名
+     */
+    private String getShardingTableAndCreate(String logicTableName, String resultTableName, Collection<String> availableTargetNames) {
+        // 缓存中有此表则返回，没有则判断创建
+        log.info("resultTableName ： {}",resultTableName);
+        log.info("boolean ： {}",availableTargetNames.contains(resultTableName));
+        log.info("availableTargetNames ： {}",availableTargetNames);
+        if (availableTargetNames.contains(resultTableName)) {
+            return resultTableName;
+        } else {
+            // 检查分表获取的表名不存在，需要自动建表
+            boolean isSuccess = ShardingAlgorithmTool.createShardingTable(logicTableName, resultTableName);
+            if (isSuccess) {
+                // 如果建表成功，需要更新缓存
+                availableTargetNames.add(resultTableName);
+                autoTablesAmount++;
+                return resultTableName;
+            } else {
+                // 如果建表失败，返回逻辑空表
+                return logicTableName;
+            }
+        }
+    }
+
 }

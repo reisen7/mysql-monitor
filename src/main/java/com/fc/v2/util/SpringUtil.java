@@ -13,7 +13,6 @@ import java.util.Collection;
  * @date 2024年11月05日
  **/
 
-
 @Component
 public final class SpringUtil implements ApplicationContextAware {
     private static ApplicationContext applicationContext = null;

@@ -42,6 +42,7 @@ public abstract class AbstractQuartzJob implements Job {
             before(context, sysJob);
             if (sysJob != null)
             {
+                log.info("context : {}",context);
                 doExecute(context, sysJob);
             }
             after(context, sysJob, null);

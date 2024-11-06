@@ -12,13 +12,17 @@ import com.fc.v2.service.monitor.impl.AbstractService;
 import com.fc.v2.util.DateUtils;
 import com.fc.v2.util.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
+import com.alibaba.fastjson.JSON;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +33,7 @@ import java.util.Map;
  * @Description
  * @date 2024年10月24日
  **/
+@Order(value = 3) // 数字越小，越先执行
 @Component("UpdateMysqlStatusTask")
 public class UpdateMysqlStatusTask extends AbstractService {
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionResolver.class);
@@ -49,11 +54,12 @@ public class UpdateMysqlStatusTask extends AbstractService {
     @Autowired
     private ServerStatusHistoryService serverStatusHistoryService;
 
-
     public void execute() {
         // 获取MySQL服务器信息
-        logger.info("正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
+        logger.info(">>>>>>>>>> 正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
         MonitorServerExample monitorServerExample = new MonitorServerExample();
+
+        String jsonString = JSON.toJSONString(monitorServerExample);
         List<MonitorServer> monitorServers = monitorServerService.selectByExample(monitorServerExample);
 
         for (MonitorServer monitorServer : monitorServers) {
@@ -74,7 +80,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
             List<Map<Object, Object>> statusList = statusQueryResult.getData();
             ServerStatusHistory statusHistory = new ServerStatusHistory();
             statusHistory.setServerId(serverId);
-            statusHistory.setCreateTime(new Date());
+            statusHistory.setCreateTime(Calendar.getInstance().getTime());
             String Variable_name = "VARIABLE_NAME";//"Variable_name";
             String Value = "VARIABLE_VALUE";//Value;
 
@@ -234,11 +240,11 @@ public class UpdateMysqlStatusTask extends AbstractService {
             serverStatusHistoryExample.setOrderByClause("update_date desc");
             PageHelper.startPage(0, 1);
             String lastId = SnowflakeIdWorker.getUUID();
-            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService
-                    .selectByExample(serverStatusHistoryExample);
+            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService.selectByExample(serverStatusHistoryExample);
             if (!lastServerStatusHistorys.isEmpty()) {
                 lastId = lastServerStatusHistorys.get(0).getId();
             }
+
             serverStatusHistoryService.insertSelective(statusHistory);
 
             // 根据上一个记录的指标值，做增量计算，再做平均值计算
@@ -310,7 +316,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
 
         }
 
-        logger.info("UpdateMysqlStatusTask 执行完成 ");
+        logger.info(">>>>>>>>>> UpdateMysqlStatusTask 执行完成 ");
     }
 
     /**

@@ -1,8 +1,10 @@
 package com.fc.v2.common.sharding;
 
+import com.fc.v2.model.monitor.ServerStatusHistoryExample;
 import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import com.fc.v2.util.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.Server;
 import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
 import org.apache.shardingsphere.sharding.api.config.rule.ShardingTableRuleConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,10 @@ import java.util.*;
  **/
 
 
-@Order(value = 1) // 数字越小，越先执行
+@Order(value = 2) // 数字越小，越先执行
 @Component
 @Slf4j
 public class ShardingTablesLoadRunner implements CommandLineRunner {
-
-
 
 
     @Autowired
@@ -45,10 +45,15 @@ public class ShardingTablesLoadRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+//        ServerStatusHistoryExample example = new ServerStatusHistoryExample();
+//        example.createCriteria().andCreateTimeEqualTo(new Date());
+//        example.setOrderByClause(" create_time desc limit 1");
+//        serverStatusHistoryService.selectByExample(example);
         ShardingAlgorithmTool.tableNameCacheReload();
+
     }
 
-    @Scheduled(cron = "0 0 23 * * ?")
+    @Scheduled(cron = "*/10 * * * *")
     public void Scheduled(){
         final Calendar c = Calendar.getInstance();
         //c.get(Calendar.DATE) 当前时间
@@ -59,8 +64,8 @@ public class ShardingTablesLoadRunner implements CommandLineRunner {
             String monthStr = dateFormat.format(c.getTime());
             for (ShardingTableRuleConfiguration x : shardingRuleConfig.getTables()){
                 String logicTableName = x.getLogicTable();
-                System.out.println("配置的分表表名: " + logicTableName);
-                DataSourceTool.executeSql(Collections.singletonList("CREATE TABLE IF NOT EXISTS `" + logicTableName + '_' + monthStr + "` LIKE `" + logicTableName + "`;"));
+                log.info("配置的分表表名: " + logicTableName);
+                ShardingAlgorithmTool.executeSql(Collections.singletonList("CREATE TABLE IF NOT EXISTS `" + logicTableName + '_' + monthStr + "` LIKE `" + logicTableName + "`;"));
             }
 
         }

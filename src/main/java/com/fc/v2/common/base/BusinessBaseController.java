@@ -3,6 +3,7 @@ package com.fc.v2.common.base;
 import com.fc.v2.service.monitor.DashboardService;
 import com.fc.v2.service.monitor.MonitorClusterService;
 import com.fc.v2.service.monitor.MonitorServerService;
+import com.fc.v2.service.monitor.ServerStatusHistoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,4 +27,8 @@ public class BusinessBaseController {
 
     @Autowired
     protected DashboardService dashboardService;
+
+    @Autowired
+    protected ServerStatusHistoryService serverStatusHistoryService;
+
 }

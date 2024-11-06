@@ -1,22 +1,16 @@
 #dev环境  mysql7.0
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://1.92.144.205:3306/mysql-monitor?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT
+    username: mysql-monitor
+    password: 7bxWHBMnTfM7zYNi
     #druid连接池配置
     druid:
-     #主库数据源
-     master:
-        url: jdbc:mysql://1.92.144.205:3306/mysql-monitor?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT
-        username: mysql-monitor
-        password: 7bxWHBMnTfM7zYNi
-     #备数据源 #关闭
-     slave:
-        enabled: false
-        url: jdbc:mysql://localhost:3306/springbootv3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&autoReconnect=true&useSSL=false
-        username: root
-        password: root
-        #配置初始化连接数大小
+     #配置初始化连接数大小
      initial-size: 10
      # 最大连接数
      maxActive: 50
@@ -74,22 +68,22 @@ spring:
               # 分片策略
               strategy: standard
               # 自定义分配算法
-              algorithmClassName: com.rookie.shardingsphere.CustomTimeShardingAlgorithm
+              algorithmClassName: com.fc.v2.common.sharding.CustomTimeShardingAlgorithm
             # 类型：自定义策略
             type: CLASS_BASED
         tables:
           server_status_history:
-          # 要分表的表名
-          logicTable: server_status_history
-          #自定义节点表
-          actualDataNodes: db0.$->{com.rookie.shardingsphere.ShardingAlgorithmTool.cacheTableNames()}
-          tableStrategy:
-            # 使用标准分片策略
-            standard:
-              # 配置分片字段
-              shardingColumn: create_time
-              # 分片算法名称，不支持大写字母和下划线，否则启动就会报错
-              shardingAlgorithmName: time-sharding-algorithm
+            # 要分表的表名
+            logicTable: server_status_history
+            #自定义节点表
+            actualDataNodes: db0.$->{com.fc.v2.common.sharding.ShardingAlgorithmTool.cacheTableNames()}
+            tableStrategy:
+              # 使用标准分片策略
+              standard:
+                # 配置分片字段
+                shardingColumn: create_time
+                # 分片算法名称，不支持大写字母和下划线，否则启动就会报错
+                shardingAlgorithmName: time-sharding-algorithm
     props:
       sql-show: true
 
