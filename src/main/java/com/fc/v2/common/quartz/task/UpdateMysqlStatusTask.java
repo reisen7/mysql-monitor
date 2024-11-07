@@ -3,6 +3,7 @@ package com.fc.v2.common.quartz.task;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.fc.v2.common.exception.GlobalExceptionResolver;
+import com.fc.v2.common.spring.SpringUtils;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.monitor.MonitorServerExample;
@@ -14,6 +15,7 @@ import com.fc.v2.service.monitor.impl.AbstractService;
 import com.fc.v2.util.DateUtils;
 import com.fc.v2.util.HttpUtil;
 import com.fc.v2.util.SnowflakeIdWorker;
+import com.fc.v2.util.SpringUtil;
 import com.github.pagehelper.PageHelper;
 import com.alibaba.fastjson.JSON;
 
@@ -24,6 +26,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +39,7 @@ import java.util.Map;
  * @Description
  * @date 2024年10月24日
  **/
-@Order(value = 3) // 数字越小，越先执行
+
 @Component("UpdateMysqlStatusTask")
 public class UpdateMysqlStatusTask extends AbstractService {
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionResolver.class);
@@ -49,21 +52,26 @@ public class UpdateMysqlStatusTask extends AbstractService {
     // where VARIABLE_NAME
     // in('open_tables','threads_connected','threads_running','threads_created','threads_cached','connections','aborted_clients','aborted_connects','bytes_received','bytes_sent','com_select','com_insert','com_update','com_delete','com_commit','com_rollback','questions','transactions','created_tmp_tables','created_tmp_disk_tables','created_tmp_files','innodb_data_reads','innodb_data_writes','innodb_data_fsyncs','innodb_data_read','innodb_data_written','innodb_buffer_pool_pages_dirty','innodb_buffer_pool_pages_flushed','innodb_rows_inserted','innodb_rows_updated','innodb_rows_deleted','slow_queries','slave_delay')";
     private static final String STATUS_SQL = "show global status where VARIABLE_NAME in('uptime','open_tables','threads_connected','threads_running','threads_created','threads_cached','connections','aborted_clients','aborted_connects','bytes_received','bytes_sent','com_select','com_insert','com_update','com_delete','com_commit','com_rollback','questions','transactions','created_tmp_tables','created_tmp_disk_tables','created_tmp_files','innodb_data_reads','innodb_data_writes','innodb_data_fsyncs','innodb_data_read','innodb_data_written','innodb_buffer_pool_pages_dirty','innodb_buffer_pool_pages_flushed','innodb_rows_inserted','innodb_rows_updated','innodb_rows_deleted','slow_queries','slave_delay','innodb_buffer_pool_pages_total','innodb_buffer_pool_pages_free','innodb_page_size')";
-    
-    
+
+
     @Autowired
-    protected MonitorServerService monitorServerService;
+    private MonitorServerService monitorServerService;
 
     @Autowired
     private ServerStatusHistoryService serverStatusHistoryService;
+
+//    @PostConstruct
+//    public void init(){
+//        updateMysqlStatusTask = this;
+//        updateMysqlStatusTask.monitorServerService = this.monitorServerService;
+//        updateMysqlStatusTask.updateMysqlStatus = this.updateMysqlStatus;
+//    }
 
     public void execute() {
         // 获取MySQL服务器信息
         logger.info(">>>>>>>>>> 正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
         MonitorServerExample monitorServerExample = new MonitorServerExample();
-        String jsonString = JSON.toJSONString(monitorServerExample);
-        String message = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/getListMonitorServer", JSONObject.parseObject(jsonString));
-        List<MonitorServer> monitorServers = JSON.parseObject(message, new TypeReference<List<MonitorServer>>(){});
+        List<MonitorServer> monitorServers = monitorServerService.selectByExample(monitorServerExample);
 
         for (MonitorServer monitorServer : monitorServers) {
             Long serverId = monitorServer.getId();
@@ -83,7 +91,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
             List<Map<Object, Object>> statusList = statusQueryResult.getData();
             ServerStatusHistory statusHistory = new ServerStatusHistory();
             statusHistory.setServerId(serverId);
-            statusHistory.setCreateTime(Calendar.getInstance().getTime());
+            statusHistory.setCreateTime(new Date());
             String Variable_name = "VARIABLE_NAME";//"Variable_name";
             String Value = "VARIABLE_VALUE";//Value;
 
@@ -235,33 +243,23 @@ public class UpdateMysqlStatusTask extends AbstractService {
                 }
             }
 
-//            ServerStatusHistoryExample serverStatusHistoryExample = new ServerStatusHistoryExample();
-//            //获取最新状态记录的ID
-//            ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
-//            criteria.andServerIdEqualTo(serverId);
-//            criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
-//            serverStatusHistoryExample.setOrderByClause("update_date desc");
-//            PageHelper.startPage(0, 1);
+            ServerStatusHistoryExample serverStatusHistoryExample = new ServerStatusHistoryExample();
+            //获取最新状态记录的ID
+            ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
+            criteria.andServerIdEqualTo(serverId);
+            criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
+            serverStatusHistoryExample.setOrderByClause("update_date desc");
+            PageHelper.startPage(0, 1);
             String lastId = SnowflakeIdWorker.getUUID();
-
-            String serverStatusHistoryJsonString = JSON.toJSONString("{\"name\":\"张三\",\"age\":30,\"email\":\"zhangsan@example.com\"}\n");
-            String serverStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/getListServerStatusHistory?serverId="+serverId, JSONObject.parseObject("{\"name\":\"张三\",\"age\":30,\"email\":\"zhangsan@example.com\"}\n"));
-            List<ServerStatusHistory> lastServerStatusHistorys = JSON.parseObject(serverStatusHistoryMessage, new TypeReference<List<ServerStatusHistory>>(){});
-
+            List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService
+                    .selectByExample(serverStatusHistoryExample);
             if (!lastServerStatusHistorys.isEmpty()) {
                 lastId = lastServerStatusHistorys.get(0).getId();
             }
+            serverStatusHistoryService.insertSelective(statusHistory);
 
-            String insertServerStatusHistoryJsonString = JSON.toJSONString(statusHistory);
-            String insertStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/insertServerStatusHistory", JSONObject.parseObject(insertServerStatusHistoryJsonString));
-            statusHistory = JSON.parseObject(insertStatusHistoryMessage,ServerStatusHistory.class);
-//            serverStatusHistoryService.insertSelective(statusHistory);
-
-
-            String selectStatusHistoryMessage = HttpUtil.doGet("http://localhost:8080/ServerStatusHistoryController/getOneServerStatusHistory?lastId="+lastId);
-            ServerStatusHistory lastStatusHistory = JSON.parseObject(selectStatusHistoryMessage,ServerStatusHistory.class);
             // 根据上一个记录的指标值，做增量计算，再做平均值计算
-//            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId);
+            ServerStatusHistory lastStatusHistory = serverStatusHistoryService.selectByPrimaryKey(lastId);
 
             if (lastStatusHistory != null) {
                 // 计算QPS
@@ -324,10 +322,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
                         .setInnodbRowsDeletedPersecond(getInnodbRowsDeletedPersecond(statusHistory, lastStatusHistory));
 
 
-                String updateServerStatusHistoryJsonString = JSON.toJSONString(statusHistory);
-                String updateStatusHistoryMessage = HttpUtil.doPost("http://localhost:8080/ServerStatusHistoryController/updateServerStatusHistory", JSONObject.parseObject(updateServerStatusHistoryJsonString));
-
-//                serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
+                serverStatusHistoryService.updateByPrimaryKeySelective(statusHistory);
             }
 
         }

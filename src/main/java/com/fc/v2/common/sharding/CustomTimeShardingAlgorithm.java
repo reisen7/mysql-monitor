@@ -43,7 +43,6 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
     public String doSharding(Collection<String> collection, PreciseShardingValue<Date> preciseShardingValue) {
         log.info(">>>>>>>>>> 【INFO】精确分片，节点配置表名：{}" ,collection);
         Object value = preciseShardingValue.getValue();
-        log.info(">>>>>>>>>> 【INFO】分片键值：{}", value);
         String tableSuffix = null;
         if(value instanceof Date){
             LocalDate localDate = ((Date) value).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -55,10 +54,6 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
 
         String logicTableName = preciseShardingValue.getLogicTableName();
         String actualTableName = logicTableName.concat("_").concat(tableSuffix);
-        if (collection.contains(logicTableName)){
-            collection.add(actualTableName);
-            return actualTableName;
-        }
         // 检查是否需要初始化
         if (collection.size() == 1) {
             // 如果只有一个表，说明需要获取所有表名
@@ -110,9 +105,9 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
             end = LocalDateTime.now();
         }
         // 开始和结束为同一月，直接返回当前月
-        if (start.format(DateTimeFormatter.ofPattern("yyyyMM")).equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))){
-            return Collections.singleton(getTableNameByDate(start,logicTableName));
-        }
+//        if (start.format(DateTimeFormatter.ofPattern("yyyyMM")).equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))){
+//            return Collections.singleton(getTableNameByDate(start,logicTableName));
+//        }
         // 查询范围的表
         Set<String> queryRangeTables = extracted(logicTableName, start, end);
         return getShardingTablesAndCreate(logicTableName,queryRangeTables,collection);
@@ -186,9 +181,6 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
      */
     private String getShardingTableAndCreate(String logicTableName, String resultTableName, Collection<String> availableTargetNames) {
         // 缓存中有此表则返回，没有则判断创建
-        log.info("resultTableName ： {}",resultTableName);
-        log.info("boolean ： {}",availableTargetNames.contains(resultTableName));
-        log.info("availableTargetNames ： {}",availableTargetNames);
         if (availableTargetNames.contains(resultTableName)) {
             return resultTableName;
         } else {
