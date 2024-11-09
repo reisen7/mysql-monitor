@@ -3,6 +3,7 @@ package com.fc.v2.common.quartz.task;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.fc.v2.common.exception.GlobalExceptionResolver;
+import com.fc.v2.common.spring.SpringUtils;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.model.monitor.MonitorServer;
 import com.fc.v2.model.monitor.MonitorServerExample;
@@ -14,6 +15,7 @@ import com.fc.v2.service.monitor.impl.AbstractService;
 import com.fc.v2.util.DateUtils;
 import com.fc.v2.util.HttpUtil;
 import com.fc.v2.util.SnowflakeIdWorker;
+import com.fc.v2.util.SpringUtil;
 import com.github.pagehelper.PageHelper;
 import com.alibaba.fastjson.JSON;
 
@@ -24,6 +26,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +39,7 @@ import java.util.Map;
  * @Description
  * @date 2024年10月24日
  **/
-@Order(value = 3) // 数字越小，越先执行
+
 @Component("UpdateMysqlStatusTask")
 public class UpdateMysqlStatusTask extends AbstractService {
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionResolver.class);
@@ -49,17 +52,24 @@ public class UpdateMysqlStatusTask extends AbstractService {
     // where VARIABLE_NAME
     // in('open_tables','threads_connected','threads_running','threads_created','threads_cached','connections','aborted_clients','aborted_connects','bytes_received','bytes_sent','com_select','com_insert','com_update','com_delete','com_commit','com_rollback','questions','transactions','created_tmp_tables','created_tmp_disk_tables','created_tmp_files','innodb_data_reads','innodb_data_writes','innodb_data_fsyncs','innodb_data_read','innodb_data_written','innodb_buffer_pool_pages_dirty','innodb_buffer_pool_pages_flushed','innodb_rows_inserted','innodb_rows_updated','innodb_rows_deleted','slow_queries','slave_delay')";
     private static final String STATUS_SQL = "show global status where VARIABLE_NAME in('uptime','open_tables','threads_connected','threads_running','threads_created','threads_cached','connections','aborted_clients','aborted_connects','bytes_received','bytes_sent','com_select','com_insert','com_update','com_delete','com_commit','com_rollback','questions','transactions','created_tmp_tables','created_tmp_disk_tables','created_tmp_files','innodb_data_reads','innodb_data_writes','innodb_data_fsyncs','innodb_data_read','innodb_data_written','innodb_buffer_pool_pages_dirty','innodb_buffer_pool_pages_flushed','innodb_rows_inserted','innodb_rows_updated','innodb_rows_deleted','slow_queries','slave_delay','innodb_buffer_pool_pages_total','innodb_buffer_pool_pages_free','innodb_page_size')";
-    
-    
+
+
     @Autowired
-    protected MonitorServerService monitorServerService;
+    private MonitorServerService monitorServerService;
 
     @Autowired
     private ServerStatusHistoryService serverStatusHistoryService;
 
+//    @PostConstruct
+//    public void init(){
+//        updateMysqlStatusTask = this;
+//        updateMysqlStatusTask.monitorServerService = this.monitorServerService;
+//        updateMysqlStatusTask.updateMysqlStatus = this.updateMysqlStatus;
+//    }
+
     public void execute() {
         // 获取MySQL服务器信息
-        logger.info("正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
+        logger.info(">>>>>>>>>> 正在执行定时任务，无参方法 UpdateMysqlStatusTask ");
         MonitorServerExample monitorServerExample = new MonitorServerExample();
         List<MonitorServer> monitorServers = monitorServerService.selectByExample(monitorServerExample);
 
@@ -238,10 +248,8 @@ public class UpdateMysqlStatusTask extends AbstractService {
             ServerStatusHistoryExample.Criteria criteria = serverStatusHistoryExample.createCriteria();
             criteria.andServerIdEqualTo(serverId);
             criteria.andCreateTimeBetween(DateUtils.getNowStartDate(),DateUtils.getNowEndDate());
-            serverStatusHistoryExample.setOrderByClause("create_time desc");
+            serverStatusHistoryExample.setOrderByClause("update_date desc");
             PageHelper.startPage(0, 1);
-
-
             String lastId = SnowflakeIdWorker.getUUID();
             List<ServerStatusHistory> lastServerStatusHistorys = serverStatusHistoryService
                     .selectByExample(serverStatusHistoryExample);
@@ -319,7 +327,7 @@ public class UpdateMysqlStatusTask extends AbstractService {
 
         }
 
-        logger.info("UpdateMysqlStatusTask 执行完成 ");
+        logger.info(">>>>>>>>>> UpdateMysqlStatusTask 执行完成 ");
     }
 
     /**

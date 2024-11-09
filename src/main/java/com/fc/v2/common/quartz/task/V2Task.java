@@ -53,10 +53,8 @@ public class V2Task {
      */
     public void scheduledDatabaseCheck()
     {
-        System.out.println("正在执行定时任务，无参方法 : scheduledDatabaseCheck ");
         UpdateMysqlStatusTask task = new UpdateMysqlStatusTask();
         task.execute();
-        System.out.println("执行完成");
     }
 
 }

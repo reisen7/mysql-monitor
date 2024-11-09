@@ -43,6 +43,7 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
     public String doSharding(Collection<String> collection, PreciseShardingValue<Date> preciseShardingValue) {
         log.info(">>>>>>>>>> 【INFO】精确分片，节点配置表名：{}" ,collection);
         Object value = preciseShardingValue.getValue();
+        log.info(">>>>>>>>>> 【INFO】分片键值：{}", value);
         String tableSuffix = null;
         if(value instanceof Date){
             LocalDate localDate = ((Date) value).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -54,15 +55,15 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
 
         String logicTableName = preciseShardingValue.getLogicTableName();
         String actualTableName = logicTableName.concat("_").concat(tableSuffix);
-        if (collection.contains(logicTableName) && collection.size() == 1){
+        if (collection.contains(logicTableName)){
             collection.add(actualTableName);
-            return getShardingTableAndCreate(logicTableName,actualTableName,collection);
+            return actualTableName;
         }
         // 检查是否需要初始化
         if (collection.size() == 1) {
             // 如果只有一个表，说明需要获取所有表名
             List<String> allTableNameBySchema = ShardingAlgorithmTool.getAllTableNameBySchema(logicTableName);
-//            collection.clear();
+            collection.clear();
             collection.addAll(allTableNameBySchema);
             autoTablesAmount = allTableNameBySchema.size();
             return getShardingTableAndCreate(logicTableName,actualTableName,collection);
@@ -185,6 +186,9 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
      */
     private String getShardingTableAndCreate(String logicTableName, String resultTableName, Collection<String> availableTargetNames) {
         // 缓存中有此表则返回，没有则判断创建
+        log.info("resultTableName ： {}",resultTableName);
+        log.info("boolean ： {}",availableTargetNames.contains(resultTableName));
+        log.info("availableTargetNames ： {}",availableTargetNames);
         if (availableTargetNames.contains(resultTableName)) {
             return resultTableName;
         } else {
