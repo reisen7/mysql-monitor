@@ -40,8 +40,8 @@ public class ShardingTestApplication {
         statusHistory.setId(SnowflakeIdWorker.getUUID());
         Calendar calendar = Calendar.getInstance(); // 获取一个Calendar实例
         calendar.setTime(date); // 设置Calendar的时间为当前Date对象的时间
-//        calendar.add(Calendar.MONTH, 1); // 给月份加1
-        statusHistory.setCreateTime(Calendar.getInstance().getTime());
+        calendar.add(Calendar.MONTH, 1); // 给月份加1
+        statusHistory.setCreateTime(calendar.getTime());
         serverStatusHistoryService.insertSelective(statusHistory);
     }
 
@@ -49,9 +49,7 @@ public class ShardingTestApplication {
     void listTest() {
 //        PageHelper.startPage(1, 1);
         ServerStatusHistoryExample example = new ServerStatusHistoryExample();
-        example.createCriteria().andCreateTimeEqualTo(new Date());
         List<ServerStatusHistory> serverStatusHistoryList = serverStatusHistoryService.selectByExample(example);
-        example.setOrderByClause(" create_time desc limit 1");
         System.out.println(">>>>>>>>>> 【Result】<<<<<<<<<< ");
         System.out.println(serverStatusHistoryList.size());
     }
