@@ -60,7 +60,7 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
     public AjaxResult getDashboardChart(Long serverId) {
         DashboardOverview dashboardOverview = new DashboardOverview();
         dashboardOverview = getQpsChatData(dashboardOverview, serverId);
-        dashboardOverview = getQueryChatData(dashboardOverview, serverId);
+//        dashboardOverview = getQueryChatData(dashboardOverview, serverId);
 
         if (dashboardOverview == null ){
             return AjaxResult.error("查询数据为空");

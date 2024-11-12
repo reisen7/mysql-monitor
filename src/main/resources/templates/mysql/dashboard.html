@@ -720,7 +720,7 @@
                     if (result.code == 200) {
                         var data = result.data;
                         fnLoadQPSChartData(data.qpsChartData);
-                        fnLoadQueryChatData(data.queryChartData);
+                        // fnLoadQueryChatData(data.queryChartData);
                     } else {
                         layer.msg(result.msg, {icon: 2, time: 1000});
                         layer.close(loader);

@@ -43,7 +43,7 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
     public String doSharding(Collection<String> collection, PreciseShardingValue<Date> preciseShardingValue) {
         log.info(">>>>>>>>>> 【INFO】精确分片，节点配置表名：{}" ,collection);
         Object value = preciseShardingValue.getValue();
-        log.info(">>>>>>>>>> 【INFO】分片键值：{}", value);
+//        log.info(">>>>>>>>>> 【INFO】分片键值：{}", value);
         String tableSuffix = null;
         if(value instanceof Date){
             LocalDate localDate = ((Date) value).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -93,8 +93,9 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
         LocalDateTime end = null;
         Object lowerEndpoint = (Object)valueRange.lowerEndpoint();
         Object upperEndpoint = (Object)valueRange.upperEndpoint();
-        log.info(">>>>>>>>>> lowerEndpoint ======"+lowerEndpoint.toString());
-        log.info(">>>>>>>>>> upperEndpoint ======"+upperEndpoint.toString());
+//        log.info(">>>>>>>>>> lowerEndpoint ======"+lowerEndpoint.toString());
+//        log.info(">>>>>>>>>> upperEndpoint ======"+upperEndpoint.toString());
+
         if(lowerEndpoint instanceof  String){
             String lower = (String) lowerEndpoint;
             String upper = (String) upperEndpoint;
