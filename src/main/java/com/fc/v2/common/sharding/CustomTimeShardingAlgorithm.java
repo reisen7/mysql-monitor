@@ -8,6 +8,7 @@ import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingV
 import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -33,6 +34,7 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
     @Getter
     private int autoTablesAmount;
 
+
     /**
      * 精准分片
      * @param collection 对应分片库中所有分片表的集合
@@ -55,18 +57,19 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
 
         String logicTableName = preciseShardingValue.getLogicTableName();
         String actualTableName = logicTableName.concat("_").concat(tableSuffix);
-        if (collection.contains(logicTableName)){
-            collection.add(actualTableName);
-            return actualTableName;
-        }
+
         // 检查是否需要初始化
         if (collection.size() == 1) {
+            if (collection.contains(logicTableName)){
+                collection.add(actualTableName);
+                return getShardingTableAndCreate(logicTableName,actualTableName,collection);
+            }
             // 如果只有一个表，说明需要获取所有表名
             List<String> allTableNameBySchema = ShardingAlgorithmTool.getAllTableNameBySchema(logicTableName);
             collection.clear();
             collection.addAll(allTableNameBySchema);
             autoTablesAmount = allTableNameBySchema.size();
-            return getShardingTableAndCreate(logicTableName,actualTableName,collection);
+            return actualTableName;
         }
 
         if(!collection.contains(actualTableName)){
@@ -93,9 +96,6 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
         LocalDateTime end = null;
         Object lowerEndpoint = (Object)valueRange.lowerEndpoint();
         Object upperEndpoint = (Object)valueRange.upperEndpoint();
-//        log.info(">>>>>>>>>> lowerEndpoint ======"+lowerEndpoint.toString());
-//        log.info(">>>>>>>>>> upperEndpoint ======"+upperEndpoint.toString());
-
         if(lowerEndpoint instanceof  String){
             String lower = (String) lowerEndpoint;
             String upper = (String) upperEndpoint;
@@ -110,8 +110,8 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
         if(end.isAfter(LocalDateTime.now())){
             end = LocalDateTime.now();
         }
-        // 开始和结束为同一月，直接返回当前月
-        if (start.format(DateTimeFormatter.ofPattern("yyyyMM")).equals(end.format(DateTimeFormatter.ofPattern("yyyyMM")))){
+        // 检查是否需要初始化
+        if (collection.size() == 1){
             return Collections.singleton(getTableNameByDate(start,logicTableName));
         }
         // 查询范围的表
@@ -187,9 +187,6 @@ public class CustomTimeShardingAlgorithm implements StandardShardingAlgorithm<Da
      */
     private String getShardingTableAndCreate(String logicTableName, String resultTableName, Collection<String> availableTargetNames) {
         // 缓存中有此表则返回，没有则判断创建
-        log.info("resultTableName ： {}",resultTableName);
-        log.info("boolean ： {}",availableTargetNames.contains(resultTableName));
-        log.info("availableTargetNames ： {}",availableTargetNames);
         if (availableTargetNames.contains(resultTableName)) {
             return resultTableName;
         } else {

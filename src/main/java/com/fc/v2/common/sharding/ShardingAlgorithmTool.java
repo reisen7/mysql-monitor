@@ -34,23 +34,18 @@ public class ShardingAlgorithmTool {
     private static final Set<String> tableNameCache = new CopyOnWriteArraySet<>();
 
     /** 数据库配置 */
-    private static final Environment ENV = SpringUtil.getBean(Environment.class);
+    private static final Environment ENV = SpringUtil.getApplicationContext().getEnvironment();
 
-    private static String DATASOURCE_URL = ENV.getProperty("my.sharding.create-table.url");
+    private static final String DATASOURCE_URL = ENV.getProperty("my.sharding.create-table.url");
 
-    private static String DATASOURCE_USERNAME = ENV.getProperty("my.sharding.create-table.username");
+    private static final String DATASOURCE_USERNAME = ENV.getProperty("my.sharding.create-table.username");
 
-    private static String DATASOURCE_PASSWORD = ENV.getProperty("my.sharding.create-table.password");
+    private static final String DATASOURCE_PASSWORD = ENV.getProperty("my.sharding.create-table.password");
+
+
 
     /** 表分片符号，例：t_user_202201 中，分片符号为 "_" */
     private static final String TABLE_SPLIT_SYMBOL = "_";
-
-
-
-    @PostConstruct
-    public void init() {
-
-    }
 
     /**
      * 缓存重载方法
