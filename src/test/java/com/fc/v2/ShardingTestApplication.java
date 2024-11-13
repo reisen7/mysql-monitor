@@ -49,6 +49,7 @@ public class ShardingTestApplication {
     void listTest() {
 //        PageHelper.startPage(1, 1);
         ServerStatusHistoryExample example = new ServerStatusHistoryExample();
+        example.createCriteria().andCreateTimeEqualTo(new Date());
         List<ServerStatusHistory> serverStatusHistoryList = serverStatusHistoryService.selectByExample(example);
         System.out.println(">>>>>>>>>> 【Result】<<<<<<<<<< ");
         System.out.println(serverStatusHistoryList.size());

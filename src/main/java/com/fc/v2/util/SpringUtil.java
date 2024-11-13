@@ -15,6 +15,8 @@ import java.util.Collection;
 
 @Component
 public final class SpringUtil implements ApplicationContextAware {
+
+
     private static ApplicationContext applicationContext = null;
 
     public static Object getBean(String name) {
