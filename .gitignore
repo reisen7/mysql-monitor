@@ -21,3 +21,7 @@ rebel.xml
 /.apt_generated_tests/
 /.settings/
 
+!/src/main/resources/application.yml
+!/src/main/resources/application-dev.yml
+!/src/main/resources/application-prod.yml
+!/src/main/resources/sharding.yaml

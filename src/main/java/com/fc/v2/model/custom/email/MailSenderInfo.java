@@ -31,7 +31,7 @@ public class MailSenderInfo {
 	// 是否需要身份验证
 	private boolean validate = false;
 	//开启ssl
-	private boolean ssl=false;
+	private boolean ssl=true;
 	// 邮件主题
 	private String subject;
 	// 邮件的文本内容

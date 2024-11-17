@@ -8,13 +8,13 @@ reisen:
   copyright-year: 2018
   #邮件功能
   #邮箱发送smtp
-  email-smtp: smtp.sina.com
+  email-smtp: smtp.163.com
   #邮箱发送端口
   email-port: 465
   #发送邮箱登录账号
-  email-account: 1@sina.com
+  email-account: Reisen7@163.com
   #发送邮箱登录密码
-  email-password: f1
+  email-password: TJqip9ditF9zHx8Q
   #实例演示开关 启动该模式删除增加修改会弹出演示模式提示框
   demo-enabled: false
   #漂亮得拖动验证码 默认false普通验证码、true滚动验证码
