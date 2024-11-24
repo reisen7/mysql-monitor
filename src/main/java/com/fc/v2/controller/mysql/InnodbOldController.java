@@ -1,5 +1,6 @@
 package com.fc.v2.controller.mysql;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.model.mysql.InnodbLockWaits;
 import com.fc.v2.model.mysql.InnodbTrx;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/innodb")
-public class InnodbController {
+public class InnodbOldController {
 	@Autowired
 	private InnodbService innodbService;
 	
 	@RequestMapping("/status/{serverId}")
     @CrossOrigin(origins = "*")
-    public String getStatus(@PathVariable Long serverId) {
+    public AjaxResult getStatus(@PathVariable Long serverId) {
         return innodbService.getStatus(serverId);
     }
 	

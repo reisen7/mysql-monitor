@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('数据库集群列表')"/>
+</head>
+<body class="pear-container">
+<!--<div class="layui-card">-->
+<!--    <div class="layui-card-body">-->
+<!--        <form class="layui-form" action="">-->
+<!--            <div class="layui-form-item">-->
+<!--                <label class="layui-form-label">名称</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" name="searchText" placeholder="" class="layui-input">-->
+<!--                </div>-->
+<!--                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="monitorCluster-query">-->
+<!--                    <i class="layui-icon layui-icon-search"></i>-->
+<!--                    查询-->
+<!--                </button>-->
+<!--                <button type="reset" class="pear-btn pear-btn-md">-->
+<!--                    <i class="layui-icon layui-icon-refresh"></i>-->
+<!--                    重置-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="layui-card">
+    <div class="layui-card-body">
+        <div id="innodbStatus">
+        </div>
+    </div>
+</div>
+</body>
+
+<!--<script type="text/html" id="monitorCluster-toolbar">-->
+<!--    <button sa:hasPermission="gen:monitorCluster:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">-->
+<!--        <i class="layui-icon layui-icon-add-1"></i>-->
+<!--        新增-->
+<!--    </button>-->
+<!--    <button sa:hasPermission="gen:monitorCluster:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">-->
+<!--        <i class="layui-icon layui-icon-delete"></i>-->
+<!--        删除-->
+<!--    </button>-->
+<!--</script>-->
+
+
+
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['table', 'form', 'jquery'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+
+        let MODULE_PATH = rootPath+"/InnodbController/";
+
+        let loading = layer.load();
+        $.ajax({
+            url: MODULE_PATH + "status/" + window.localStorage.getItem("curServer"),
+            dataType: 'json',
+            type: 'get',
+            success: function (result) {
+                layer.close(loading);
+                if (result.code==200) {
+                    layer.msg("加载成功", {icon: 1, time: 1000}, function () {
+                    });
+                    $("#innodbStatus").html(result.msg);
+                } else {
+                    layer.msg(result.msg, {icon: 2, time: 1000});
+                }
+            }
+        })
+    })
+</script>
+</html>

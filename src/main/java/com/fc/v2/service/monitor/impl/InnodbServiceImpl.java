@@ -1,5 +1,6 @@
 package com.fc.v2.service.monitor.impl;
 
+import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.dto.QueryResult;
 import com.fc.v2.model.monitor.MonitorServer;
@@ -18,14 +19,14 @@ import java.util.Map;
 public class InnodbServiceImpl extends AbstractService implements InnodbService {
 
 	@Override
-	public String getStatus(Long serverId) {
+	public AjaxResult getStatus(Long serverId) {
 		String sql="show engine innodb status";
 		QueryResult<List<Map<Object,Object>>> queryResult = getQueryResult(serverId, sql);
 		if (queryResult.isSuccess()) {
-			return queryResult.getData().toString().replaceAll("\n", "<br/>");
+			return AjaxResult.success(queryResult.getData().toString().replaceAll("\n", "<br/>"));
 		}
 		else {
-			return null;
+			return AjaxResult.error("加载失败");
 		}
 	}
 
