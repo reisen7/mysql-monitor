@@ -3,11 +3,13 @@ package com.fc.v2.util;
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.quartz.Calendar;
 
@@ -105,6 +107,16 @@ public class DateUtils  extends org.apache.commons.lang3.time.DateUtils{
         return calendar.getTime();
     }
 
+    /**
+     * LocalDateTime 转成 Date
+     * @param localDateTime
+     * @return
+     */
+    public static Date localDateTimeToDate(LocalDateTime localDateTime){
+        long timestamp = localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        Date date = new Date(timestamp);
+        return date;
+    }
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd

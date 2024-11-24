@@ -3,7 +3,13 @@ package com.fc.v2.controller.monitor;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.fc.v2.common.base.BaseController;
 import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.common.domain.ResultTable;
+import com.fc.v2.dto.PagedDto;
+import com.fc.v2.dto.Processlist;
+import com.fc.v2.model.custom.Tablepar;
+import com.fc.v2.model.mysql.InnodbTrx;
 import com.fc.v2.service.monitor.InnodbService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @Description
  * @date 2024年11月24日
  **/
-@Api(value = "数据库集群")
+@Api(value = "Innodb")
 @Controller
 @RequestMapping("/InnodbController")
 public class InnodbController extends BaseController {
@@ -38,4 +44,22 @@ public class InnodbController extends BaseController {
     public String toView(ModelMap model) {
         return prefix + "/innodbStatus";
     }
+
+    @ApiOperation(value = "事务页面", notes = "页面跳转")
+    @GetMapping("/transaction/view")
+    @SaCheckPermission("gen:transaction:view")
+    public String toTransactionView(ModelMap model) {
+        return prefix + "/transaction";
+    }
+
+    @ApiOperation(value = "事务详情", notes = "事务详情")
+    @GetMapping("/trx/{serverId}")
+    @ResponseBody
+    @SaCheckPermission("gen:transaction:view")
+    public ResultTable getTransaction(@PathVariable Long serverId, Tablepar tablepar) {
+        PageInfo<InnodbTrx> page = innodbService.getInnodbTrxs(serverId, tablepar);
+        return pageTable(page.getList(),page.getTotal());
+    }
+
+
 }

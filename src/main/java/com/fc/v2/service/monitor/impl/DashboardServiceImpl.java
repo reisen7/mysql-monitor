@@ -329,7 +329,6 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
                 resultList = resultListOriginal;
             }
 
-            System.out.println(resultList);
 
             List<Processlist> processlists=new ArrayList<>();
             for (int i = (tablepar.getPage()-1)*tablepar.getLimit(); i < ((tablepar.getPage()+1)*tablepar.getLimit() > resultList.size() ? resultList.size() : (tablepar.getPage()+1)*tablepar.getLimit()); i++)

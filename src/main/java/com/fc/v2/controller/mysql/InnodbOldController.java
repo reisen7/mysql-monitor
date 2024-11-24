@@ -17,18 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class InnodbOldController {
 	@Autowired
 	private InnodbService innodbService;
-	
-	@RequestMapping("/status/{serverId}")
-    @CrossOrigin(origins = "*")
-    public AjaxResult getStatus(@PathVariable Long serverId) {
-        return innodbService.getStatus(serverId);
-    }
-	
-	@RequestMapping("/trx/{serverId}")
-    @CrossOrigin(origins = "*")
-    public PagedDto<InnodbTrx> getTrxs(@PathVariable Long serverId) {
-        return innodbService.getInnodbTrxs(serverId);
-    }
+
 	
 	@RequestMapping("/lockwaits/{serverId}")
     @CrossOrigin(origins = "*")
