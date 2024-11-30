@@ -27,7 +27,7 @@ public interface InnodbService {
 	 * @param serverId
 	 * @return
 	 */
-	PagedDto<InnodbLockWaits> getInnodbLockWaits(Long serverId);
+	PageInfo<InnodbLockWaits> getInnodbLockWaits(Long serverId, Tablepar tablepar);
 	
 	
 }

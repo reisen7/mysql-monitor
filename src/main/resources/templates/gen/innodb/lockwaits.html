@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="include :: header('锁状态查看')"/>
+    <link rel="stylesheet" th:href="@{/static/admin/css/other/console1.css}"/>
+    <style>
+        /*https://blog.csdn.net/Zyj_0101/article/details/142650955*/
+        /* 设置滚动条整体的宽度 */
+
+    </style>
+</head>
+
+<body class="pear-container">
+
+<div style="padding: 16px;">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <table id="lockwaits-table" lay-filter="lockwaits-table"></table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="lockwaits-toolbar">
+</script>
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['layer', 'echarts', 'element', 'count', 'topBar', 'code', 'form', 'jquery', 'table'], function () {
+        layui.code();
+        let table = layui.table;
+        let MODULE_PATH = rootPath + "/InnodbController";
+        let $ = layui.jquery;
+        let count = layui.count,
+            echarts = layui.echarts;
+
+        var form = layui.form;
+
+
+        let cols = [
+            [
+                {title: 'requestingTrxId', field: 'requestingTrxId', width: 80, align: 'center'},
+
+                {title: 'requestedLockId', field: 'requestedLockId', width: 80, align: 'center'},
+
+                {title: 'blockingTrxId', field: 'blockingTrxId', width: 100, align: 'center'},
+
+                {title: 'blockingLockId', field: 'blockingLockId', width: 150, align: 'center'},
+
+            ]
+        ]
+
+        //table表单列表
+
+        table.render({
+            elem: '#lockwaits-table',
+            url: MODULE_PATH + '/lockwaits/' + window.localStorage.getItem("curServer"),
+            page: true,
+            method: 'get',
+            cols: cols,
+            height: 'full-40', // 最大高度减去其他容器已占有的高度差
+            css: [ // 重设当前表格样式
+                '.layui-table-tool-temp{padding-right: 145px;}'
+            ].join(''),
+            cellMinWidth: 80,
+            skin: 'line',
+            toolbar: '#lockwaits-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            }, 'filter', 'print', 'exports']
+        });
+
+        //查询按钮绑定
+        // form.on('submit(lockwaits-query)', function (data) {
+        //     table.reload('processlist-table', {page: {curr: 1}, where: data.field})
+        //     return false;
+        // });
+
+        //table工具栏绑定
+        table.on('toolbar(lockwaits-table)', function (obj) {
+            if (obj.event === 'refresh') {
+                window.refresh();
+            }
+        });
+
+        //刷新按钮
+        window.refresh = function () {
+            table.reload('lockwaits-table');
+        }
+    });
+</script>
+</body>
+
+</html>

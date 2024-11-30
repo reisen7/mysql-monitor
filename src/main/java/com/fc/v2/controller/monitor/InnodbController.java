@@ -7,6 +7,7 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.dto.PagedDto;
 import com.fc.v2.dto.Processlist;
 import com.fc.v2.model.custom.Tablepar;
+import com.fc.v2.model.mysql.InnodbLockWaits;
 import com.fc.v2.model.mysql.InnodbTrx;
 import com.fc.v2.service.monitor.InnodbService;
 import com.github.pagehelper.PageInfo;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @ClassName InnodbController
  * @Author reisen
+ * 参考： https://gitee.com/redtie/mycateye
  * @Description
  * @date 2024年11月24日
  **/
@@ -60,6 +62,23 @@ public class InnodbController extends BaseController {
         PageInfo<InnodbTrx> page = innodbService.getInnodbTrxs(serverId, tablepar);
         return pageTable(page.getList(),page.getTotal());
     }
+
+    @RequestMapping("/lockwaits/view")
+    @SaCheckPermission("gen:lock:view")
+    public String toLockView(ModelMap model) {
+        return prefix + "/lockwaits";
+    }
+
+
+    @RequestMapping("/lockwaits/{serverId}")
+    @SaCheckPermission("gen:lock:view")
+    @ResponseBody
+    public ResultTable getLockWaits(@PathVariable Long serverId, Tablepar tablepar) {
+        PageInfo<InnodbLockWaits> page = innodbService.getInnodbLockWaits(serverId, tablepar);
+        return pageTable(page.getList(),page.getTotal());
+    }
+
+
 
 
 }

@@ -22,6 +22,7 @@ import java.util.List;
  * @ClassName DashboardController
  * @Author reisen
  * @Description
+ * 参考： https://gitee.com/redtie/mycateye
  * @date 2024年10月17日
  **/
 @Api(value = "监控面板")

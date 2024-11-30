@@ -87,15 +87,19 @@ public class InnodbServiceImpl extends AbstractService implements InnodbService 
 	}
 
 	@Override
-	public PagedDto<InnodbLockWaits> getInnodbLockWaits(Long serverId) {
+	public PageInfo<InnodbLockWaits> getInnodbLockWaits(Long serverId, Tablepar tablepar) {
 		MonitorServer monitorServe = monitorServerMapper.selectByPrimaryKey(serverId);
 		String sql = monitorServe.getVersion().equals("8")?"select * from performance_schema.DATA_LOCKS":"select * from information_schema.INNODB_LOCK_WAITS";
 		QueryResult<List<Map<Object,Object>>> queryResult = getQueryResult(serverId, sql);
 		if (queryResult.isSuccess()) {
 			List<InnodbLockWaits> innodbLockWaits=new ArrayList<>();
 			List<Map<Object,Object>> data = queryResult.getData();
-			PagedDto<InnodbLockWaits> pagedDto=new PagedDto<>();
-			for (Map<Object, Object> map : data) {
+			int size = data.size(); // 获取分页的总大小
+			List<Map<Object, Object>> pageData = data.stream()
+					.skip((tablepar.getPage() - 1) * tablepar.getLimit()) // 跳过前面的数据
+					.limit(tablepar.getLimit()) // 限制当前页的数据量
+					.collect(Collectors.toList()); // 收集结果
+			for (Map<Object, Object> map : pageData) {
 				InnodbLockWaits lockWaits=new InnodbLockWaits();
 				lockWaits.setBlockingLockId((String)map.get("blocking_lock_id"));
 				lockWaits.setBlockingTrxId((String)map.get("blocking_trx_id"));
@@ -103,8 +107,9 @@ public class InnodbServiceImpl extends AbstractService implements InnodbService 
 				lockWaits.setRequestingTrxId((String)map.get("requesting_trx_id"));
 				innodbLockWaits.add(lockWaits);
 			}
-			pagedDto.setData(innodbLockWaits);
-			return pagedDto;
+			PageInfo<InnodbLockWaits> pageInfo = new PageInfo<>(innodbLockWaits);
+			pageInfo.setTotal(size);
+			return pageInfo;
 		}
 		else {
 			return null;
