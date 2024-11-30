@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 公告 SysNoticeMapper
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @email 115889198@qq.com
  * @date 2019-09-08 01:38:44
  */

@@ -5,7 +5,7 @@ import java.lang.Integer;
 
 /**
  * 公告_用户外键 SysNoticeUser 
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @email 115889198@qq.com
  * @date 2019-09-08 02:12:54
  */

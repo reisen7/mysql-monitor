@@ -4,15 +4,24 @@
 <head>
     <th:block th:include="include :: header('首页')"/>
     <link rel="stylesheet" th:href="@{/static/admin/css/other/console1.css}"/>
+    <style>
+        /*https://blog.csdn.net/Zyj_0101/article/details/142650955*/
+        /* 设置滚动条整体的宽度 */
+
+    </style>
 </head>
 
 <body class="pear-container">
 
-<div class="layui-card">
-    <div class="layui-card-body">
-        <table id="transaction-table" lay-filter="transaction-table"></table>
+<div style="padding: 16px;">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <table id="transaction-table" lay-filter="transaction-table"></table>
+        </div>
     </div>
 </div>
+
+
 <script type="text/html" id="transaction-toolbar">
 </script>
 <th:block th:include="include :: footer"/>
@@ -30,56 +39,55 @@
 
         let cols = [
             [
+                {title: 'trxId', field: 'trxId', width: 80, align: 'center'},
 
-                {title: 'trxId', field: 'trxId', align: 'center'},
+                {title: 'trxState', field: 'trxState', width: 80, align: 'center'},
 
-                {title: 'trxState', field: 'trxState', align: 'center'},
+                {title: 'trxStarted', field: 'trxStarted', width: 100, align: 'center', templet: "<div>{{layui.util.toDateString(d.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
 
-                {title: 'trxStarted', field: 'trxStarted', align: 'center'},
+                {title: 'trxRequestedLockId', field: 'trxRequestedLockId', width: 150, align: 'center'},
 
-                {title: 'trxRequestedLockId', field: 'trxRequestedLockId', align: 'center'},
+                {title: 'trxWaitStarted', field: 'trxWaitStarted', width: 150, align: 'center'},
 
-                {title: 'trxWaitStarted', field: 'trxWaitStarted', align: 'center'},
+                {title: 'trxWeight', field: 'trxWeight', width: 150, align: 'center'},
 
-                {title: 'trxWeight', field: 'trxWeight', align: 'center'},
+                {title: 'trxMysqlThreadId', field: 'trxMysqlThreadId', width: 160, align: 'center'},
 
-                {title: 'trxMysqlThreadId', field: 'trxMysqlThreadId', align: 'center'},
+                {title: 'trxQuery', field: 'trxQuery', width: 80, align: 'center'},
 
-                {title: 'trxQuery', field: 'trxQuery', align: 'center'},
+                {title: 'trxOperationState', field: 'trxOperationState', width: 160, align: 'center'},
 
-                {title: 'trxOperationState', field: 'trxOperationState', align: 'center'},
+                {title: 'trxTablesInUse', field: 'trxTablesInUse', width: 160, align: 'center'},
 
-                {title: 'trxTablesInUse', field: 'trxTablesInUse', align: 'center'},
+                {title: 'trxTablesInUse', field: 'trxTablesInUse', width: 160, align: 'center'},
 
-                {title: 'trxTablesInUse', field: 'trxTablesInUse', align: 'center'},
+                {title: 'trxTablesLocked', field: 'trxTablesLocked', width: 160, align: 'center'},
 
-                {title: 'trxTablesLocked', field: 'trxTablesLocked', align: 'center'},
+                {title: 'trxLockStructs', field: 'trxLockStructs', width: 160, align: 'center'},
 
-                {title: 'trxLockStructs', field: 'trxLockStructs', align: 'center'},
+                {title: 'trxLockMemoryBytes', field: 'trxLockMemoryBytes', width: 200, align: 'center'},
 
-                {title: 'trxLockMemoryBytes', field: 'trxLockMemoryBytes', align: 'center'},
+                {title: 'trxRowsLocked', field: 'trxRowsLocked', width: 160, align: 'center'},
 
-                {title: 'trxRowsLocked', field: 'trxRowsLocked', align: 'center'},
+                {title: 'trxRowsModified', field: 'trxRowsModified', width: 160, align: 'center'},
 
-                {title: 'trxRowsModified', field: 'trxRowsModified', align: 'center'},
+                {title: 'trxConcurrencyTickets', field: 'trxConcurrencyTickets', width: 200, align: 'center'},
 
-                {title: 'trxConcurrencyTickets', field: 'trxConcurrencyTickets', align: 'center'},
+                {title: 'trxIsolationLevel', field: 'trxIsolationLevel', width: 150, align: 'center'},
 
-                {title: 'trxIsolationLevel', field: 'trxIsolationLevel', align: 'center'},
+                {title: 'trxUniqueChecks', field: 'trxUniqueChecks', width: 180, align: 'center'},
 
-                {title: 'trxUniqueChecks', field: 'trxUniqueChecks', align: 'center'},
+                {title: 'trxForeignKeyChecks', field: 'trxForeignKeyChecks', width: 180, align: 'center'},
 
-                {title: 'trxForeignKeyChecks', field: 'trxForeignKeyChecks', align: 'center'},
+                {title: 'trxLastForeignKeyError', field: 'trxLastForeignKeyError', width: 200, align: 'center'},
 
-                {title: 'trxLastForeignKeyError', field: 'trxLastForeignKeyError', align: 'center'},
+                {title: 'trxAdaptiveHashLatched', field: 'trxAdaptiveHashLatched', width: 200, align: 'center'},
 
-                {title: 'trxAdaptiveHashLatched', field: 'trxAdaptiveHashLatched', align: 'center'},
+                {title: 'trxAdaptiveHashTimeout', field: 'trxAdaptiveHashTimeout', width: 200, align: 'center'},
 
-                {title: 'trxAdaptiveHashTimeout', field: 'trxAdaptiveHashTimeout', align: 'center'},
+                {title: 'trxIsReadOnly', field: 'trxIsReadOnly', width: 120, align: 'center'},
 
-                {title: 'trxIsReadOnly', field: 'trxIsReadOnly', align: 'center'},
-
-                {title: 'trxAutocommitNonLocking', field: 'trxAutocommitNonLocking', align: 'center'},
+                {title: 'trxAutocommitNonLocking', field: 'trxAutocommitNonLocking', width: 200, align: 'center'},
 
             ]
         ]
@@ -92,6 +100,11 @@
             page: true,
             method: 'get',
             cols: cols,
+            height: 'full-40', // 最大高度减去其他容器已占有的高度差
+            css: [ // 重设当前表格样式
+                '.layui-table-tool-temp{padding-right: 145px;}'
+            ].join(''),
+            cellMinWidth: 80,
             skin: 'line',
             toolbar: '#transaction-toolbar',
             defaultToolbar: [{

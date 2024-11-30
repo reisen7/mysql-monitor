@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 定时任务日志Controller
 * @ClassName: QuartzJobLogController
-* @author reisen
+* @author fuce
 * @date 2019-11-20 22:51
  */
 @Api(value = "定时任务调度日志表")

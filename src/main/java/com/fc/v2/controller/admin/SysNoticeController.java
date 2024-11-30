@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 公告Controller
  * @ClassName: SysNoticeController
- * @author reisen
+ * @author fuce
  * @date 2019-11-20 22:31
  */
 @Api(value = "公告")

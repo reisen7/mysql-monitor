@@ -24,7 +24,7 @@ import java.util.Properties;
 /**
  * 简单邮件发送通用类
  * @ClassName: SimpleMailSender
- * @author reisen
+ * @author fuce
  * @date 2019-06-09 23:57
  **/
 public class SimpleEmailUtil {

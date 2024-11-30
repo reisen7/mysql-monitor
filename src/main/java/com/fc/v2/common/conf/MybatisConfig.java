@@ -32,7 +32,7 @@ import javax.sql.DataSource;
  * Mybatis多数据源配置
  * 参考文章：https://www.cnblogs.com/geekdc/p/10963476.html
  * @ClassName: MybatisConfig
- * @author reisen
+ * @author fuce
  * @date 2019-12-06 21:11
  */
 @Configuration

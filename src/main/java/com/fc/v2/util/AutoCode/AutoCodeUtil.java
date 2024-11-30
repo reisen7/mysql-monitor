@@ -27,7 +27,7 @@ import cn.hutool.core.date.DateTime;
 /**
  * 自动生成 通用类
 * @ClassName: AutoCodeUtil
-* @author reisen
+* @author fuce
 * @date 2019-11-20 22:05
  */
 public class AutoCodeUtil {

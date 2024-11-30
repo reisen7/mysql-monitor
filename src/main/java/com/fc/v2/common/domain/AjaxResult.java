@@ -3,11 +3,11 @@ package com.fc.v2.common.domain;
 import java.util.HashMap;
 
 /**
-* @ClassName: AjaxResult
-* @Description: ajax操作消息提醒
-* @author reisen
-* @date: 2024年10月16日
-*
+ * @ClassName: AjaxResult
+ * @Description: ajax操作消息提醒
+ * @author fuce
+ * @date 2018年8月18日
+ *
  */
 public class AjaxResult extends HashMap<String, Object>
 {

@@ -17,7 +17,7 @@ import java.util.List;
  * 省份表 SysProvinceService
  * @Title: SysProvinceService.java
  * @Package com.fc.v2.service
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @email 115889198@qq.com
  * @date 2019-10-04 19:56:15
  **/

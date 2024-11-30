@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义注解，用于类或方法上，优先级：方法>类
  * @ClassName: DataSource
- * @author reisen
+ * @author fuce
  * @date 2019-12-06 21:15
  */
 @Target({ElementType.METHOD})

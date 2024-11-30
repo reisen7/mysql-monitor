@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 日志记录controller
- * @author reisen 
+ * @author fuce
  * @date: 2018年9月30日 下午9:28:31
  */
 @Controller

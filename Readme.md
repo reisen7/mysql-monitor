@@ -33,7 +33,7 @@
 </p>
 <br>
 <div align="center">
-  <img  width="92%" style="border-radius:10px;margin-top:20px;margin-bottom:20px;box-shadow: 2px 0 6px gray;" src="1.png" />
+  <img  width="92%" style="border-radius:10px;margin-top:20px;margin-bottom:20px;box-shadow: 2px 0 6px gray;" src="readme/1.png" />
 </div>
 <br>
 
@@ -64,11 +64,11 @@
 
 |  |  |
 |---------------------|---------------------|
-|![输入图片说明](1.png "屏幕截图.png")  | ![输入图片说明](2.png "屏幕截图.png")  |
-|![输入图片说明](3.png "屏幕截图.png")|  ![输入图片说明](4.png "屏幕截图.png")  |
-|![输入图片说明](5.png "屏幕截图.png")| ![输入图片说明](6.png "屏幕截图.png")  |
-|![输入图片说明](7.png "屏幕截图.png")|  ![输入图片说明](8.png "屏幕截图.png")   |
-|![输入图片说明](9.png "屏幕截图.png")|  ![输入图片说明](10.png "屏幕截图.png")  |
+|![输入图片说明](readme/1.png "屏幕截图.png")  | ![输入图片说明](readme/2.png "屏幕截图.png")  |
+|![输入图片说明](readme/3.png "屏幕截图.png")|  ![输入图片说明](readme/4.png "屏幕截图.png")  |
+|![输入图片说明](readme/5.png "屏幕截图.png")| ![输入图片说明](readme/6.png "屏幕截图.png")  |
+|![输入图片说明](readme/7.png "屏幕截图.png")|  ![输入图片说明](readme/8.png "屏幕截图.png")   |
+|![输入图片说明](readme/9.png "屏幕截图.png")|  ![输入图片说明](readme/10.png "屏幕截图.png")  |
 
 
 ### 感谢支持

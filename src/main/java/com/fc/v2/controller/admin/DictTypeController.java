@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 字典类型Controller
  * @ClassName: DictTypeController
- * @author reisen
+ * @author fuce
  * @date 2019-11-20 22:45
  */
 @Api(value = "字典类型表")

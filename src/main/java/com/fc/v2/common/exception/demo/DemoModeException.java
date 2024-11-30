@@ -3,7 +3,7 @@ package com.fc.v2.common.exception.demo;
 /**
  * 演示模式异常
 * @ClassName: DemoModeException
-* @author reisen
+* @author fuce
 * @date 2019-11-08 15:45
 *
  */

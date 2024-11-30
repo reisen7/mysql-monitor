@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 数据库状态历史表 ServerStatusHistoryMapper
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @Description
  * @date 2024-11-04 15:20:27
  */

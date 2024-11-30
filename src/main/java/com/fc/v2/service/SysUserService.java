@@ -33,7 +33,7 @@ import cn.dev33.satoken.stp.StpUtil;
 /**
  * 系统用户
  * @ClassName: SysUserService
- * @author reisen
+ * @author fuce
  * @date 2018年8月26日
  *
  */

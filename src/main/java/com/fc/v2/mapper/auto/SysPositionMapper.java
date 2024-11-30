@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 岗位表 SysPositionMapper
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @email 115889198@qq.com
  * @date 2020-04-16 23:46:24
  */

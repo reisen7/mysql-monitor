@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @ClassName: TsysUserDao
- * @author reisen
+ * @author fuce
  * @date 2018年8月25日
  *
  */

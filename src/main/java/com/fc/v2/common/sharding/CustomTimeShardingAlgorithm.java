@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 /**
  * @ClassName CustomTimeShardingAlgorithm
+ * 参考文章：https://blog.csdn.net/qq_33204709/article/details/132590731
  * @Author reisen
  * @Description
  * @date 2024年11月05日

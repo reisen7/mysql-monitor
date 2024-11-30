@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 定时任务调度日志表 SysQuartzJobLog 
- * @author reisen_自动生成
+ * @author fuce_自动生成
  * @email 115889198@qq.com
  * @date 2019-09-13 00:03:42
  */

@@ -10,7 +10,7 @@ import java.util.Map;
  * 数据库接口
 * @Title: GeneratorMapper.java 
 * @Package com.fc.v2.mapper.auto 
-* @author reisen  
+* @author fuce  
 * @date 2019年5月9日 上午12:31:13 
 * @version V1.0   
  */

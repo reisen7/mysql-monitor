@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * Bean 工具类
- * @author reisen
+ * @author fuce
  */
 public class BeanUtils
 {

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 读取项目相关配置
- * 
- * @author reisen
+ *
+ * @author fuce
  */
 @Component
 @ConfigurationProperties(prefix = "reisen")

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 通用dao
 * @ClassName: SysUtilDao
-* @author reisen
+* @author fuce
 * @date 2019-08-31 18:11
 *
  */

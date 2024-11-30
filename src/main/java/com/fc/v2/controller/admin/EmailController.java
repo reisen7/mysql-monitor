@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 邮件发送Controller
  * @ClassName: EmailController
- * @author reisen
+ * @author fuce
  * @date 2019-06-10 00:39
  * @version V1.0
  */

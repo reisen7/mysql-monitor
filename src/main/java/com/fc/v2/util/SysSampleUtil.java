@@ -19,7 +19,6 @@ import java.util.List;
 /**   
  * @ClassName:  SysSampleUtil   
  * @Description:系统采样
- * @author: reisen
  * @date:   2017年8月8日 上午10:47:06   
  *     
  * @Copyright: 2017 www.mycat.io Inc. All rights reserved. 

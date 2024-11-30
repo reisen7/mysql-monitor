@@ -16,10 +16,10 @@ import java.util.Date;
 
 /**
  * web层通用数据处理
-* @ClassName: BaseController
-* @author reisen
-* @date: 2024年10月16日
-*
+ * @ClassName: BaseController
+ * @author fuce
+ * @date 2018年8月18日
+ *
  */
 @Controller
 public class BaseController extends BusinessBaseController

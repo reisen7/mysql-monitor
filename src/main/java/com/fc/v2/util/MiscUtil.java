@@ -18,7 +18,7 @@ import java.util.Date;
 /**   
  * @ClassName:  MiscUtil   
  * @Description:常用工具类
- * @author: reisen
+ * @author: fuce
  * @date:   2017年7月21日 下午2:53:20   
  *     
  * @Copyright: 2017 www.openwork.org.cn Inc. All rights reserved. 

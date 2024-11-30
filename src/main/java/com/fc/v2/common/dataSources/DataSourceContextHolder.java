@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 动态数据源上下文管理：设置数据源，获取数据源，清除数据源
  * @ClassName: DataSourceContextHolder
- * @author reisen
+ * @author fuce
  * @date 2019-12-06 21:08
  */
 public class DataSourceContextHolder {
