@@ -14,7 +14,7 @@
 
 <p align="center">
     <a href="#">
-        <img src="https://img.shields.io/badge/Sping tboot-
+        <img src="https://img.shields.io/badge/Sping boot-
         2.7+-green.svg" alt="Spring boot Version">
     </a>
     <a href="#">
@@ -47,6 +47,11 @@
 
 
 </p>
+
+参考项目如下：
+- [SpringbootV2](https://gitee.com/bdj/SpringBoot_v2)：这是一个功能很强大的后端平台，使用该项目的平台进行搭建。
+- [pear-admin-layui](https://gitee.com/pear-admin/pear-admin-layui)：我们参考其中的前端。
+- 
 
 #### 最新分支为dev2
 
