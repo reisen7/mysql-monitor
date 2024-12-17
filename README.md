@@ -14,8 +14,7 @@
 
 <p align="center">
     <a href="#">
-        <img src="https://img.shields.io/badge/Sping boot-
-        2.7+-green.svg" alt="Spring boot Version">
+        <img src="https://img.shields.io/badge/Sping boot-2.7+-green.svg" alt="Spring boot Version">
     </a>
     <a href="#">
         <img src="https://img.shields.io/badge/MySQL-5.7+-green.svg" alt="Vue Version">
